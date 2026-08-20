@@ -30,6 +30,7 @@
       if (page === "preview") renderPreview();
       if (page === "publishers") renderPublishers();
       if (page === "detail") renderDetail();
+      if (page === "partners") renderPartners();
     } catch (error) {
       console.error(error);
       renderLoadError();
@@ -206,6 +207,31 @@
     );
   }
 
+  function renderPartners() {
+    const container = document.querySelector("#partner-data");
+    const publisherIds = unique(
+      releases.map((release) => release.publisher_id).filter(Boolean)
+    );
+    const publisherList = publisherIds
+      .map((id) => publisherName(id))
+      .sort((left, right) => collator.compare(left, right));
+    const isbnCount = releases.filter((release) => release.isbn).length;
+    const stats = element("div", "partner-stats");
+
+    stats.append(
+      createPartnerStat(releases.length, "erfasste Veröffentlichungen"),
+      createPartnerStat(publisherIds.length, "vertretene Manga-Verlage"),
+      createPartnerStat(isbnCount, "Einträge mit ISBN-13")
+    );
+
+    const publishers = element("p", "partner-publisher-line");
+    publishers.append(
+      element("strong", "", "Erfasste Verlage: "),
+      document.createTextNode(publisherList.join(", "))
+    );
+    container.replaceChildren(stats, publishers);
+  }
+
   function renderDetail() {
     const id = new URLSearchParams(window.location.search).get("id");
     const release = releases.find((item) => item.id === id);
@@ -240,7 +266,7 @@
 
     const detailDescription = `${release.title}${
       volumeText(release) ? `, ${volumeText(release)}` : ""
-    } von ${publisherName(release.publisher_id, release.publisher_name)}: Erscheinungstermin, Preis, ISBN und künftig passende Bezugsquellen zur Ausgabe.`;
+    } von ${publisherName(release.publisher_id, release.publisher_name)}: Erscheinungstermin, Preis, ISBN und passende Bezugsquellen im Buchhandel.`;
     setMetaContent('meta[name="description"]', detailDescription);
     setMetaContent('meta[property="og:title"]', document.title);
     setMetaContent('meta[property="og:description"]', detailDescription);
@@ -307,11 +333,11 @@
     appendDefinition(meta, "ISBN", release.isbn || "Nicht angegeben");
 
     const actions = element("div", "card-actions");
-    const link = element("a", "card-link", "Details ansehen →");
+    const link = element("a", "card-link", "Details & Bezugsquellen →");
     link.href = `detail.html?id=${encodeURIComponent(release.id)}`;
     link.setAttribute(
       "aria-label",
-      `Details zu ${release.title}${volumeText(release) ? `, ${volumeText(release)}` : ""}`
+      `Details und Bezugsquellen zu ${release.title}${volumeText(release) ? `, ${volumeText(release)}` : ""}`
     );
     actions.append(link);
     body.append(kicker, title, subtitle, meta, actions);
@@ -334,6 +360,15 @@
     link.href = `new-releases.html?month=all&publisher=${encodeURIComponent(id)}`;
     article.append(link);
     return article;
+  }
+
+  function createPartnerStat(value, label) {
+    const stat = element("div", "partner-stat");
+    stat.append(
+      element("strong", "", new Intl.NumberFormat(locale).format(value)),
+      element("span", "", label)
+    );
+    return stat;
   }
 
   function renderCards(selector, items, emptyMessage) {
