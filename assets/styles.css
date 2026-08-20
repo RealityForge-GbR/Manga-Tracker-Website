@@ -747,6 +747,59 @@ h3 {
   font-size: 1.65rem;
 }
 
+.source-section {
+  max-width: 720px;
+  margin-top: 2.8rem;
+  padding-top: 2.2rem;
+  border-top: 2px solid var(--line);
+}
+
+.source-section h2 {
+  margin-bottom: 0.65rem;
+  font-size: 1.65rem;
+}
+
+.source-section > p {
+  margin-bottom: 1.2rem;
+  color: var(--muted);
+}
+
+.source-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper-strong);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.source-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  border: 2px solid var(--ink);
+  background: var(--blue);
+  color: white;
+  font-weight: 950;
+}
+
+.source-placeholder h3 {
+  margin-bottom: 0.15rem;
+}
+
+.source-placeholder p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.detail-actions {
+  margin-top: 2rem;
+}
+
 .prose {
   max-width: 780px;
   font-size: 1.04rem;

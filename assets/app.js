@@ -240,7 +240,7 @@
 
     const detailDescription = `${release.title}${
       volumeText(release) ? `, ${volumeText(release)}` : ""
-    } von ${publisherName(release.publisher_id, release.publisher_name)}: Erscheinungstermin, Preis, ISBN und weitere Angaben.`;
+    } von ${publisherName(release.publisher_id, release.publisher_name)}: Erscheinungstermin, Preis, ISBN und künftig passende Bezugsquellen zur Ausgabe.`;
     setMetaContent('meta[name="description"]', detailDescription);
     setMetaContent('meta[property="og:title"]', document.title);
     setMetaContent('meta[property="og:description"]', detailDescription);
