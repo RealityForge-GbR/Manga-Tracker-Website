@@ -8,6 +8,7 @@
     altraverse: "#335c67",
     tokyopop: "#e6483d",
     carlsen: "#76528b",
+    egmont: "#4f7545",
   };
 
   let releases = [];
@@ -212,11 +213,22 @@
     const shell = document.querySelector("#detail-content");
 
     if (!release) {
+      document.title = "Veröffentlichung nicht gefunden | Manga-Neuheiten";
+      setMetaContent(
+        'meta[name="description"]',
+        "Die angeforderte Manga-Veröffentlichung wurde nicht gefunden."
+      );
+      setMetaContent('meta[property="og:title"]', document.title);
+      setMetaContent(
+        'meta[property="og:description"]',
+        "Die angeforderte Manga-Veröffentlichung wurde nicht gefunden."
+      );
       loading.replaceWith(
         createState(
           "error-state",
           "Veröffentlichung nicht gefunden",
-          "Der Link ist möglicherweise veraltet oder unvollständig."
+          "Der Link ist möglicherweise veraltet oder unvollständig.",
+          "h1"
         )
       );
       return;
@@ -226,10 +238,17 @@
     shell.hidden = false;
     document.title = `${release.title}${volumeText(release) ? ` – ${volumeText(release)}` : ""} | Manga-Neuheiten`;
 
+    const detailDescription = `${release.title}${
+      volumeText(release) ? `, ${volumeText(release)}` : ""
+    } von ${publisherName(release.publisher_id, release.publisher_name)}: Erscheinungstermin, Preis, ISBN und weitere Angaben.`;
+    setMetaContent('meta[name="description"]', detailDescription);
+    setMetaContent('meta[property="og:title"]', document.title);
+    setMetaContent('meta[property="og:description"]', detailDescription);
+
     setText("#detail-title", release.title);
     setText("#detail-subtitle", detailSubtitle(release));
     setText("#detail-publisher", publisherName(release.publisher_id, release.publisher_name));
-    setText("#detail-date", formatDate(release.release_date));
+    setText("#detail-date", release.release_date ? formatDate(release.release_date) : release.status || "Termin offen");
     setText("#detail-price", formatPrice(release.price_cents));
     setText("#detail-isbn", release.isbn || "Nicht angegeben");
     setText(
@@ -268,11 +287,18 @@
 
     const body = element("div", "card-body");
     const kicker = element("div", "card-kicker");
-    kicker.append(
-      element("span", "", publisherName(release.publisher_id, release.publisher_name)),
-      element("time", "", formatDate(release.release_date))
+    const publisher = element(
+      "span",
+      "",
+      publisherName(release.publisher_id, release.publisher_name)
     );
-    if (release.release_date) kicker.lastElementChild.dateTime = release.release_date;
+    const releaseDate = element(
+      release.release_date ? "time" : "span",
+      "",
+      formatDate(release.release_date)
+    );
+    if (release.release_date) releaseDate.dateTime = release.release_date;
+    kicker.append(publisher, releaseDate);
 
     const title = element("h3", "", release.title);
     const subtitle = element("p", "card-subtitle", cardSubtitle(release));
@@ -324,16 +350,17 @@
 
   function renderLoadError() {
     const targets = document.querySelectorAll("[data-release-container]");
-    const error = () =>
+    const error = (headingTag = "h2") =>
       createState(
         "error-state",
         "Daten konnten nicht geladen werden",
-        "Bitte versuche es später erneut."
+        "Bitte versuche es später erneut.",
+        headingTag
       );
     targets.forEach((target) => target.replaceChildren(error()));
 
     const detailLoading = document.querySelector("#detail-loading");
-    if (detailLoading) detailLoading.replaceWith(error());
+    if (detailLoading) detailLoading.replaceWith(error("h1"));
   }
 
   function populateMonthOptions(select) {
@@ -481,14 +508,19 @@
     if (target) target.textContent = value;
   }
 
+  function setMetaContent(selector, value) {
+    const target = document.querySelector(selector);
+    if (target) target.content = value;
+  }
+
   function appendDefinition(list, term, description) {
     list.append(element("dt", "", term), element("dd", "", description));
   }
 
-  function createState(className, heading, message) {
+  function createState(className, heading, message, headingTag = "h2") {
     const state = element("div", className);
     state.setAttribute("role", className === "error-state" ? "alert" : "status");
-    state.append(element("h2", "", heading), element("p", "", message));
+    state.append(element(headingTag, "", heading), element("p", "", message));
     return state;
   }
 
