@@ -287,12 +287,6 @@
       release.page_count ? `${release.page_count} Seiten` : "Nicht angegeben"
     );
 
-    const description = document.querySelector("#detail-description");
-    if (release.synopsis) {
-      setText("#detail-description-text", release.synopsis);
-      description.hidden = false;
-    }
-
     const cover = document.querySelector("#detail-cover");
     cover.style.setProperty(
       "--cover-color",
