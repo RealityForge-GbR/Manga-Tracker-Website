@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-12T08:15:33.990Z",
+  "results": [
+    {
+      "url": "https://mangatracker.de/",
+      "error": "ENOTFOUND"
+    },
+    {
+      "url": "https://mangatracker.de/manga/9783964335388",
+      "error": "ENOTFOUND"
+    },
+    {
+      "url": "https://mangatracker.de/.well-known/assetlinks.json",
+      "error": "ENOTFOUND"
+    },
+    {
+      "url": "https://mangatracker.de/manga-tracker-og.png",
+      "error": "ENOTFOUND"
+    },
+    {
+      "url": "https://manga.realityforge.eu/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonical": "https://manga.realityforge.eu/",
+      "playLink": true
+    },
+    {
+      "url": "https://manga.realityforge.eu/manga/9783964335388",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "canonical": "https://manga.realityforge.eu/manga/9783964335388",
+      "playLink": true,
+      "cover": "https://api.manga.realityforge.eu/manga/9783964335388/cover"
+    },
+    {
+      "url": "https://manga.realityforge.eu/.well-known/assetlinks.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8"
+    },
+    {
+      "url": "https://manga.realityforge.eu/manga-tracker-og.png",
+      "status": 200,
+      "type": "image/png"
+    },
+    {
+      "url": "https://www.mangatracker.de/",
+      "error": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE"
+    },
+    {
+      "url": "https://www.mangatracker.de/manga/9783964335388?campaign=test",
+      "error": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE"
+    },
+    {
+      "url": "https://www.mangatracker.de//evil.example/path",
+      "error": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE"
+    }
+  ]
+}
