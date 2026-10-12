@@ -25,6 +25,20 @@ noch Analytics und fragt auf der Startseite keine API ab. Die lokale Speicherung
 der Sammlung ist keine Behauptung, die App erhebe keinerlei optionale Nutzungsdaten;
 die App-Datenschutzerklärung bleibt verlinkt.
 
+Auf Nutzerwunsch werden „Kostenlos · Werbefrei · Keine In-App-Käufe“ direkt
+unter dem Hero-Download-Button hervorgehoben. Der Vertrauensbereich erläutert
+die kostenlose Nutzung, den Verzicht auf Werbebanner/Werbevideos und In-App-Käufe
+sowie „Wir verkaufen deine Daten nicht an Werbeanbieter“. Ein kleiner sichtbarer
+Affiliate-Hinweis erklärt, dass die App Affiliate-Links verwendet und bei
+qualifizierten Käufen eine Provision erhält. Die öffentliche
+[App-Datenschutzerklärung](https://realityforge.eu/privacy-policy/manga-tracker/)
+wurde hierfür am 12.10.2026 erneut per HTTP 200 geprüft: kein Verkauf persönlicher
+Sammlungsdaten, keine Werbung Dritter, keine Banner-/Interstitial-Werbung und
+externe Kauf-/Affiliate-Links sind dort dokumentiert. Der Android-Code bestätigt
+den Datenschutztext, enthält keine Ads-/Billing-Abhängigkeiten und weist
+Affiliate-Links mit Provision aus. Die Website behauptet keine generelle
+Abwesenheit optionaler Analytics- oder Push-Dienste.
+
 „Meine Reihen“ und der erweiterte Bandstatus sind ausdrücklich als Vorschau
 gekennzeichnet. Die zugehörige Android-Integration
 [PR #23](https://github.com/RealityForge-GbR/Manga-Tracker-Android/pull/23)
@@ -156,6 +170,10 @@ Nach Einbau des Benachrichtigungsbilds wurden dieselben sieben Breiten erneut
 geprüft: kein horizontaler Überlauf, das Bild und seine Kennzeichnung auch auf
 Tablet-Breiten sichtbar. Nachweis:
 [notification-responsive.json](review/notification-responsive.json).
+Die zusätzlichen Kostenlos-/Werbefrei-/In-App-Kauf-Hinweise und der
+Affiliate-Hinweis wurden bei denselben sieben Breiten geprüft: kein Überlauf,
+der Hero-CTA bleibt sichtbar. Nachweis:
+[trust-responsive.json](review/trust-responsive.json).
 
 Gespeicherte Website-Aufnahmen: [Desktop](review/desktop.jpg),
 [Mobil](review/mobile.jpg) und [Sammlung mobil](review/collection-mobile.jpg).

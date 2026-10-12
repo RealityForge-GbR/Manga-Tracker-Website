@@ -57,7 +57,7 @@ export function renderLandingPage(origin) {
         <h1 id="hero-title">Deine Manga.<br>Deine Reihen.<br><em>Alles im Blick.</em></h1>
         <p class="lead">${description}</p>
         <div class="hero-actions">${cta()}<a class="text-link" href="#entdecken">Die App entdecken <span aria-hidden="true">↓</span></a></div>
-        <p class="small hero-note">Für Android <span aria-hidden="true">·</span> Ohne Benutzerkonto</p>
+        <p class="small hero-note">Kostenlos · Werbefrei · Keine In-App-Käufe</p>
       </div>
       <figure class="hero-visual">
         <div class="hero-disc" aria-hidden="true"></div>
@@ -90,7 +90,17 @@ export function renderLandingPage(origin) {
       <div class="planning-grid"><figure>${phone("budget", "Einkaufsliste für One Piece, Jujutsu Kaisen und Spy x Family mit einem Test-Monatsbudget von 60 Euro")}<figcaption>Einkaufsliste & Monatsbudget · Testdaten</figcaption></figure><div class="planning-copy"><h3>Deine Wunschbände.<br>Dein Monatsbudget.</h3><p>Speichere interessante Manga für später und ordne geplante Käufe einem Monat zu. So bleibt neben deinem nächsten Band auch dein Budget im Blick.</p><div class="notification-copy"><span class="tiny-label">Passend zu deiner Sammlung</span><h3>Neue Bände?<br>Bleib auf dem Laufenden.</h3><p>Persönliche Hinweise in der App helfen dir, neue Bände deiner Reihen und Änderungen an Erscheinungsterminen zu bemerken.</p><span class="preview-badge">Erweiterte Bandhinweise in Entwicklung</span><p class="small">Die erweiterten sammlungsbezogenen Bandhinweise werden weiterentwickelt.</p></div></div><figure id="benachrichtigungen" class="notification-shot">${phone("notifications", "Echter App-Screenshot: Benachrichtigungen für One Piece, Jujutsu Kaisen und Spy x Family mit simulierten Beispielmeldungen, Status und Terminen")}<figcaption>Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine</figcaption></figure></div>
     </section>
 
-    <section class="trust wrap section" aria-labelledby="trust-title"><div><p class="eyebrow">Für deine Sammlung gemacht</p><h2 id="trust-title">Deine Manga.<br><em>Deine Daten.</em></h2></div><dl><div><dt>Ohne Benutzerkonto</dt><dd>Starte mit deiner Sammlung, ohne ein Konto anzulegen.</dd></div><div><dt>Auf deinem Gerät</dt><dd>Bibliothek, Einkaufsliste und Budget werden lokal verwaltet.</dd></div><div><dt>Kostenlos nutzbar</dt><dd>Entdecken, sammeln und planen – kostenlos mit der Android-App.</dd></div><div><dt>Für deutsche Manga-Sammler</dt><dd>Deutsche Ausgaben und Neuerscheinungen stehen im Mittelpunkt.</dd></div></dl></section>
+    <section class="trust wrap section" aria-labelledby="trust-title">
+      <div><p class="eyebrow">Für deine Sammlung gemacht</p><h2 id="trust-title">Deine Manga.<br><em>Deine Daten.</em></h2><p class="affiliate-note"><strong>Affiliate-Hinweis:</strong> In der App verwenden wir Affiliate-Links. Bei qualifizierten Käufen erhalten wir eine Provision.</p></div>
+      <dl>
+        <div><dt>Kostenlos</dt><dd>Manga Tracker ist kostenlos nutzbar.</dd></div>
+        <div><dt>Keine Werbung</dt><dd>Keine Werbebanner oder Werbevideos in der App.</dd></div>
+        <div><dt>Keine In-App-Käufe</dt><dd>Für die App-Funktionen musst du nichts dazukaufen.</dd></div>
+        <div><dt>Kein Datenverkauf</dt><dd>Wir verkaufen deine Daten nicht an Werbeanbieter.</dd></div>
+        <div><dt>Ohne Benutzerkonto</dt><dd>Starte mit deiner Sammlung, ohne ein Konto anzulegen.</dd></div>
+        <div><dt>Auf deinem Gerät</dt><dd>Bibliothek, Einkaufsliste und Budget werden lokal verwaltet.</dd></div>
+      </dl>
+    </section>
     <section id="download" class="download wrap" aria-labelledby="download-title"><div class="download-copy"><img class="download-icon" src="/landing/app-icon.png" alt="Originales Manga-Tracker-App-Icon" width="192" height="192" loading="lazy"><p class="eyebrow">Dein Regal hat noch Platz für Geschichten.</p><h2 id="download-title">Bereit für deinen<br><em>nächsten Band?</em></h2><p>Manga Tracker begleitet deine Sammlung – vom ersten Entdecken bis zum nächsten Manga im Regal.</p>${cta()}<p class="small">Die aktuell verfügbare Version findest du bei Google Play.</p></div><img class="mascot" src="/landing/collection-mascot.webp" alt="" width="683" height="1024" loading="lazy" decoding="async"></section>
     <p class="version-note wrap">Alle Screenshots wurden direkt in der echten Android-App aufgenommen. Sie zeigen die Android-Entwicklungsversion 1.0.1-compose mit Beispieldaten. Darstellung und Funktionen können vom aktuellen Google-Play-Release abweichen. Vorschaufunktionen sind entsprechend gekennzeichnet.</p>
   </main>

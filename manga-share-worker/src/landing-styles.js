@@ -212,10 +212,8 @@ h1 {
 }
 .hero-note {
   margin:18px 0 0;
-  color:var(--muted)
-}
-.hero-note span {
-  padding-inline:7px
+  color:var(--rose);
+  font-weight:600
 }
 .hero-visual {
   position:relative;
@@ -547,6 +545,13 @@ h3 {
   margin:0;
   color:var(--muted);
   font-size:13px;
+  line-height:1.8
+}
+.affiliate-note {
+  max-width:360px;
+  margin:25px 0 0;
+  color:var(--muted);
+  font-size:12px;
   line-height:1.8
 }
 .download {
