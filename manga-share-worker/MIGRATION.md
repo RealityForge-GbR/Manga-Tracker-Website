@@ -15,7 +15,7 @@
 - Domain heute neu bei INWX registriert; alte Nameserver: `ns.inwx.de`, `ns2.inwx.de`, `ns3.inwx.eu`.
 - INWX-Zone enthielt nur Standard-Parking-A-Einträge für Apex, www und `*`, sowie SOA/NS. Keine MX-, TXT-, CAA- oder E-Mail-Konfiguration. INWX zeigte für alle Domains kein eingerichtetes DNSSEC; kein DS wird entfernt.
 - Neue Zone im bestehenden Account `301b9e2cebe3502a8ea4e421b5df690b`, Free-Tarif. Tatsächlich zugewiesene Nameserver: `penny.ns.cloudflare.com`, `santino.ns.cloudflare.com`.
-- Die automatisch importierten Apex-/www-Parking-Einträge werden durch die Worker-Custom-Domains ersetzt. Der unbenutzte Wildcard-Parking-Eintrag wird nicht übernommen; dessen Kopie wurde von der automatischen Freigabe abgelehnt. Keine funktionalen Subdomain-Abhängigkeiten beobachtet.
+- Der automatische DNS-Scan übernahm die drei Parking-A-Einträge. Die automatisch importierten Apex-/www-Platzhalter wurden entfernt und durch die Worker-Custom-Domains ersetzt; ihr Original bleibt in der INWX-Zone erhalten. Der automatisch importierte Wildcard-Eintrag bleibt erhalten. Ein zusätzlich versuchtes manuelles Kopieren des Wildcards wurde von der automatischen Freigabe abgelehnt und verworfen; es wurde kein zusätzlicher Wildcard-Eintrag geschrieben. Keine funktionalen Subdomain-Abhängigkeiten beobachtet.
 - Ziel-Custom-Domains desselben Workers: `manga.realityforge.eu`, `mangatracker.de`, `www.mangatracker.de`.
 
 ## Verhalten und Grenzen
@@ -45,4 +45,14 @@ npx wrangler rollback beac9118-d3a7-4b34-9365-a12cc37c49bb --config wrangler.pro
 
 Der Rollback betrifft nur den Share-Worker-Code und dessen damalige Bindings/Assets. Domains/DNS getrennt prüfen; `manga.realityforge.eu` niemals entfernen. Keine globale Cache-Löschung, keine Änderungen am Backend und kein Deployment aus dem Root-Repository. Vor einem DNS-Rollback bedenken: Die ursprünglichen INWX-Nameserver liefern nur Parking, keine Manga-Tracker-Website.
 
-Die genaue neue Produktionsversion, aktive Zone und öffentliche Prüfwerte werden nach erfolgreicher Veröffentlichung ergänzt.
+## Veröffentlichter Stand
+
+- PR #1 gemergt: `50cbbef7e748c42b7d4a6f2bc81d48efbe58453b`; Implementierungscommit `e7d425cf62ea6c8b793a1ff23c7aa461da8ce387`.
+- Cloudflare-Zone-ID: `3ccf6a8a84965ca7a3601ca8383c1db8`; INWX zeigt die beiden zugewiesenen Cloudflare-Nameserver als gespeicherten Stand.
+- Neue Worker-Version `933d77a2-5b08-494d-8908-220a05a545ba`, 100 % Traffic, veröffentlicht am 12. Oktober 2026 um 09:52 Uhr Europe/Berlin aus diesem Repository.
+- Der geerbte API-Token erlaubte keinen Asset-Upload; dieser erste Versuch brach vor Veröffentlichung ab. Die vorhandene OAuth-Anmeldung veröffentlichte Code, unveränderte Assets und Bindings. Der anschließende Domain-Schritt wurde zunächst durch die neu importierten Parking-Platzhalter blockiert. Nach deren Entfernung wurden ausschließlich die Trigger mit `wrangler triggers deploy --config wrangler.production.jsonc` erfolgreich synchronisiert; kein weiteres Code-Deployment erforderlich.
+- Alle drei vorgesehenen Custom Domains sind am bestehenden Worker eingetragen. Die alte Domain liefert weiterhin HTTP 200 für Startseite und Manga-Detail. Die kanonische API liefert per GET HTTP 200; die Legacy-API liefert weiterhin HTTP 307 auf dieselbe Route der kanonischen API. Die Root-Repository-Arbeitskopie ist sauber und blieb unverändert. Nach Umstellung der Pages-Quelle liefen keine weiteren Actions durch Branch-Push oder Merge.
+- Öffentliche HTTP-Prüfungen für Apex und www liefern bereits HTTP 308 auf `https://mangatracker.de/`. Der echte Google-Play-Link liefert HTTP 200.
+- Stand 10:00 Uhr: neue TLS-Zertifikate noch `Pending Validation (TXT)`, Cloudflare verwaltet die Validierung automatisch. Öffentliche HTTPS-Prüfungen der neuen Domain sind bis zur Ausstellung nicht bestanden. Öffentliche Resolver meldeten noch NXDOMAIN; der autoritative Cloudflare-Nameserver liefert bereits die korrekt zugewiesenen NS. Kein TLS-Fehler wird umgangen.
+
+Den endgültigen öffentlichen HTTPS-Status mit `node scripts/verify-public.mjs` prüfen; das Skript berichtet jedes Ziel auch bei einer fehlgeschlagenen Einzelprüfung.

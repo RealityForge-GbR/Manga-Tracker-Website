@@ -3,9 +3,17 @@ import assert from "node:assert/strict";
 const ISBN = "9783964335388";
 const PLAY = "https://play.google.com/store/apps/details?id=eu.realityforge.mangatracker";
 const results = [];
+async function check(url, verify) {
+  try { await verify(); }
+  catch (error) {
+    results.push({ url, error: error.cause?.code || error.code || error.message });
+    process.exitCode = 1;
+  }
+}
 for (const origin of ["https://mangatracker.de", "https://manga.realityforge.eu"]) {
   for (const path of ["/", `/manga/${ISBN}`, "/.well-known/assetlinks.json", "/manga-tracker-og.png"]) {
     const url = `${origin}${path}`;
+    await check(url, async () => {
     const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(15000) });
     assert.equal(response.status, 200, url);
     assert.equal(response.headers.get("location"), null, url);
@@ -40,13 +48,16 @@ for (const origin of ["https://mangatracker.de", "https://manga.realityforge.eu"
       }
     }
     results.push(result);
+    });
   }
 }
 for (const path of ["/", `/manga/${ISBN}?campaign=test`, "//evil.example/path"]) {
   const url = `https://www.mangatracker.de${path}`;
+  await check(url, async () => {
   const response = await fetch(url, { redirect: "manual", signal: AbortSignal.timeout(15000) });
   assert.equal(response.status, 308, url);
   assert.equal(response.headers.get("location"), `https://mangatracker.de${path}`);
   results.push({ url, status: response.status, location: response.headers.get("location") });
+  });
 }
 console.log(JSON.stringify({ checkedAt: new Date().toISOString(), results }, null, 2));

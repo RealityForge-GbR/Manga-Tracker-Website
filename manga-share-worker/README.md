@@ -34,7 +34,7 @@ Ohne die Variable liefert `/.well-known/assetlinks.json` HTTP 200 und JSON mit l
 
 ## Veröffentlichung
 
-`wrangler.jsonc` dient der Entwicklung. `wrangler.production.jsonc` ergänzt das verifizierte Account-ID und alle drei Custom Domains. Den Produktions-Build mit dieser Datei prüfen:
+`wrangler.jsonc` dient der Entwicklung. `wrangler.production.jsonc` ergänzt die verifizierte Account-ID und alle drei Custom Domains. Den Produktions-Build mit dieser Datei prüfen:
 
 ```powershell
 npm test
@@ -42,6 +42,8 @@ npx wrangler deploy --dry-run --config wrangler.production.jsonc
 npm run deploy
 node scripts/verify-public.mjs
 ```
+
+Ein vorhandener `CLOUDFLARE_API_TOKEN` muss auch den Asset-Upload für diesen Worker erlauben. Beim Umzug fehlte dem geerbten Token diese Berechtigung; die bereits vorhandene Wrangler-OAuth-Anmeldung wurde stattdessen verwendet. In einer lokalen PowerShell-Sitzung kann dafür vor `npm run deploy` die geerbte Variable mit `$env:CLOUDFLARE_API_TOKEN = $null` nur für diesen Prozess entfernt werden. Keine Tokenwerte ausgeben oder neue Berechtigungen ohne Bedarf anlegen.
 
 Die alte Custom Domain und das Service-Binding müssen bei jedem Deployment erhalten bleiben. Die alte API-Adresse `manga-tracker-api.realityforgeeu.workers.dev` bleibt für bereits veröffentlichte Apps als bestehende 307-Brücke zur kanonischen API erreichbar; dieser Share-Worker ändert den Backend-Worker nicht.
 

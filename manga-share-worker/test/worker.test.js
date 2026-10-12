@@ -459,10 +459,12 @@ test("production configuration preserves domains/service bindings and uses the v
   const production = readConfig("wrangler.production.jsonc");
   const development = readConfig("wrangler.jsonc");
   for (const config of [production, development]) {
+    assert.equal(config.name, "realityforge-manga-share");
     assert.equal(config.vars.MANGA_API_BASE, CANONICAL_API);
     assert.equal(config.workers_dev, true);
     assert.deepEqual(config.services, [{ binding: "MANGA_API", service: "manga-tracker-api", remote: true }]);
   }
+  assert.equal(production.account_id, "301b9e2cebe3502a8ea4e421b5df690b");
   assert.deepEqual(production.routes, ["manga.realityforge.eu", "mangatracker.de", "www.mangatracker.de"].map((pattern) => ({ pattern, custom_domain: true })));
   const response = await handleRequest(request("/.well-known/assetlinks.json"), production.vars);
   assert.equal(response.headers.get("x-assetlinks-configuration"), "complete");

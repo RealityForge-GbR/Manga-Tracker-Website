@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "test": "node --test",
-    "check": "npm test && wrangler deploy --dry-run",
+    "check": "npm test && wrangler deploy --dry-run --config wrangler.production.jsonc",
     "deploy": "wrangler deploy --config wrangler.production.jsonc"
   },
   "devDependencies": {
