@@ -718,7 +718,11 @@ h3 {
     grid-template-columns:.85fr 1.15fr
   }
   .notification-shot {
-    display:none
+    display:block;
+    grid-column:1/-1;
+    justify-self:center;
+    width:250px;
+    margin-top:0
   }
   .notification-copy {
     margin-top:30px

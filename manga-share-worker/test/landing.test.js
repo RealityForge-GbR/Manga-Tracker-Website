@@ -26,7 +26,11 @@ test("homepage works independently of unavailable API and assets bindings", asyn
       assert.match(html, /prefers-reduced-motion:reduce/);
       assert.match(html, /a:focus-visible/);
       assert.doesNotMatch(html, /<script\b|<iframe\b|<form\b|google-analytics|googletagmanager|fonts\.googleapis|fbq\(/i);
-      assert.doesNotMatch(html, /Hanako|notifications\.webp/);
+      assert.doesNotMatch(html, /Hanako/);
+      assert.match(html, /Alle Screenshots wurden direkt in der echten Android-App aufgenommen/);
+      assert.match(html, /Echte Screenshots aus der Android-App/);
+      assert.match(html, /src="\/landing\/notifications\.webp"/);
+      assert.match(html, /Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine/);
       const expectedOrigin = origin.startsWith("http:") ? "https://mangatracker.de" : origin;
       assert.ok(html.includes(`<link rel="canonical" href="${expectedOrigin}/">`));
       assert.ok(html.includes(`property="og:image" content="${expectedOrigin}/landing/app-icon-source.png"`));
@@ -80,7 +84,7 @@ test("only approved static assets are served, with GET/HEAD, security headers an
 
 test("screenshot provenance checksums match optimized assets; original app icons remain unchanged", () => {
   const manifest = JSON.parse(readFileSync(new URL("../docs/landing-assets.json", import.meta.url)));
-  assert.equal(manifest.length, 7);
+  assert.equal(manifest.length, 8);
   for (const asset of manifest) {
     const path = `/landing/${asset.file}`;
     assert.ok(LANDING_ASSETS.has(path));

@@ -11,6 +11,8 @@ Die Startseite verwendet die App-Farben #171217, #211A22, #D7A0AF,
 drei Kapitel für Entdecken/Sammeln/Planen und die originale App-Figur bilden
 den Seitenaufbau. Alle Bildinhalte stammen aus der App; keine neu erzeugten
 Illustrationen, erfundenen Oberflächen, Bewertungen oder Nutzerzahlen.
+Am Hero und im allgemeinen Screenshot-Hinweis ist ausdrücklich erkennbar,
+dass alle Screenshots direkt in der echten Android-App aufgenommen wurden.
 
 Die Trust-Texte beziehen sich auf die tatsächlich vorhandenen Kernfunktionen:
 Neuerscheinungen, lokale Bibliothek, Einkaufsliste und Budget. Der öffentliche
@@ -84,13 +86,36 @@ Hanako wird auf der Landingpage nicht verwendet.
 | `detail.webp` | Jujutsu Kaisen, Band 1, ISBN 9782889510825 |
 | `budget.webp` | Monatsbudget und tatsächliche Test-Kaufplanung |
 | `shopping.webp` | Die drei geplanten Testkäufe |
+| `notifications.webp` | Echte Benachrichtigungsansicht mit isolierten, simulierten Beispielmeldungen |
 
-Der reale Benachrichtigungseingang blieb für diese Testsammlung leer. Es wurde
-kein gefüllter Eingang erfunden oder aus manuell verfassten Meldungen erzeugt.
-Der installierte normale App-Pfad verwendet `pushEnabled=true`; sein lokaler
-Legacy-Recommendation-Refresh ist deshalb deaktiviert. Eine Änderung an diesem
-Android-Verhalten gehört nicht zum Website-Auftrag. Die Landingpage beschreibt
-die Hinweise, verwendet aber keinen Benachrichtigungs-Screenshot.
+Der Nutzer hat anschließend einen gefüllten Benachrichtigungs-Screenshot mit
+simulierten Beispieldaten ausdrücklich angefordert. Der ausführende Codex-Chat
+„Prüfe PR-Kette vor Integration“ im Projekt Androidstudio-Manga-Tracker hat ihn
+am 12.10.2026 um 12:37:29 CEST auf demselben Samsung aufgenommen. Verwendet
+wurde dieselbe installierte Debug-App und derselbe APK-Fingerprint wie oben.
+Die echte `NotificationScreen` mit Room/Paging und Original-Artwork wurde in
+einer isolierten In-Memory-Testfixture verwendet; das Bild wurde nicht montiert
+oder nachgezeichnet. Original-PNG: 1080×2400, SHA-256
+`eefd3255207b237f1615b8fe398118adb631fc984ad68e2aa11f869fa2eb198e`.
+
+Sichtbare Beispielinhalte: One Piece 111 (fehlend), Jujutsu Kaisen 29
+(Einkaufsliste), Spy x Family 15 (Sammlung), ein Collector-Arc-Achievement,
+One Piece 89 (Terminverschiebung), Jujutsu Kaisen 27 (fehlend), Spy x Family 14
+(Einkaufsliste) und ein teilweise sichtbares weiteres Achievement. Cover und
+Figuren sind echte VLB-/App-Assets. Meldungen, Status, Achievement-Vergaben,
+relative Zeiten und die Terminverschiebung sind simuliert. Insbesondere die
+Termine 15./29.10.2026 zu One Piece 89 sind keine reale Verlagsankündigung.
+Die Bildunterschrift nennt ausdrücklich „Echter App-Screenshot“ und
+„Simulierte Beispieldaten: Meldungen, Status und Termine“.
+
+Der Screenshot-Agent bestätigt: persönliche Debug-Daten wurden nicht ersetzt;
+die isolierte Fixture und temporären Gerätedateien wurden entfernt. Persönliche
+Datenbank, WAL, Preferences und Datastores blieben unverändert, abgesehen von
+zulässigen Android-Activity-Metadaten und SQLite-SHM. Die ursprüngliche Test-APK
+wurde wiederhergestellt. Die Play-Store-App blieb unangetastet. Nachweise liegen
+im ignorierten Android-Verzeichnis `.tmp/website-notification-shot-20261012/`
+(`README.md`, `cover-provenance.json`, `final-proof.json`). Es wurde dafür kein
+Android-Produktcode geändert und kein Commit, Deployment oder Workflow gestartet.
 
 Originale Screenshots: 1080×2400. Zulässige Verarbeitung: Zuschnitt
 `(0,110)–(1080,2260)` entfernt Android-Status- und Systemnavigationsleiste;
@@ -99,7 +124,7 @@ Zahlenwert wurde retuschiert. Die CSS-Rahmen sind reine Website-Darstellung.
 Original- und Ergebnis-SHA-256, Zuschnitt, Dimensionen und Dateigrößen stehen in
 [landing-assets.json](landing-assets.json).
 
-Die private Debug-Sicherung liegt ausschließlich im ignorierten `.local/` und
+Für die ersten sieben Aufnahmen liegt die private Debug-Sicherung ausschließlich im ignorierten `.local/` und
 gehört nicht in Git oder die öffentlichen Assets. Nach der Aufnahme wurden
 alle elf gesicherten Datenbank-/Preferences-Dateien byteweise identisch
 wiederhergestellt. Die Debug-App wurde danach gestoppt. Keine Neuinstallation;
@@ -118,14 +143,19 @@ Vorschau: `http://127.0.0.1:4173/`. Sie verwendet denselben `handleRequest`
 wie der Worker und lokale Asset-Dateien. Die Startseite bleibt API-unabhängig;
 eine lokal geöffnete Manga-Detailseite liest die bestehende öffentliche API.
 Der Server bindet ausschließlich an Loopback, verwendet keine Cloudflare-
-Preview-Deployments und startet keine Actions. Er wird nach der QA beendet;
-für eine eigene Designreview kann er mit obigem Befehl erneut gestartet werden.
+Preview-Deployments und startet keine Actions. Für die laufende Designreview
+bleibt der lokale Server im Hintergrund geöffnet. Falls er später beendet wird,
+kann er mit obigem Befehl erneut gestartet werden.
 
 Browserprüfung in Chrome bei **320, 360, 390, 412, 768, 1280 und 1920 CSS-Pixeln**:
 kein horizontaler Überlauf; Hero-Download sichtbar. Wegen des bestehenden
 Browserzooms wurden die tatsächlichen CSS-Breiten jeweils per DOM gemessen,
 nicht aus der angeforderten Fenstergröße angenommen. Ergebnisse:
 [responsive.json](review/responsive.json).
+Nach Einbau des Benachrichtigungsbilds wurden dieselben sieben Breiten erneut
+geprüft: kein horizontaler Überlauf, das Bild und seine Kennzeichnung auch auf
+Tablet-Breiten sichtbar. Nachweis:
+[notification-responsive.json](review/notification-responsive.json).
 
 Gespeicherte Website-Aufnahmen: [Desktop](review/desktop.jpg),
 [Mobil](review/mobile.jpg) und [Sammlung mobil](review/collection-mobile.jpg).
@@ -149,4 +179,5 @@ Cache-Version, damit eine spätere freigegebene Veröffentlichung keine alte
 Startseite aus dem Cache zeigt.
 
 Offen: Designfreigabe und eine danach gesondert autorisierte Veröffentlichung.
-Ein gefüllter authentischer Benachrichtigungs-Screenshot steht nicht zur Verfügung.
+Der gefüllte Benachrichtigungs-Screenshot ist jetzt eingebunden; seine Daten
+sind als simulierte Beispiele gekennzeichnet.

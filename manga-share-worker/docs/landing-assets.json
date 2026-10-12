@@ -138,5 +138,25 @@
       1433
     ],
     "bytes": 60384
+  },
+  {
+    "file": "notifications.webp",
+    "originalSha256": "eefd3255207b237f1615b8fe398118adb631fc984ad68e2aa11f869fa2eb198e",
+    "sha256": "5e3777dbfb258bae5a111f920a4486b181a1e4a84824b21cb77faefaf4b56773",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 92696
   }
 ]
