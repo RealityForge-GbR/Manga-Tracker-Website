@@ -1,0 +1,58 @@
+[
+  {
+    "affiliateVisible": true,
+    "clientWidth": 303,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 303,
+    "width": 320
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 343,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 343,
+    "width": 360
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 373,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 373,
+    "width": 390
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 395,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 395,
+    "width": 412
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 752,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 752,
+    "width": 768
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 1263,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 1263,
+    "width": 1280
+  },
+  {
+    "affiliateVisible": true,
+    "clientWidth": 1903,
+    "heroCTAVisible": true,
+    "heroText": "Kostenlos · Werbefrei · Keine In-App-Käufe",
+    "scrollWidth": 1903,
+    "width": 1920
+  }
+]

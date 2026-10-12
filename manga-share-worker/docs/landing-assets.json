@@ -1,0 +1,162 @@
+[
+  {
+    "file": "releases.webp",
+    "originalSha256": "c72ed99870cedbabe4c7913c15be2c7aafa11834ba91f16db8a5a54e2d08a7bb",
+    "sha256": "56dbe1dd48393dfdff7afca2be9552eeb510e9e1ee2df86f87ec3206e0142b5a",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 154800
+  },
+  {
+    "file": "library.webp",
+    "originalSha256": "2d30ce8ff6716c12aab3fedf99965cbbddeb6c771f5017fd89854182882ce621",
+    "sha256": "d08acf534078aa468b5b0e1ab84ff364282a10577865e81dc1db9ff120a198cc",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 63812
+  },
+  {
+    "file": "series.webp",
+    "originalSha256": "80b17b23c4785072d530b63a7475654882ab1fc20e90c1c165299e4fe6f5fb68",
+    "sha256": "b3e9c8934de99adfc6fdf759fa7ff737ac4b724a1c039cf5a96e355db68d56d6",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 62064
+  },
+  {
+    "file": "series-status.webp",
+    "originalSha256": "a9b7e0e48abc8bb7c4888f8c6ff31668c74ddb3833069d63e677c744da98bb65",
+    "sha256": "d2975a96ccd4be3fe759c8d0e9a610fd92fb82b2810342682fbea4ca2040871a",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 159914
+  },
+  {
+    "file": "detail.webp",
+    "originalSha256": "a2bf7de7043bfc54035d40713f11f70b1caba95455a0a499d21766c20a701614",
+    "sha256": "2f0e419c0777ba43882fcb594cf7794edf55fb7efc009ab72f3a3fed888b4e5d",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 77080
+  },
+  {
+    "file": "budget.webp",
+    "originalSha256": "80805e399c2c9ffeace6260b6420ad6543e5d0dcff884d9be428d443616b1530",
+    "sha256": "7cdf5ab54cb98c016d4282a978829f46cfdba61205689c1fd5659d48fe86ed10",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 49850
+  },
+  {
+    "file": "shopping.webp",
+    "originalSha256": "70d7b01798404a998cfaba48e5beccee40e810559ac35a8e24ddd37afc52f922",
+    "sha256": "6ad7453e8b357cc65f2102a04b68391757f2c81356304f42b213dc222f96c62f",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 60384
+  },
+  {
+    "file": "notifications.webp",
+    "originalSha256": "eefd3255207b237f1615b8fe398118adb631fc984ad68e2aa11f869fa2eb198e",
+    "sha256": "5e3777dbfb258bae5a111f920a4486b181a1e4a84824b21cb77faefaf4b56773",
+    "originalSize": [
+      1080,
+      2400
+    ],
+    "crop": [
+      0,
+      110,
+      1080,
+      2260
+    ],
+    "size": [
+      720,
+      1433
+    ],
+    "bytes": 92696
+  }
+]

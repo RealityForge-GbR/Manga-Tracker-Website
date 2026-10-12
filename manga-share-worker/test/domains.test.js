@@ -31,7 +31,7 @@ for (const origin of origins) {
     const html = await response.text();
     assert.ok(html.includes(`<link rel="canonical" href="${origin}/">`));
     assert.ok(html.includes(`property="og:url" content="${origin}/"`));
-    assert.ok(html.includes(`property="og:image" content="${origin}/manga-tracker-og.png"`));
+    assert.ok(html.includes(`property="og:image" content="${origin}/landing/app-icon-source.png"`));
     assert.ok(html.includes(`href="${PLAY}"`));
     assert.equal(response.headers.get("location"), null);
   });

@@ -6,6 +6,13 @@ Seit dem Umzug vom 12. Oktober 2026 wird ausschließlich aus `RealityForge-GbR/M
 
 ## Lokale Entwicklung
 
+Für die Landingpage-Designreview ohne Cloudflare-Zugriff genügt vom
+Worker-Verzeichnis aus `npm run preview`. Die Vorschau läuft unter
+`http://127.0.0.1:4173/`, bindet ausschließlich an Loopback und verwendet den
+gleichen Request-Handler mit lokalen Assets. Eine Startseitenansicht benötigt
+keine API-Anfrage. Quellen, Screenshot-Herkunft, Versionsgrenzen und QA sind in
+[der Landingpage-Review](docs/landing-review.md) dokumentiert.
+
 Voraussetzungen: Node.js 22 oder neuer und das bestehende Cloudflare-Konto mit Zugriff auf die Zonen `realityforge.eu` und `mangatracker.de`.
 
 ```powershell

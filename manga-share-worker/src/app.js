@@ -1,3 +1,5 @@
+import { LANDING_ASSETS, renderLandingPage } from "./landing.js";
+
 const DEFAULT_API_BASE = "https://api.manga.realityforge.eu";
 const LEGACY_API_ORIGIN = "https://manga-tracker-api.realityforgeeu.workers.dev";
 const SITE_ORIGIN = "https://manga.realityforge.eu";
@@ -296,13 +298,6 @@ function renderStatePage(status, heading, message, siteOrigin) {
   return shell({ title: `${heading} | Manga Tracker`, description: message, canonical, image: FALLBACK_IMAGE, body, robots: status === 404 ? "noindex,follow" : "noindex,nofollow" });
 }
 
-function renderLandingPage(siteOrigin) {
-  const FALLBACK_IMAGE = `${siteOrigin}/manga-tracker-og.png`;
-  const description = "Deutsche Manga-Neuerscheinungen entdecken und die eigene Sammlung verwalten.";
-  const body = `<main><section class="state"><div class="cover-wrap"><img class="cover" src="${FALLBACK_IMAGE}" alt="Manga Tracker" width="1200" height="630"></div><p class="eyebrow">Deine Manga. Deine Sammlung.</p><h1>Manga Tracker</h1><p>${description}</p><ul aria-label="Funktionen"><li>Bibliothek</li><li>Neue Bände</li><li>Einkaufsliste</li><li>Budget</li></ul><a class="cta" href="${PLAY_STORE_URL}">Manga Tracker bei Google Play</a></section></main>`;
-  return shell({ title: "Manga Tracker", description, canonical: `${siteOrigin}/`, image: FALLBACK_IMAGE, body });
-}
-
 async function fetchWithTimeout(fetcher, url, options = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
@@ -406,11 +401,11 @@ function asHead(request, response) {
   return request.method === "HEAD" ? new Response(null, { status: response.status, headers: response.headers }) : response;
 }
 
-async function cached(request, ctx, createResponse) {
+async function cached(request, ctx, createResponse, version = CACHE_VERSION) {
   const cache = globalThis.caches?.default;
   const url = new URL(request.url);
   url.search = "";
-  url.pathname = `/__manga-share-cache-v${CACHE_VERSION}${url.pathname}`;
+  url.pathname = `/__manga-share-cache-v${version}${url.pathname}`;
   const key = new Request(url.toString(), { method: "GET" });
   if (cache) {
     const match = await cache.match(key);
@@ -435,13 +430,13 @@ export async function handleRequest(request, env = {}, ctx = {}) {
     return new Response(null, { status: 308, headers: { Location: `${siteOrigin}${url.pathname}${url.search}`, "Cache-Control": "public, max-age=300", ...SECURITY_HEADERS } });
   }
   if (url.pathname === "/.well-known/assetlinks.json") return asHead(request, assetLinks(env));
-  if (url.pathname === "/manga-tracker-og.png" && env.ASSETS) {
+  if ((url.pathname === "/manga-tracker-og.png" || LANDING_ASSETS.has(url.pathname)) && env.ASSETS) {
     const asset = await env.ASSETS.fetch(request);
     const headers = new Headers(asset.headers);
     for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
     return asHead(request, new Response(asset.body, { status: asset.status, headers }));
   }
-  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900"));
+  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900"), "landing-1");
   const match = /^\/manga\/([^/]+)\/?$/.exec(url.pathname);
   if (!match || !isValidIsbn13(match[1])) return cached(request, ctx, async () => htmlResponse(renderStatePage(404, "Manga nicht gefunden", "Diese Manga-Seite ist nicht verfügbar. Prüfe den Link oder öffne Manga Tracker.", siteOrigin), 404, "public, max-age=30, s-maxage=120"));
   const isbn = match[1];
