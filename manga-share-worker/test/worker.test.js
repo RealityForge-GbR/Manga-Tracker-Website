@@ -245,7 +245,7 @@ test("landing page is SSR, tracking-free and links to the Play Store", async () 
   const response = await handleRequest(request("/"));
   const html = await response.text();
   assert.equal(response.status, 200);
-  assert.match(html, /<h1>Manga Tracker<\/h1>/);
+  assert.match(html, /<h1 id="hero-title">Deine Manga\.<br>Deine Reihen\.<br><em>Alles im Blick\.<\/em><\/h1>/);
   assert.match(html, /play\.google\.com/);
   assert.doesNotMatch(html, /google-analytics|googletagmanager|facebook\.net/i);
   assert.doesNotMatch(html, /<script src=/i);

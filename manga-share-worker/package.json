@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "preview": "node --watch scripts/preview.mjs",
     "dev": "wrangler dev",
     "test": "node --test",
     "check": "npm test && wrangler deploy --dry-run --config wrangler.production.jsonc",
