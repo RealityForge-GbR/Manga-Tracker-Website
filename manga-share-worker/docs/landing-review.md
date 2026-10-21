@@ -411,3 +411,51 @@ das hintere Telefon ist mobil ausgeblendet, die sechs Buchebenen sind dekorativ.
 Am Desktop sind beide Telefone sichtbar und die mobilen Buchebenen ausgeblendet.
 Die Website verwendet für die aktualisierte Startseite die Cachekennung landing-12.
 Parallax wurde bewusst noch nicht als Interaktion umgesetzt.
+
+
+## Mobile Landingpage mit Scroll-Parallax · 21.10.2026
+
+Eric hat den weiteren Ausbau der mobilen Landingpage mit zentriertem Telefon,
+echtem App-Screenshot, wenig Text und der zuvor besprochenen sensorfreien
+Parallax-Bewegung beauftragt.
+
+- Der mobile Einstieg trägt nun die kurze Überschrift „Deine Manga. Alles im
+  Blick.“ und die Erklärung „Manga sammeln, Neuheiten entdecken und dein Budget
+  planen.“ Die Desktop-Überschrift bleibt bei drei Zeilen.
+- Das neutrale Android-Gehäuse steht horizontal und vertikal mittig in der Szene.
+  Die alte automatische Randverteilung der überbreiten Figur ist entfernt.
+- Im Telefon bleibt die belegte Originalaufnahme `releases.webp`, unverändert
+  720×1433 px, vollständig geladen. Kein USB-Zugriff und kein Ersatzbild nötig.
+- Scrollen bewegt vordere Bücher stärker als hintere. Das Telefon bewegt und
+  neigt sich nur leicht; Text und Download-Button werden nicht transformiert.
+- Ein passiver Scroll-Listener fasst Ereignisse in genau einem angeforderten
+  Bild-Update zusammen. Keine dauerhafte Schleife, kein Bewegungssensor und keine
+  zusätzliche Laufzeitbibliothek. Außerhalb der Szene, im Hintergrund, am Desktop
+  und bei reduziertem Bewegungswunsch werden Listener/Updates gestoppt und die
+  Ausgangskomposition wiederhergestellt.
+- Der vorhandene Desktop-Portal-Controller ist zusätzlich auf >=761 px begrenzt.
+- Für Mobilgeräte wurden sieben längere Fließtexte durch kompakte sichtbare
+  Varianten ergänzt. Light Novels, Barcode, Mehrfach-Hinzufügen, Achievements,
+  Kostenlos-/Werbefrei-/In-App-Kauf-Angaben sowie Datenschutz und Affiliate-
+  Erklärung bleiben enthalten. Abschnittsabstände und Sammlungsfunktionen sind
+  kompakter angeordnet.
+
+Browserprüfung am tatsächlichen lokalen Worker unter 127.0.0.1:8787 mit aktiver
+CSP: 320×740, 390×844 und 430×932. Kein horizontaler Überlauf. Die gemessene
+Abweichung der projizierten Telefonmitte von der Viewportmitte liegt unter
+0,4 CSS-Pixeln. Der Play-Button liegt jeweils unter dem Telefon und innerhalb
+der geprüften Höhe. Bei 390 px steigt der Scroll-Fortschritt sichtbar von 0
+auf 0,1873; bei der separaten Mobile-Vorschau bewegten sich Vorder- und
+Hintergrund nach dem Scrollen um unterschiedliche Beträge. Browser-Konsole ohne
+Fehler. Die normale Desktop-Ansicht wurde ebenfalls geprüft: zwei Telefone,
+aktives Portal, keine mobilen Buchebenen und kein horizontaler Überlauf.
+
+[Aktuelle Mobile-Aufnahme](review/mobile-landing-20261021.png).
+Die interaktive lokale Mobile-Vorschau unter http://127.0.0.1:8788/ verwendet
+unverändertes Landingpage-Markup und unterstützt 320, 390 und 430 px sowie
+Scrollen in der Seite. Sie läuft über ein temporäres Hilfsskript, nicht als
+Produktionsroute. Hauptvorschau weiterhin http://127.0.0.1:8787/.
+
+Validierung: **83/83 Tests**, einschließlich acht neuer Tests für Ereignis-
+Bündelung, aktuelle Geometrie, Sichtbarkeit, Breakpoints, Reduced Motion,
+fehlende Browserfähigkeiten und Worker-Bundling. Startseiten-Cache landing-14.

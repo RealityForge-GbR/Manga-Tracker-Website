@@ -1,6 +1,6 @@
-// Frozen depth layers form the mobile scene. Scroll/gyro control is a later design decision.
+// A centered product scene with scroll-driven depth layers and concise mobile copy.
 export const LANDING_MOBILE_HERO_STYLES = `
-.mobile-manga-cloud {
+.mobile-manga-cloud,.hero-title-mobile,.mobile-lead,.mobile-copy {
   display:none
 }
 @media(max-width:760px) {
@@ -25,22 +25,40 @@ export const LANDING_MOBILE_HERO_STYLES = `
   .hero h1 {
     order:1;
     text-align:center;
-    font-size:clamp(34px,9.2vw,46px);
+    font-size:clamp(36px,9.8vw,48px);
     line-height:1.04;
     letter-spacing:-.055em;
-    margin:0 0 10px
+    margin:0 0 12px
+  }
+  .hero-title-wide,.wide-copy {
+    display:none
+  }
+  .hero-title-mobile,.mobile-copy {
+    display:inline
+  }
+  .mobile-lead {
+    display:block;
+    order:2;
+    max-width:300px;
+    justify-self:center;
+    text-align:center;
+    font-size:13px;
+    line-height:1.65;
+    margin:0 0 8px
   }
   .hero .lead {
     display:none
   }
   .hero-visual {
-    order:2;
+    order:3;
     width:calc(100% + 40px);
     max-width:540px;
-    height:clamp(372px,108vw,470px);
-    margin:0 auto 0;
+    height:clamp(404px,108vw,500px);
+    margin:0;
     justify-self:center;
-    perspective:1000px
+    perspective:1200px;
+    perspective-origin:50% 50%;
+    overflow:clip
   }
   .hero-back,.hero-disc,.hero-visual .book-portal,.hero-visual .motion-toggle {
     display:none
@@ -65,13 +83,13 @@ export const LANDING_MOBILE_HERO_STYLES = `
     pointer-events:none
   }
   .hero-front-rig {
-    width:clamp(174px,50vw,224px);
+    width:clamp(184px,52vw,240px);
     max-width:none;
-    top:12px;
+    top:50%;
     right:auto;
     left:50%;
-    transform:translateX(-50%) rotateY(-12deg) rotateX(6deg) rotateZ(-6deg);
-    transform-origin:50% 55%;
+    transform:translate(-50%,-50%) translateY(calc(var(--mobile-progress,0) * 12px)) rotateY(calc(-8deg + var(--mobile-progress,0) * 9deg)) rotateX(3deg) rotateZ(calc(var(--mobile-progress,0) * 2deg));
+    transform-origin:50% 50%;
     z-index:2
   }
   .hero-front-rig .hero-front {
@@ -79,7 +97,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
     border:1px solid var(--muted);
     border-radius:29px;
     background:linear-gradient(112deg,var(--muted),var(--secondary) 5%,var(--bg) 14%,var(--elevated) 94%,var(--muted));
-    box-shadow:inset 2px 0 1px var(--secondary),inset -1px 0 1px var(--text),12px 18px 0 -9px var(--contrast),18px 28px 35px var(--bg)
+    box-shadow:inset 2px 0 1px var(--secondary),inset -1px 0 1px var(--text),7px 10px 0 -5px var(--contrast),8px 24px 32px var(--bg)
   }
   .hero-front:before {
     content:"";
@@ -113,6 +131,8 @@ export const LANDING_MOBILE_HERO_STYLES = `
     pointer-events:none
   }
   .mobile-manga {
+    --travel-y:-44px;
+    --swing:6deg;
     position:absolute;
     left:var(--x);
     top:var(--y);
@@ -124,9 +144,16 @@ export const LANDING_MOBILE_HERO_STYLES = `
     border-right:2px solid var(--muted);
     border-bottom:2px solid var(--rose);
     box-shadow:4px 5px 0 var(--contrast),8px 12px 20px var(--bg);
-    transform:rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx));
+    transform:translateY(calc(var(--mobile-progress,0) * var(--travel-y))) rotateZ(calc(var(--rz) + var(--mobile-progress,0) * var(--swing))) rotateY(var(--ry)) rotateX(var(--rx));
     z-index:var(--depth);
     opacity:var(--opacity)
+  }
+  .mobile-manga.manga-near {
+    --travel-y:64px;
+    --swing:-7deg
+  }
+  .is-parallax-active .hero-front-rig,.is-parallax-active .mobile-manga {
+    will-change:transform
   }
   .mobile-manga:after {
     content:"";
@@ -139,7 +166,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
     border-radius:0 2px 2px 0
   }
   .hero-actions {
-    order:3;
+    order:4;
     justify-content:center;
     margin-top:8px
   }
@@ -148,10 +175,45 @@ export const LANDING_MOBILE_HERO_STYLES = `
     min-height:54px
   }
   .hero-note {
-    order:4;
+    order:5;
     text-align:center;
-    font-size:10px;
+    font-size:11px;
     margin:13px 0 0
+  }
+  .section {
+    padding-block:56px
+  }
+  .section-heading {
+    margin-bottom:28px
+  }
+  .discovery-grid {
+    gap:32px
+  }
+  .discovery-shot {
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:var(--surface)
+  }
+  .collection-features {
+    gap:0;
+    margin-top:32px;
+    padding-top:0;
+    border-top:0
+  }
+  .collection-features article {
+    padding-block:24px;
+    border-top:1px solid var(--line)
+  }
+  .collection-features h3 {
+    font-size:22px;
+    margin-bottom:8px
+  }
+  .collection-features p {
+    font-size:13px;
+    line-height:1.7
+  }
+  .download-copy>.small {
+    display:none
   }
 }
 `;

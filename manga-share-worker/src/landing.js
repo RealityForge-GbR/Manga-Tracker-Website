@@ -13,6 +13,7 @@ const description = "Verwalte deine Manga und Light Novels, entdecke monatliche 
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 4 14 8-14 8Z"/></svg>';
 function cta(extra = "") { return `<a class="button ${extra}" href="${PLAY}">${play}<span>Jetzt bei Google Play</span>${arrow}</a>`; }
+function responsiveCopy(wide, mobile) { return `<span class="wide-copy">${wide}</span><span class="mobile-copy">${mobile}</span>`; }
 function catScene() {
   return `<div class="cat-scene" data-cat-scene>
     ${cta("cat-cta")}
@@ -39,7 +40,7 @@ function portalBooks() {
 }
 
 // Each book uses a real cover crop from releases.webp, matching the desktop portal.
-// Depth and pose are independent layers so a later parallax controller can move them.
+// Depth and pose are independent layers driven by scroll progress on mobile.
 function mobileMangaCloud() {
   const poses = [
     ["piece", "5%", "7%", "16%", "-25deg", "30deg", "15deg", 1, ".75"],
@@ -49,7 +50,7 @@ function mobileMangaCloud() {
     ["piece", "18%", "79%", "11%", "-12deg", "-30deg", "15deg", 1, ".65"],
     ["spy", "83%", "32%", "12%", "-17deg", "25deg", "-16deg", 1, ".65"],
   ];
-  return `<div class="mobile-manga-cloud" aria-hidden="true">${poses.map(([cover, x, y, w, rz, ry, rx, depth, opacity]) => `<span class="mobile-manga book-${cover}" style="--x:${x};--y:${y};--w:${w};--rz:${rz};--ry:${ry};--rx:${rx};--depth:${depth};--opacity:${opacity}"><span class="book-cover"></span></span>`).join("")}</div>`;
+  return `<div class="mobile-manga-cloud" aria-hidden="true">${poses.map(([cover, x, y, w, rz, ry, rx, depth, opacity]) => `<span class="mobile-manga book-${cover}${depth === 3 ? " manga-near" : ""}" style="--x:${x};--y:${y};--w:${w};--rz:${rz};--ry:${ry};--rx:${rx};--depth:${depth};--opacity:${opacity}"><span class="book-cover"></span></span>`).join("")}</div>`;
 }
 
 export function renderLandingPage(origin) {
@@ -91,12 +92,13 @@ export function renderLandingPage(origin) {
   <main id="inhalt" tabindex="-1">
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1 id="hero-title">Deine Manga.<br>Deine Reihen.<br><em>Alles im Blick.</em></h1>
+        <h1 id="hero-title"><span class="hero-title-wide">Deine Manga.<br>Deine Reihen.<br><em>Alles im Blick.</em></span><span class="hero-title-mobile">Deine Manga.<br><em>Alles im Blick.</em></span></h1>
+        <p class="mobile-lead">Manga sammeln, Neuheiten entdecken und dein Budget planen.</p>
         <p class="lead">${description}</p>
         <div class="hero-actions">${cta()}</div>
         <p class="small hero-note">Kostenlos · Werbefrei · Keine In-App-Käufe</p>
       </div>
-      <figure class="hero-visual" data-manga-portal>
+      <figure class="hero-visual" data-manga-portal data-mobile-parallax>
         <div class="hero-disc" aria-hidden="true"></div>
         ${mobileMangaCloud()}
         ${phone("detail", "Manga-Detailansicht von Jujutsu Kaisen in der Android-Entwicklungsversion", { className: "hero-back" })}
@@ -112,16 +114,16 @@ export function renderLandingPage(origin) {
     </section>
 
     <section id="entdecken" class="discovery wrap section" aria-labelledby="discovery-title">
-      <div class="section-heading"><h2 id="discovery-title">Monatliche Neuerscheinungen.<br><em>Auf einen Blick.</em></h2><p>Sieh, welche Manga im jeweiligen Monat erscheinen. Stöbere durch die Neuheiten und merke dir interessante Bände auf deiner Einkaufsliste.</p></div>
+      <div class="section-heading"><h2 id="discovery-title">Monatliche Neuerscheinungen.<br><em>Auf einen Blick.</em></h2><p>${responsiveCopy("Sieh, welche Manga im jeweiligen Monat erscheinen. Stöbere durch die Neuheiten und merke dir interessante Bände auf deiner Einkaufsliste.", "Monat für Monat neue Bände entdecken und für später merken.")}</p></div>
       <div class="discovery-grid">
         <figure class="discovery-shot">${phone("releases", "Neuerscheinungen nach Monat und Woche in der echten Manga-Tracker-App")}<figcaption>Neuerscheinungen nach Monat und Woche</figcaption></figure>
-        <div class="discovery-copy"><h3>Vom Cover<br>zu den Details.</h3><p>Cover, Verlag, Erscheinungstermin und Preis helfen dir, deinen nächsten Band einzuordnen. Interessante Titel bleiben auf deiner Einkaufsliste griffbereit.</p><a class="text-link" href="#planung">Deinen nächsten Kauf planen ${arrow}</a><div class="detail-inset">${phone("detail", "Authentische Detailseite mit Manga-Cover und Buchinformationen")}<p>Ein Titel.<br><strong>Alle wichtigen Infos.</strong></p></div></div>
+        <div class="discovery-copy"><h3>Vom Cover<br>zu den Details.</h3><p>${responsiveCopy("Cover, Verlag, Erscheinungstermin und Preis helfen dir, deinen nächsten Band einzuordnen. Interessante Titel bleiben auf deiner Einkaufsliste griffbereit.", "Cover, Termin und Preis – alles zu deinem nächsten Band.")}</p><a class="text-link" href="#planung">Deinen nächsten Kauf planen ${arrow}</a><div class="detail-inset">${phone("detail", "Authentische Detailseite mit Manga-Cover und Buchinformationen")}<p>Ein Titel.<br><strong>Alle wichtigen Infos.</strong></p></div></div>
       </div>
     </section>
 
     <section id="sammlung" class="collection section" aria-labelledby="collection-title">
       <div class="wrap collection-grid">
-        <div class="collection-copy"><h2 id="collection-title">Deine Manga-Sammlung.<br><em>Übersichtlich verwaltet.</em></h2><p>Behalte im Blick, welche Bände du schon besitzt. Verwalte deine Manga in einer übersichtlichen Bibliothek und finde einzelne Titel über die Suche wieder.</p><ul class="benefits"><li>Die eigene Bibliothek gezielt durchsuchen</li><li>Sammlung und gewünschte Käufe auseinanderhalten</li><li>Auch für Light Novels geeignet</li></ul></div>
+        <div class="collection-copy"><h2 id="collection-title">Deine Manga-Sammlung.<br><em>Übersichtlich verwaltet.</em></h2><p>${responsiveCopy("Behalte im Blick, welche Bände du schon besitzt. Verwalte deine Manga in einer übersichtlichen Bibliothek und finde einzelne Titel über die Suche wieder.", "Scanne deine Manga, füge mehrere Bände hinzu und behalte deine Sammlung im Blick.")}</p><ul class="benefits"><li>Die eigene Bibliothek gezielt durchsuchen</li><li>Sammlung und gewünschte Käufe auseinanderhalten</li><li>Auch für Light Novels geeignet</li></ul></div>
         <figure class="collection-shot">${phone("library", "Testbibliothek mit One Piece, Jujutsu Kaisen und Spy x Family sowie Bibliothekssuche")}<figcaption>Echte App-Aufnahme mit freigegebenen Testdaten</figcaption></figure>
       </div>
       <div class="wrap collection-features">
@@ -129,13 +131,13 @@ export function renderLandingPage(origin) {
         <article><h3>Mehrere Bände auf einmal hinzufügen</h3><p>Wähle mehrere Bände einer Reihe aus und übernimm sie gemeinsam in deine Bibliothek.</p></article>
         <article><h3>Achievements fürs Sammeln freischalten</h3><p>Schalte beim Sammeln Achievements frei und behalte deine Sammelerfolge in der App im Blick.</p></article>
       </div>
-      <div class="wrap series-feature"><div class="series-header"><h3>Eine Reihe.<br>Ein klarer Überblick.</h3><p>„Meine Reihen“ bündelt deine Sammlung nach Reihen. Der Bandstatus zeigt, was du besitzt und wo noch Lücken sind – damit du beim nächsten Band gezielt weitersammeln kannst.</p></div><div class="series-shots"><figure>${phone("series", "Meine Reihen in der Android-Entwicklungsversion")}<figcaption>Meine Reihen</figcaption></figure><figure>${phone("series-status", "Bandübersicht mit Besitzstatus in der Android-Entwicklungsversion")}<figcaption>Bandstatus</figcaption></figure></div></div>
+      <div class="wrap series-feature"><div class="series-header"><h3>Eine Reihe.<br>Ein klarer Überblick.</h3><p>${responsiveCopy("„Meine Reihen“ bündelt deine Sammlung nach Reihen. Der Bandstatus zeigt, was du besitzt und wo noch Lücken sind – damit du beim nächsten Band gezielt weitersammeln kannst.", "Welche Bände hast du? Welche fehlen noch? Deine Reihen zeigen es dir.")}</p></div><div class="series-shots"><figure>${phone("series", "Meine Reihen in der Android-Entwicklungsversion")}<figcaption>Meine Reihen</figcaption></figure><figure>${phone("series-status", "Bandübersicht mit Besitzstatus in der Android-Entwicklungsversion")}<figcaption>Bandstatus</figcaption></figure></div></div>
     </section>
 
     <section id="planung" class="planning wrap section" aria-labelledby="planning-title">
       <div class="section-heading"><h2 id="planning-title">Dein Monatsbudget.<br><em>Deine Sammlung wächst.</em></h2></div>
       ${LANDING_BUDGET_MARKUP}
-      <div class="planning-grid"><figure>${phone("budget", "Einkaufsliste für One Piece, Jujutsu Kaisen und Spy x Family mit einem Test-Monatsbudget von 60 Euro")}<figcaption>Einkaufsliste & Monatsbudget · Testdaten</figcaption></figure><div class="planning-copy"><h3>Deine Wunschbände.<br>Dein Monatsbudget.</h3><p>Speichere interessante Manga für später und ordne geplante Käufe einem Monat zu. So bleibt neben deinem nächsten Band auch dein Budget im Blick.</p><div class="notification-copy"><h3>Neue Bände?<br>Bleib auf dem Laufenden.</h3><p>Persönliche Hinweise in der App helfen dir, neue Bände deiner Reihen und Änderungen an Erscheinungsterminen zu bemerken.</p><span class="preview-badge">Erweiterte Bandhinweise in Entwicklung</span><p class="small">Die erweiterten sammlungsbezogenen Bandhinweise werden weiterentwickelt.</p></div></div><figure id="benachrichtigungen" class="notification-shot">${phone("notifications", "Echter App-Screenshot: Benachrichtigungen für One Piece, Jujutsu Kaisen und Spy x Family mit simulierten Beispielmeldungen, Status und Terminen")}<figcaption>Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine</figcaption></figure></div>
+      <div class="planning-grid"><figure>${phone("budget", "Einkaufsliste für One Piece, Jujutsu Kaisen und Spy x Family mit einem Test-Monatsbudget von 60 Euro")}<figcaption>Einkaufsliste & Monatsbudget · Testdaten</figcaption></figure><div class="planning-copy"><h3>Deine Wunschbände.<br>Dein Monatsbudget.</h3><p>${responsiveCopy("Speichere interessante Manga für später und ordne geplante Käufe einem Monat zu. So bleibt neben deinem nächsten Band auch dein Budget im Blick.", "Wunschbände merken, Käufe planen und dein Monatsbudget im Blick behalten.")}</p><div class="notification-copy"><h3>Neue Bände?<br>Bleib auf dem Laufenden.</h3><p>${responsiveCopy("Persönliche Hinweise in der App helfen dir, neue Bände deiner Reihen und Änderungen an Erscheinungsterminen zu bemerken.", "Neue Bände und Terminänderungen deiner Reihen im Blick behalten.")}</p><span class="preview-badge">Erweiterte Bandhinweise in Entwicklung</span><p class="small">Die erweiterten sammlungsbezogenen Bandhinweise werden weiterentwickelt.</p></div></div><figure id="benachrichtigungen" class="notification-shot">${phone("notifications", "Echter App-Screenshot: Benachrichtigungen für One Piece, Jujutsu Kaisen und Spy x Family mit simulierten Beispielmeldungen, Status und Terminen")}<figcaption>Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine</figcaption></figure></div>
     </section>
 
     <section class="trust wrap section" aria-labelledby="trust-title">
@@ -149,7 +151,7 @@ export function renderLandingPage(origin) {
         <div><dt>Auf deinem Gerät</dt><dd>Deine Sammlung, Einkaufsliste und dein Budget bleiben auf deinem Gerät.</dd></div>
       </dl>
     </section>
-    <section id="download" class="download wrap" aria-labelledby="download-title"><div class="download-copy"><img class="download-icon" src="/landing/app-icon.png" alt="Originales Manga-Tracker-App-Icon" width="192" height="192" loading="lazy"><h2 id="download-title">Bereit für deinen<br><em>nächsten Band?</em></h2><p>Manga Tracker begleitet deine Sammlung – vom ersten Entdecken bis zum nächsten Manga im Regal.</p><p class="small">Die aktuell verfügbare Version findest du bei Google Play.</p></div>${catScene()}</section>
+    <section id="download" class="download wrap" aria-labelledby="download-title"><div class="download-copy"><img class="download-icon" src="/landing/app-icon.png" alt="Originales Manga-Tracker-App-Icon" width="192" height="192" loading="lazy"><h2 id="download-title">Bereit für deinen<br><em>nächsten Band?</em></h2><p>${responsiveCopy("Manga Tracker begleitet deine Sammlung – vom ersten Entdecken bis zum nächsten Manga im Regal.", "Manga Tracker kostenlos für Android.")}</p><p class="small">Die aktuell verfügbare Version findest du bei Google Play.</p></div>${catScene()}</section>
   </main>
   <footer class="footer wrap"><a class="brand" href="/" aria-label="Manga Tracker Startseite"><img src="/landing/app-icon.png" alt="" width="192" height="192"><span>Manga Tracker</span></a><p>Eine App von RealityForge GbR</p><nav aria-label="Rechtliches"><a href="https://realityforge.eu/legal-notice/">Impressum</a><a href="https://realityforge.eu/privacy-policy/">Datenschutz Website</a><a href="https://realityforge.eu/privacy-policy/manga-tracker/">Datenschutz App</a></nav></footer>
 <script>${LANDING_MOTION_SCRIPT}</script>
