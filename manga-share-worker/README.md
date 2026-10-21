@@ -2,7 +2,7 @@
 
 Serverseitig gerenderte Website- und Share-Seiten für die Hauptdomain `mangatracker.de` und die bestehende Domain `manga.realityforge.eu`. `www.mangatracker.de` leitet mit HTTP 308 unter Erhalt von Pfad und Query auf `https://mangatracker.de` weiter. Der Worker ist vom statischen GitHub-Pages-Auftritt unter `realityforge.eu` getrennt.
 
-Seit dem Umzug vom 12. Oktober 2026 wird ausschließlich aus `RealityForge-GbR/Manga-Tracker-Website/manga-share-worker/` in den unverändert benannten Worker `realityforge-manga-share` veröffentlicht. Die Kopie im Root-Repository ist nur historischer Bestand. Kein zweiter Worker und kein automatischer Deployment-Workflow werden eingerichtet.
+Seit dem Umzug vom 12. Oktober 2026 wird ausschließlich aus `RealityForge-GbR/Manga-Tracker-Website/manga-share-worker/` in den unverändert benannten Worker `realityforge-manga-share` veröffentlicht. Die Kopie im Root-Repository ist nur historischer Bestand. Jeder Push auf `main` veröffentlicht nach erfolgreichen Prüfungen automatisch über GitHub Actions in diesen bestehenden Worker.
 
 ## Lokale Entwicklung
 
@@ -41,7 +41,29 @@ Ohne die Variable liefert `/.well-known/assetlinks.json` HTTP 200 und JSON mit l
 
 ## Veröffentlichung
 
-`wrangler.jsonc` dient der Entwicklung. `wrangler.production.jsonc` ergänzt die verifizierte Account-ID und alle drei Custom Domains. Den Produktions-Build mit dieser Datei prüfen:
+### Normaler Ablauf für Mitarbeiter
+
+1. Worker und SSR unter `manga-share-worker/src/` oder statische Assets unter `manga-share-worker/public/` bearbeiten.
+2. Änderungen direkt auf `main` pushen. Die historischen HTML-Dateien im Repository-Stamm sind keine Produktionsquelle.
+3. Den Status unter [GitHub → Actions → Deploy website to Cloudflare](https://github.com/RealityForge-GbR/Manga-Tracker-Website/actions/workflows/deploy-website.yml) prüfen.
+
+Der Workflow [`../.github/workflows/deploy-website.yml`](../.github/workflows/deploy-website.yml) läuft bei jedem Push auf `main`, ohne Pfadfilter und ohne manuellen Start. Er checkt den gepushten Commit aus, richtet Node.js 22 ein und führt in diesem Verzeichnis `npm ci`, `npm test` und den Production-Dry-Run aus. Erst bei erfolgreichen Prüfungen folgt `npm run deploy`, danach `node scripts/verify-public.mjs`. Fehlgeschlagene Tests oder ein fehlgeschlagener Dry-Run verhindern das Deployment. Schlägt die öffentliche Prüfung fehl, bleibt der Lauf rot und zeigt die betroffenen Endpunkte; diese Prüfung findet nach der Veröffentlichung statt.
+
+Pull Request, Review, manueller Merge, Workflow-Dispatch und GitHub-Environment-Freigaben sind für die Veröffentlichung nicht erforderlich. Mitarbeiter benötigen GitHub-Schreibrechte auf `main`, keinen eigenen Cloudflare-Zugang.
+
+Die gemeinsame Concurrency-Gruppe `mangatracker-production` verarbeitet wartende Läufe nacheinander (`queue: max`, `cancel-in-progress: false`). Unmittelbar vor dem Deployment vergleicht der Workflow seinen Commit mit dem aktuellen GitHub-`main`. Überholte Commits werden nicht veröffentlicht. Kommt während eines laufenden Deployments ein neuer Push, beendet der aktive Lauf zuerst sein Deployment und die öffentlichen Prüfungen; anschließend kann der aktuelle Stand veröffentlicht werden.
+
+### Einmalige Authentifizierung
+
+Das einzige benötigte GitHub Repository Secret heißt `CLOUDFLARE_API_TOKEN` und wird unter **Settings → Secrets and variables → Actions** verwaltet. Es wird nur dem Deployment-Schritt bereitgestellt. Der automatisch von GitHub bereitgestellte `github.token` benötigt lediglich `contents: read`, um den aktuellen `main`-Stand zu prüfen; dafür ist kein zusätzliches Secret anzulegen.
+
+Der Cloudflare-Token benötigt die minimalen Deployment-Rechte für den bestehenden Worker `realityforge-manga-share`, einschließlich seines statischen Asset-Uploads. Bei granularen Account-Tokens ist dies **Workers Editor** für genau diesen Worker; für die in der Konfiguration enthaltenen Custom Domains kommen **Workers Routes Write** für die beiden Zonen `mangatracker.de` und `realityforge.eu` hinzu. Separate D1-, R2- oder Backend-Berechtigungen werden nicht benötigt. Account-ID, Service-Binding, Variablen und Domains bleiben in `wrangler.production.jsonc`; keine Tokenwerte in Git, Dokumentation oder Logs speichern.
+
+Der eingerichtete Account-Token `mangatracker-website-github-actions` besitzt genau diese Ressourcenbeschränkung und hat nach ausdrücklicher Betreiberfreigabe kein Ablaufdatum. Bei einer späteren Rotation wird ausschließlich das gleichnamige GitHub Secret aktualisiert.
+
+### Lokale Prüfung und Veröffentlichung durch Betreiber
+
+`wrangler.jsonc` dient der Entwicklung. `wrangler.production.jsonc` ergänzt die verifizierte Account-ID und alle drei bestehenden Custom Domains. Die gleichen Prüfungen können lokal ausgeführt werden; ein manuelles Deployment durch einen berechtigten Betreiber bleibt bei Bedarf möglich:
 
 ```powershell
 npm test
@@ -50,7 +72,7 @@ npm run deploy
 node scripts/verify-public.mjs
 ```
 
-Ein vorhandener `CLOUDFLARE_API_TOKEN` muss auch den Asset-Upload für diesen Worker erlauben. Beim Umzug fehlte dem geerbten Token diese Berechtigung; die bereits vorhandene Wrangler-OAuth-Anmeldung wurde stattdessen verwendet. In einer lokalen PowerShell-Sitzung kann dafür vor `npm run deploy` die geerbte Variable mit `$env:CLOUDFLARE_API_TOKEN = $null` nur für diesen Prozess entfernt werden. Keine Tokenwerte ausgeben oder neue Berechtigungen ohne Bedarf anlegen.
+Auch lokal muss ein verwendeter `CLOUDFLARE_API_TOKEN` den Asset-Upload erlauben. Alternativ kann ein berechtigter Betreiber seine bereits eingerichtete Wrangler-OAuth-Anmeldung verwenden. Diese interaktive Anmeldung ersetzt das Repository Secret im automatischen Workflow nicht.
 
 Die alte Custom Domain und das Service-Binding müssen bei jedem Deployment erhalten bleiben. Die alte API-Adresse `manga-tracker-api.realityforgeeu.workers.dev` bleibt für bereits veröffentlichte Apps als bestehende 307-Brücke zur kanonischen API erreichbar; dieser Share-Worker ändert den Backend-Worker nicht.
 
