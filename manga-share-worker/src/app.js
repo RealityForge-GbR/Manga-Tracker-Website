@@ -1,4 +1,5 @@
 import { LANDING_ASSETS, renderLandingPage } from "./landing.js";
+import { LANDING_MOTION_SCRIPT } from "./landing-motion.js";
 
 const DEFAULT_API_BASE = "https://api.manga.realityforge.eu";
 const LEGACY_API_ORIGIN = "https://manga-tracker-api.realityforgeeu.workers.dev";
@@ -36,12 +37,14 @@ const CLIENT_SCRIPT = `(() => {
     openApp.hidden = false;
   }
 })();`;
-let clientScriptHash;
+const scriptHashes = new Map();
 
-async function scriptHash() {
-  clientScriptHash ||= crypto.subtle.digest("SHA-256", new TextEncoder().encode(CLIENT_SCRIPT))
-    .then((buffer) => btoa(String.fromCharCode(...new Uint8Array(buffer))));
-  return clientScriptHash;
+async function scriptHash(script) {
+  if (!scriptHashes.has(script)) {
+    scriptHashes.set(script, crypto.subtle.digest("SHA-256", new TextEncoder().encode(script))
+      .then((buffer) => btoa(String.fromCharCode(...new Uint8Array(buffer)))));
+  }
+  return scriptHashes.get(script);
 }
 
 const SECURITY_HEADERS = {
@@ -169,7 +172,7 @@ function authorNames(contributors) {
   return [...new Set(authors)];
 }
 
-async function htmlResponse(html, status, cacheControl, apiOrigin = DEFAULT_API_BASE) {
+async function htmlResponse(html, status, cacheControl, apiOrigin = DEFAULT_API_BASE, script = CLIENT_SCRIPT) {
   let imageOrigin = DEFAULT_API_BASE;
   try { imageOrigin = new URL(apiOrigin).origin; } catch { /* use the fixed safe default */ }
   return new Response(html, {
@@ -177,7 +180,7 @@ async function htmlResponse(html, status, cacheControl, apiOrigin = DEFAULT_API_
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": cacheControl,
-      "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${await scriptHash()}'; style-src 'unsafe-inline'; img-src 'self' ${imageOrigin}; base-uri 'none'; frame-ancestors 'none'; form-action 'none'`,
+      "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${await scriptHash(script)}'; style-src 'unsafe-inline'; img-src 'self' ${imageOrigin}; base-uri 'none'; frame-ancestors 'none'; form-action 'none'`,
       ...SECURITY_HEADERS,
     },
   });
@@ -436,7 +439,7 @@ export async function handleRequest(request, env = {}, ctx = {}) {
     for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
     return asHead(request, new Response(asset.body, { status: asset.status, headers }));
   }
-  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900"), "landing-1");
+  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900", DEFAULT_API_BASE, LANDING_MOTION_SCRIPT), "landing-12");
   const match = /^\/manga\/([^/]+)\/?$/.exec(url.pathname);
   if (!match || !isValidIsbn13(match[1])) return cached(request, ctx, async () => htmlResponse(renderStatePage(404, "Manga nicht gefunden", "Diese Manga-Seite ist nicht verfügbar. Prüfe den Link oder öffne Manga Tracker.", siteOrigin), 404, "public, max-age=30, s-maxage=120"));
   const isbn = match[1];

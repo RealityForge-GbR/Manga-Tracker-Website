@@ -1,0 +1,129 @@
+{
+  "tool": "built-in image_gen",
+  "actualOutputSize": [
+    1254,
+    1254
+  ],
+  "frames": [
+    {
+      "frame": 1,
+      "mode": "generate",
+      "transparent_background": true,
+      "referenceFrame": null,
+      "prompt": "Use case: illustration-story. Asset type: frame 01 of a 15-frame transparent manga cat sprite animation for a website CTA, one frame only. Create a lovable fluffy manga/chibi CAT (an animal, not a human/nekomimi), rounded cream fur #F7EEE8, dark plum ear/back patches #30202A and #342735, dusty rose ears/nose/blush #D7A0AF, bordeaux outlines #5A3948. Clean premium anime line art, softly shaded, restrained colors, friendly and cuddly. Square 1024x1024 fixed transparent canvas, camera absolutely static, no background, no ground or cast shadow, no text/logo/button rendered. Full cat visible, occupies approximately x=80..480 and y=280..880. Seated fluffy body at x=220,y=690, curled tail toward bottom left. Head centered about x=315,y=485, head tilted gently right, eyes softly closed, cheek leaning toward the top-left corner of an INVISIBLE horizontal button which will later be real HTML at x=360,y=650,width=600,height=130. Forepaws cuddle that invisible button's left corner at x=365,y=660 and x=365,y=745; paws must never cover the large empty region x=430..960,y=665..765, reserved for clickable text. Only draw the cat; the invisible target must be completely transparent. The cat's right cheek should sit just above the invisible button's left top edge. This is the first/neutral pose of a gentle rubbing/purring loop: relaxed half-smile, tail curled. Keep large transparent margins and exact registration for later frames. No extra characters, no accessories, no lettering, no particles. Actual transparent alpha background, not a checkerboard.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-779e41f0-83c1-4fca-af21-d74b05adeea3.png"
+    },
+    {
+      "frame": 2,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 02 OF 15, one square 1280x1280 transparent frame. Use the provided image as the exact locked master artwork. Preserve cat's anatomy, fur patches, colors, line quality, size, body/paws/tail positions and canvas registration pixel-for-pixel wherever unchanged. No new design or reframing. Change ONLY the head pose very slightly: move the right cheek 4 pixels right and 3 pixels down, tilt the head about 1 degree farther clockwise, eyes still softly closed and pleased, mouth same. This begins a small affectionate rubbing motion against the invisible HTML button at x=580,y=820,width=660,height=130. Preserve both paws around its left corner. Draw no button or other object, keep button area transparent. Keep rest of cat identical; full transparent alpha background. No text, no particles, no cast shadow. This must look like the next hand-drawn cel, not a new illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-ba3eb830-c665-460c-8b9c-aa1d60f4cfad.png"
+    },
+    {
+      "frame": 3,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 03 OF 15, one square 1280x1280 transparent frame. Edit the provided exact master cat; do NOT redesign or reframe. Preserve body, two paws, feet, tail, fur patterns, colors, linework and canvas registration exactly. Only head/cheek region is changing by a tiny amount for a gentle affectionate nuzzling loop. Relative to the MASTER, shift head 8 pixels right, 6 pixels down and tilt it 2 degrees clockwise, cheek softly squished against an invisible HTML-button corner at x=580,y=820. Eyes remain gently closed, contented small smile, same ears and facial markings. Preserve all other pixels and proportions as closely as possible. Cat must remain in exact same place and same scale on canvas, fixed camera. Paws stay at their original positions around the invisible button left edge. Render CAT ONLY, absolutely no button, text, object, shadow, background or particles. Empty area x=690..1240,y=825..960 stays transparent for later real HTML button. Genuine transparent alpha. This is one next hand-drawn animation cel, not a separate illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-1dd915a4-d31d-4747-802e-45916db44360.png"
+    },
+    {
+      "frame": 4,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 04 OF 15, one square 1280x1280 transparent frame. Edit the provided exact master cat; do NOT redesign or reframe. Preserve body, two paws, feet, tail, fur patterns, colors, linework and canvas registration exactly. Only head/cheek region is changing by a tiny amount for a gentle affectionate nuzzling loop. Relative to the MASTER, shift head 12 pixels right, 9 pixels down and tilt it 3 degrees clockwise, cheek softly squished against an invisible HTML-button corner at x=580,y=820. Eyes remain gently closed, contented small smile, same ears and facial markings. Preserve all other pixels and proportions as closely as possible. Cat must remain in exact same place and same scale on canvas, fixed camera. Paws stay at their original positions around the invisible button left edge. Render CAT ONLY, absolutely no button, text, object, shadow, background or particles. Empty area x=690..1240,y=825..960 stays transparent for later real HTML button. Genuine transparent alpha. This is one next hand-drawn animation cel, not a separate illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-1683e685-0e5a-4b9e-ab32-8cca1b778cea.png"
+    },
+    {
+      "frame": 5,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 05 OF 15, one square 1280x1280 transparent frame. Edit the provided exact master cat; do NOT redesign or reframe. Preserve body, two paws, feet, tail, fur patterns, colors, linework and canvas registration exactly. Only head/cheek region is changing by a tiny amount for a gentle affectionate nuzzling loop. Relative to the MASTER, shift head 16 pixels right, 12 pixels down and tilt it 4 degrees clockwise, cheek softly squished against an invisible HTML-button corner at x=580,y=820. Eyes remain gently closed, contented small smile, same ears and facial markings. Preserve all other pixels and proportions as closely as possible. Cat must remain in exact same place and same scale on canvas, fixed camera. Paws stay at their original positions around the invisible button left edge. Render CAT ONLY, absolutely no button, text, object, shadow, background or particles. Empty area x=690..1240,y=825..960 stays transparent for later real HTML button. Genuine transparent alpha. This is one next hand-drawn animation cel, not a separate illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-4cab87b3-ca74-48b0-877e-3c876ec045dc.png"
+    },
+    {
+      "frame": 6,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 06 OF 15, one square 1280x1280 transparent frame. Edit the provided exact master cat; do NOT redesign or reframe. Preserve body, two paws, feet, tail, fur patterns, colors, linework and canvas registration exactly. Only head/cheek region is changing by a tiny amount for a gentle affectionate nuzzling loop. Relative to the MASTER, shift head 20 pixels right, 15 pixels down and tilt it 5 degrees clockwise, cheek softly squished against an invisible HTML-button corner at x=580,y=820. Eyes remain gently closed, contented small smile, same ears and facial markings. Preserve all other pixels and proportions as closely as possible. Cat must remain in exact same place and same scale on canvas, fixed camera. Paws stay at their original positions around the invisible button left edge. Render CAT ONLY, absolutely no button, text, object, shadow, background or particles. Empty area x=690..1240,y=825..960 stays transparent for later real HTML button. Genuine transparent alpha. This is one next hand-drawn animation cel, not a separate illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-dd965f17-2053-4368-9e4c-2018ec28525d.png"
+    },
+    {
+      "frame": 7,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 07 OF 15, one square 1280x1280 transparent frame. Use the provided exact master cat, do NOT redesign or reframe. Preserve the whole body, two front paws, feet, curled tail, fur patches, palette, linework, shape and canvas registration exactly. Change ONLY the head pose by a tiny amount in an affectionate nuzzling loop. Relative to the MASTER head shift 16 pixels horizontally (positive means right), 12 pixels vertically (positive means down), rotate 4 degrees clockwise (negative counterclockwise). This is a slow easing return from pressing the cheek toward the invisible HTML-button corner at x=580,y=820. Same closed contented eyes and tiny smile, same facial anatomy, no mouth opening. Preserve paws at original coordinates. No body shift or rescale, fixed camera, no cropped extremities. Draw cat only: no button, no text, no other object, shadow, background, particles or effects. Keep x=700..1240,y=825..960 completely transparent for the real HTML CTA. Genuine transparent alpha, identical canvas size. The result must look like one consecutive animation cel of exactly the same cat, with only subtle head movement.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-8f0b7f45-9544-469c-9e15-0f6ebc621463.png"
+    },
+    {
+      "frame": 8,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 08 OF 15, one square 1280x1280 transparent frame. Use the provided exact master cat, do NOT redesign or reframe. Preserve the whole body, two front paws, feet, curled tail, fur patches, palette, linework, shape and canvas registration exactly. Change ONLY the head pose by a tiny amount in an affectionate nuzzling loop. Relative to the MASTER head shift 10 pixels horizontally (positive means right), 8 pixels vertically (positive means down), rotate 2.5 degrees clockwise (negative counterclockwise). This is a slow easing return from pressing the cheek toward the invisible HTML-button corner at x=580,y=820. Same closed contented eyes and tiny smile, same facial anatomy, no mouth opening. Preserve paws at original coordinates. No body shift or rescale, fixed camera, no cropped extremities. Draw cat only: no button, no text, no other object, shadow, background, particles or effects. Keep x=700..1240,y=825..960 completely transparent for the real HTML CTA. Genuine transparent alpha, identical canvas size. The result must look like one consecutive animation cel of exactly the same cat, with only subtle head movement.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-aa5d2cbf-fc14-4484-8738-526bb9c56d48.png"
+    },
+    {
+      "frame": 9,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 09 OF 15, one square 1280x1280 transparent frame. Use the provided exact master cat, do NOT redesign or reframe. Preserve the whole body, two front paws, feet, curled tail, fur patches, palette, linework, shape and canvas registration exactly. Change ONLY the head pose by a tiny amount in an affectionate nuzzling loop. Relative to the MASTER head shift 4 pixels horizontally (positive means right), 3 pixels vertically (positive means down), rotate 1 degrees clockwise (negative counterclockwise). This is a slow easing return from pressing the cheek toward the invisible HTML-button corner at x=580,y=820. Same closed contented eyes and tiny smile, same facial anatomy, no mouth opening. Preserve paws at original coordinates. No body shift or rescale, fixed camera, no cropped extremities. Draw cat only: no button, no text, no other object, shadow, background, particles or effects. Keep x=700..1240,y=825..960 completely transparent for the real HTML CTA. Genuine transparent alpha, identical canvas size. The result must look like one consecutive animation cel of exactly the same cat, with only subtle head movement.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-11a4b4dc-7812-49cb-b7de-adf7a5b8631d.png"
+    },
+    {
+      "frame": 10,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 10 OF 15, one square 1280x1280 transparent frame. Use the provided exact master cat, do NOT redesign or reframe. Preserve the whole body, two front paws, feet, curled tail, fur patches, palette, linework, shape and canvas registration exactly. Change ONLY the head pose by a tiny amount in an affectionate nuzzling loop. Relative to the MASTER head shift -2 pixels horizontally (positive means right), -2 pixels vertically (positive means down), rotate -0.5 degrees clockwise (negative counterclockwise). This is a slow easing return from pressing the cheek toward the invisible HTML-button corner at x=580,y=820. Same closed contented eyes and tiny smile, same facial anatomy, no mouth opening. Preserve paws at original coordinates. No body shift or rescale, fixed camera, no cropped extremities. Draw cat only: no button, no text, no other object, shadow, background, particles or effects. Keep x=700..1240,y=825..960 completely transparent for the real HTML CTA. Genuine transparent alpha, identical canvas size. The result must look like one consecutive animation cel of exactly the same cat, with only subtle head movement.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-6daee53e-145a-4fb7-8ee9-422acf84c014.png"
+    },
+    {
+      "frame": 11,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 11 OF 15, ONE square 1280x1280 transparent animation cel. The provided image is the exact fixed master. Keep the identical cat identity, fur markings, colors, size, body silhouette, feet, curled tail, paw positions, linework and exact canvas registration. Do not reframe, crop or redesign. Change ONLY the head by a very subtle nuzzling pose. Relative to the MASTER: horizontal head offset -8px (negative means left), vertical offset -6px (negative means up), rotation -2 degrees clockwise (negative means counterclockwise). Cat gently lifts cheek from the invisible button before nestling back to starting pose; eyes softly closed, same tiny content smile, no facial redesign.  Head and neck connect naturally; do not move or enlarge torso or either front paw. CAT ONLY on genuine transparent alpha. No rendered button, no letters, no objects, no particles, no scene or floor shadows. Keep empty canvas at x=700..1240,y=825..960 transparent for the real HTML Google Play button, which the cat cuddles around its left corner. One continuous hand-drawn stop-motion sequence, not a new character illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-14834c0d-8e2e-47e7-ba5d-7d2a771d4ebc.png"
+    },
+    {
+      "frame": 12,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 12 OF 15, ONE square 1280x1280 transparent animation cel. The provided image is the exact fixed master. Keep the identical cat identity, fur markings, colors, size, body silhouette, feet, curled tail, paw positions, linework and exact canvas registration. Do not reframe, crop or redesign. Change ONLY the head by a very subtle nuzzling pose. Relative to the MASTER: horizontal head offset -12px (negative means left), vertical offset -9px (negative means up), rotation -3 degrees clockwise (negative means counterclockwise). Cat gently lifts cheek from the invisible button before nestling back to starting pose; eyes softly closed, same tiny content smile, no facial redesign.  Head and neck connect naturally; do not move or enlarge torso or either front paw. CAT ONLY on genuine transparent alpha. No rendered button, no letters, no objects, no particles, no scene or floor shadows. Keep empty canvas at x=700..1240,y=825..960 transparent for the real HTML Google Play button, which the cat cuddles around its left corner. One continuous hand-drawn stop-motion sequence, not a new character illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-86828f2e-ef27-4c6f-9d56-4ba07a64bb6f.png"
+    },
+    {
+      "frame": 13,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 13 OF 15, ONE square 1280x1280 transparent animation cel. The provided image is the exact fixed master. Keep the identical cat identity, fur markings, colors, size, body silhouette, feet, curled tail, paw positions, linework and exact canvas registration. Do not reframe, crop or redesign. Change ONLY the head by a very subtle nuzzling pose. Relative to the MASTER: horizontal head offset -8px (negative means left), vertical offset -6px (negative means up), rotation -2 degrees clockwise (negative means counterclockwise). Cat gently lifts cheek from the invisible button before nestling back to starting pose; eyes softly closed, same tiny content smile, no facial redesign.  Head and neck connect naturally; do not move or enlarge torso or either front paw. CAT ONLY on genuine transparent alpha. No rendered button, no letters, no objects, no particles, no scene or floor shadows. Keep empty canvas at x=700..1240,y=825..960 transparent for the real HTML Google Play button, which the cat cuddles around its left corner. One continuous hand-drawn stop-motion sequence, not a new character illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-36d93634-7022-44d4-9b9e-0c2908ea66d7.png"
+    },
+    {
+      "frame": 14,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 14 OF 15, ONE square 1280x1280 transparent animation cel. The provided image is the exact fixed master. Keep the identical cat identity, fur markings, colors, size, body silhouette, feet, curled tail, paw positions, linework and exact canvas registration. Do not reframe, crop or redesign. Change ONLY the head by a very subtle nuzzling pose. Relative to the MASTER: horizontal head offset -4px (negative means left), vertical offset -3px (negative means up), rotation -1 degrees clockwise (negative means counterclockwise). Cat gently lifts cheek from the invisible button before nestling back to starting pose; eyes softly closed, same tiny content smile, no facial redesign.  Head and neck connect naturally; do not move or enlarge torso or either front paw. CAT ONLY on genuine transparent alpha. No rendered button, no letters, no objects, no particles, no scene or floor shadows. Keep empty canvas at x=700..1240,y=825..960 transparent for the real HTML Google Play button, which the cat cuddles around its left corner. One continuous hand-drawn stop-motion sequence, not a new character illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-d3e483a9-c0a8-4926-82f2-b318d8e59755.png"
+    },
+    {
+      "frame": 15,
+      "mode": "edit",
+      "transparent_background": true,
+      "referenceFrame": 1,
+      "prompt": "Identity-preserve animation edit. FRAME 15 OF 15, ONE square 1280x1280 transparent animation cel. The provided image is the exact fixed master. Keep the identical cat identity, fur markings, colors, size, body silhouette, feet, curled tail, paw positions, linework and exact canvas registration. Do not reframe, crop or redesign. Change ONLY the head by a very subtle nuzzling pose. Relative to the MASTER: horizontal head offset 0px (negative means left), vertical offset 0px (negative means up), rotation 0 degrees clockwise (negative means counterclockwise). Cat gently lifts cheek from the invisible button before nestling back to starting pose; eyes softly closed, same tiny content smile, no facial redesign. This FINAL frame closes the seamless loop: return extremely close to the original master pose, with only a barely perceptible breath; all contours should meet frame 01. Head and neck connect naturally; do not move or enlarge torso or either front paw. CAT ONLY on genuine transparent alpha. No rendered button, no letters, no objects, no particles, no scene or floor shadows. Keep empty canvas at x=700..1240,y=825..960 transparent for the real HTML Google Play button, which the cat cuddles around its left corner. One continuous hand-drawn stop-motion sequence, not a new character illustration.",
+      "generatedPath": "/Users/ericosterwald/.codex/generated_images/01a15e32-4365-7261-a8c5-f6da2ea6dabc/exec-bc4fce52-d728-4e3b-99cd-87a754f61e25.png"
+    }
+  ]
+}

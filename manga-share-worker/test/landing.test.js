@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { handleRequest } from "../src/app.js";
 import { LANDING_ASSETS } from "../src/landing.js";
+import { LANDING_MOTION_SCRIPT } from "../src/landing-motion.js";
 
 const PLAY = "https://play.google.com/store/apps/details?id=eu.realityforge.mangatracker";
 const assetData = (path) => readFileSync(new URL(`../public${path}`, import.meta.url));
@@ -25,10 +26,12 @@ test("homepage works independently of unavailable API and assets bindings", asyn
       assert.match(html, /class="skip" href="#inhalt"/);
       assert.match(html, /prefers-reduced-motion:reduce/);
       assert.match(html, /a:focus-visible/);
-      assert.doesNotMatch(html, /<script\b|<iframe\b|<form\b|google-analytics|googletagmanager|fonts\.googleapis|fbq\(/i);
+      const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+      assert.deepEqual(scripts.map((match) => match[1]), [LANDING_MOTION_SCRIPT]);
+      const scriptDigest = createHash("sha256").update(LANDING_MOTION_SCRIPT).digest("base64");
+      assert.match(response.headers.get("content-security-policy"), new RegExp("script-src 'sha256-" + scriptDigest.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "'"));
+      assert.doesNotMatch(html, /<script\s|<iframe\b|<form\b|<[a-z][^>]*\son\w+=|google-analytics|googletagmanager|fonts\.googleapis|fbq\(/i);
       assert.doesNotMatch(html, /Hanako/);
-      assert.match(html, /Alle Screenshots wurden direkt in der echten Android-App aufgenommen/);
-      assert.match(html, /Echte Screenshots aus der Android-App/);
       assert.match(html, /src="\/landing\/notifications\.webp"/);
       assert.match(html, /Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine/);
       const expectedOrigin = origin.startsWith("http:") ? "https://mangatracker.de" : origin;
@@ -49,10 +52,8 @@ test("all homepage images are local, dimensioned and exist, with deferred below-
   }
   assert.equal((html.match(/fetchpriority="high"/g) || []).length, 1);
   assert.match(html, /loading="lazy"/);
-  assert.match(html, /Meine Reihen · Vorschau/);
-  assert.match(html, /Bandstatus · Vorschau/);
-  assert.match(html, /In Vorbereitung/);
-  assert.match(html, /1\.0\.1-compose/);
+  assert.match(html, /Meine Reihen<\/figcaption>/);
+  assert.match(html, /Bandstatus<\/figcaption>/);
   for (const path of ["legal-notice/", "privacy-policy/", "privacy-policy/manga-tracker/"]) {
     assert.ok(html.includes(`href="https://realityforge.eu/${path}"`));
   }
@@ -108,7 +109,7 @@ test("homepage bypasses former cached landing without changing detail cache name
   globalThis.caches = { default: { async match(key) { keys.push(key.url); return undefined; }, async put() {} } };
   try {
     await handleRequest(new Request("https://mangatracker.de/?campaign=test"));
-    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-1/"]);
+    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-12/"]);
   } finally {
     if (previous === undefined) delete globalThis.caches; else globalThis.caches = previous;
   }

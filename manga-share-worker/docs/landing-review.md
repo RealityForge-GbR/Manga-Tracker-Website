@@ -4,6 +4,132 @@ Stand: 12. Oktober 2026. Branch: `codex/landingpage-relaunch`.
 Diese Änderung ist zur Review bestimmt. Kein Merge, Produktionsdeployment,
 Workflow-Start, Android-Release oder Eingriff in DNS/TLS/Cloudflare-Routing.
 
+## Gestaltungsvorgaben vom 21. Oktober 2026
+
+Die vom Nutzer gelieferte Farbpalette ist für die Startseite verbindlich:
+
+| Rolle | Farbe |
+| --- | --- |
+| Primärfarbe Rosé | #D7A0AF |
+| Haupthintergrund | #171217 |
+| Kartenhintergrund | #211A22 |
+| Erhöhter Hintergrund | #2A202B |
+| Bordeaux | #5A3948 |
+| Sekundärer Hintergrund | #342735 |
+| Haupttext | #F7EEE8 |
+| Sekundärtext | #C2B3B8 |
+| Dunkler Kontrasttext auf Rosé | #30202A |
+
+Alle kleinen Überschriften oberhalb der Hauptüberschriften sind entfernt.
+Zusätzlich entfallen der Hero-Link „Die App entdecken“, die senkrechte Hero-Beschriftung,
+der Hero-Bilduntertitel und der allgemeine Screenshot-Hinweis vor dem Footer.
+Herkunft und Prüfsummen der vorhandenen Aufnahmen bleiben in dieser Dokumentation
+und landing-assets.json erhalten. Am Benachrichtigungsbild bleibt der Hinweis auf
+simulierte Beispieldaten bestehen.
+
+Es werden ausschließlich echte App-Aufnahmen verwendet, bei Bedarf Originale aus
+Google Play. Keine erfundenen App-Oberflächen oder nachgestellten Screenshots.
+Vor einer neuen Ansicht ohne vorhandene Aufnahme wird dem Nutzer die fehlende Quelle genannt.
+Im bestehenden Assetbestand fehlen eigene Ansichten von Scanner, Favoriten, Profil und Backup.
+Die acht vorhandenen WebPs sind dokumentierte Zuschnitte/Verkleinerungen echter
+Android-Aufnahmen; die unbeschnittenen Original-PNGs liegen nicht in diesem Checkout.
+
+### Inhaltliche Grundlage: die zwölf Nutzer-USPs
+
+Die zwölf am 21. Oktober gelieferten USPs sind auf die passenden Bereiche verteilt.
+Die Kapitelübersicht „Vom ersten Entdecken bis zum vollständigen Regal“ ist entfernt.
+Die Gestaltung bleibt zunächst bestehen; die neuen Textbausteine verwenden eine
+schlichte responsive Anordnung innerhalb des Sammlungsbereichs.
+
+| USP | Bereich |
+| --- | --- |
+| Kostenlos nutzbar | Hero-Kurzzeile und Vertrauensbereich |
+| Keine In-App-Käufe | Hero-Kurzzeile und Vertrauensbereich |
+| Keine Werbung | Hero-Kurzzeile und Vertrauensbereich |
+| Kein Weiterverkauf, persönliche Daten lokal | Vertrauensbereich: Sammlung, Einkaufsliste und Budget konkret benannt |
+| Sammlung übersichtlich verwalten | Sammlungsbereich |
+| Barcode einscannen | Textbaustein unter der Bibliothek |
+| Mehrere Bände einer Reihe hinzufügen | Textbaustein unter der Bibliothek |
+| Light Novels | Einleitung und Sammlungsbereich |
+| Monatliche Neuerscheinungen | Entdecken |
+| Einkaufsliste für gewünschte Manga | Kaufplanung |
+| Achievements fürs Sammeln | Textbaustein unter der Bibliothek |
+| Freiwillige Affiliate-Unterstützung ohne Mehrkosten | Ausformulierter Hinweis im Vertrauensbereich |
+
+Es fehlen eigene Original-Aufnahmen von Barcode-Scan, Mehrfachauswahl/Reihenimport,
+einem Light-Novel-Beispiel und der Achievements-Ansicht. Diese USPs werden als Text
+erklärt; die Reihen-/Bandstatus-Aufnahmen werden nicht als Mehrfachimport ausgegeben.
+Das vorhandene Achievement-Maskottchen ist Artwork und kein UI-Screenshot.
+Außerhalb des Website-Bestands existieren originale Feature-Videos (Achievment.MOV,
+Bibliothekreihe 1.MOV und Bibliothekreihe 2.MOV) als mögliche spätere Framequellen;
+ihre Inhalte und passende Frames wurden in diesem Schritt nicht geprüft.
+
+Die historischen „In Vorbereitung“-Labels für Meine Reihen und Bandstatus sind
+entfernt: Die Funktionen und der Mehrfachimport sind im veröffentlichten Play-Tag
+play-v1.0.2-4 (5bd868bb2b128b875805362f3bdf63d36081c792) implementiert. Direkte Belege
+sind InventoryScreen.kt (InventorySeriesList), SeriesBrowseScreen.kt
+(CollectionStatusIndex) und inventory/add/SeriesImportScreen.kt (Mehrfachauswahl
+und Übernahme in die Bibliothek). Die Originalaufnahmen bleiben unverändert.
+„Alles bleibt auf dem Gerät“ wird nicht pauschal für jeden technischen Datenaustausch
+behauptet, sondern auf die tatsächlich lokal gespeicherten persönlichen Listen bezogen.
+
+### Manga-Portal im Hero
+
+Nur im Landing-Abschnitt fliegen acht dekorative Buch-Elemente zum vorderen Handy.
+Die Cover zeigen zwei Ausschnitte aus der vorhandenen unveränderten releases.webp
+(One Piece und Spy x Family); es gibt keine erfundenen Screenshots oder zusätzlichen Bilddateien.
+Der CSS-Geräterahmen, die Bücher und der Portalsaum sind dekorativ.
+
+Die Animation verändert ausschließlich transform und opacity, ohne Bibliothek,
+Canvas, Video, Timer oder JavaScript pro Frame. Auf kleinen Displays bleiben fünf
+Bücher aktiv. Ein IntersectionObserver und die Page Visibility API pausieren bei
+unsichtbarem Hero bzw. inaktivem Tab. Ein zugänglicher Pausenknopf erhält die manuelle
+Pause beim Scrollen. Bei reduzierter Bewegung oder fehlender Browserunterstützung
+bleibt die originale Zwei-Handy-Darstellung statisch. Das kleine feste Steuer-Script
+wird ausschließlich mit seinem SHA-256-Hash in der CSP freigegeben; die Detailseiten
+behalten ihr eigenes Script und ihren bisherigen Cache-Namensraum.
+
+### Interaktive Budget-Beispielrechnung
+
+Der Kaufplanungsbereich zeigt eine eigenständige Website-Illustration mit einem
+Budget-Konto, Geldtransfer und wachsendem Manga-Regal. Startwerte: 100 Euro pro
+Monat und 8,50 Euro pro Band. Budget (0–1.000 Euro) und Preis (0,01–1.000 Euro)
+sind veränderbar. Es handelt sich ausdrücklich um eine Beispielrechnung und keinen
+Kauf oder Screenshot der App. Das Buchcover ist ein Ausschnitt der unveränderten
+releases.webp, alle übrigen Elemente sind HTML/CSS in der verbindlichen Palette.
+
+Die Rechnung arbeitet in ganzen Cent. Restbudget, Ausgaben und Bandanzahl ändern
+sich gemeinsam bei Ankunft des Buchs. Käufe können das Budget nicht unterschreiten.
+Die begrenzte Regal-Darstellung nutzt zwölf Elemente, der Zähler zeigt auch größere
+Mengen korrekt. Der automatische Durchlauf zeigt vor dem Zurücksetzen einen neuen
+Monat an. Manuelle Eingaben pausieren den Durchlauf und beginnen eine neue Rechnung;
+Pause, einzelner Beispielkauf und Zurücksetzen bleiben direkt bedienbar.
+
+CSS bewegt drei Münzen und ein Buch ausschließlich per transform/opacity; ein
+Timer steuert die Kaufphasen, es gibt keinen JavaScript-Loop pro Frame. Außerhalb
+des sichtbaren Bereichs, bei inaktivem Tab und reduzierter Bewegung läuft keine
+Automatik. Der manuelle Rechner funktioniert auch ohne IntersectionObserver oder
+matchMedia; bei blockiertem Script bleibt ein statisches Beispiel mit gesperrten
+Bedienelementen. Die bestehenden App-Aufnahmen darunter bleiben unverändert.
+
+### Neue Katzen-Animation im Download-Bereich
+
+Auf ausdrücklichen Nutzerwunsch ersetzt eine neue Manga-Katze die bisherige Figur
+im Abschnitt „Bereit für deinen nächsten Band?“. 15 separat und nacheinander mit
+dem eingebauten image_gen erzeugte Illustrationen bilden eine Stop-Motion-Schleife.
+Die Originale, verwendeten Prompts und Prüfsummen liegen unter docs/cat-animation.
+Die App-Screenshots und ihre Herkunftsbelege sind davon unabhängig und unverändert.
+
+Die Website lädt einen 413.492 Byte großen WebP-Bildstreifen erst nahe dem Abschnitt.
+15 CSS-Schritte bei acht Bildern pro Sekunde bewegen die Katze. Der anklickbare
+Play-Link bleibt echtes HTML; Text und Symbole liegen vor der dekorativen Katze.
+Ein statisches 28.836-Byte-Bild hält den Download auch ohne Script sichtbar.
+Bei reduzierter Bewegung, inaktivem Tab oder unsichtbarem Abschnitt wird nicht
+abgespielt. Manuelle Pause bleibt beim Scrollen erhalten. Es gibt keine Bildwechsel
+per JavaScript und keine Canvas-/WebGL-/Videopipeline.
+
+Die folgenden Abschnitte dokumentieren den ursprünglichen Reviewstand vom 12. Oktober.
+
 ## Gestaltung
 
 Die Startseite verwendet die App-Farben #171217, #211A22, #D7A0AF,
@@ -11,8 +137,6 @@ Die Startseite verwendet die App-Farben #171217, #211A22, #D7A0AF,
 drei Kapitel für Entdecken/Sammeln/Planen und die originale App-Figur bilden
 den Seitenaufbau. Alle Bildinhalte stammen aus der App; keine neu erzeugten
 Illustrationen, erfundenen Oberflächen, Bewertungen oder Nutzerzahlen.
-Am Hero und im allgemeinen Screenshot-Hinweis ist ausdrücklich erkennbar,
-dass alle Screenshots direkt in der echten Android-App aufgenommen wurden.
 
 Die Trust-Texte beziehen sich auf die tatsächlich vorhandenen Kernfunktionen:
 Neuerscheinungen, lokale Bibliothek, Einkaufsliste und Budget. Der öffentliche
@@ -199,3 +323,91 @@ Startseite aus dem Cache zeigt.
 Offen: Designfreigabe und eine danach gesondert autorisierte Veröffentlichung.
 Der gefüllte Benachrichtigungs-Screenshot ist jetzt eingebunden; seine Daten
 sind als simulierte Beispiele gekennzeichnet.
+
+
+## Designgespräch und mobiles Grundgerüst · 21.10.2026
+
+### Festgehaltene Ideen aus dem Gespräch
+
+Eric wünscht eine App-Website von Fans für Fans. Zusätzlich zur allgemeinen
+Manga-Bildsprache will er konkrete Insider aus berühmten Reihen erkennen können.
+Die folgenden Ideen bleiben als Entwurfsoptionen erhalten, nicht als freigegebene
+Verwendung fremder Illustrationen oder Kennzeichen:
+
+- Die Sammellücke: eigene Buchrücken 01, 02, Lücke, 04, 05; Band 03 schließt sie.
+- Eine Startszene wie ein großes Manga-Panel: neutrales Android-Handy, echter
+  App-Screenshot und davor/dahinter schwebende Bände wie eingefrorenes Herbstlaub.
+- Die eigene Katze als wiederkehrende Figur mit kurzen Manga-Gefühlszeichen.
+- Barcode-Scan, kurzer Bewegungslinien-Impuls und eigenes „ZACK!“, dann ins Regal.
+- Monatsbudget sinkt, während sich gekaufte Bände zu einem Stapel sammeln.
+- Sparsame Rasterpunkte, Tuschelinien und Fokuslinien innerhalb der vorgegebenen
+  Rosé-/Pflaumenpalette; keine zusätzlichen Mini-Überschriften.
+
+### Konkrete Reihenbezüge als Recherche, noch ohne Gestaltungsauswahl
+
+„Jeder Manga-Fan kennt es“ wird nicht als Fakt behauptet. Bekanntheit unterscheidet
+sich nach gelesenen Reihen; breite Erkennungszeichen und tiefere Insider trennen:
+
+| Reihe | Erkennungszeichen / Insider | Offizieller Beleg |
+| --- | --- | --- |
+| One Piece | Strohhut als breites Zeichen; X am linken Arm beim Abschied von Vivi als emotionale Fanebene | https://one-piece.com/weareone/ |
+| One Piece | Drei Schwerter und Orientierungslosigkeit: Zoros laufender Witz | https://one-piece.com/character/zoro/index.html |
+| Naruto | Ichiraku-Ramen und das Handzeichen für Schattendoppelgänger | https://naruto-official.com/en/news/01_1623 |
+| Dragon Ball | Vier-Sterne-Kugel als Erinnerung an Großvater Gohan; insgesamt sieben Kugeln für einen Wunsch | https://en.dragon-ball-official.com/news/01_3933.html |
+| Dragon Ball | Überforderter bzw. explodierender Kampfkraft-Scouter | https://en.dragon-ball-official.com/news/01_1666.html |
+| Death Note | Schwarzes Notizbuch und Ryuks Vorliebe für Äpfel | https://www.viz.com/blog/posts/death-note-all-in-one-edition |
+| Attack on Titan | Kellerschlüssel als Story-Motiv | https://shingeki.tv/news/archives/2888 |
+| Demon Slayer | Tanjiros grün-schwarz kariertes Haori als breites Erkennungszeichen | https://kimetsu.com/anime/risshihen/news/?id=59176 |
+
+Diese Recherche ist keine Rechtefreigabe. Das Weglassen des Namens allein
+entscheidet nicht über die Zulässigkeit einer konkreten Nachgestaltung; bei
+Bearbeitungen gilt § 23 UrhG: https://www.gesetze-im-internet.de/urhg/__23.html
+Serienobjekte, Logos oder Figuren wurden in diesem Schritt nicht ergänzt.
+
+Allgemeine Bildsprache und Sammler-Motive:
+https://www.clipstudio.net/en/comics-manga/tool/effects-tones/
+https://www.britishmuseum.org/blog/introduction-manga
+https://www.carlsen.de/reihe/one-piece?language=de
+
+### Mobile Grundlage und offene Parallax-Frage
+
+Für <=760 CSS-Pixel zeigt die Startseite nun ein einzelnes, selbst gestaltetes,
+markenunabhängiges Android-Gehäuse mit dem unveränderten echten Screenshot
+`releases.webp`. Sechs dekorative Bücher in unterschiedlichen Größen, Winkeln
+und Vorder-/Hintergrundebenen verwenden dieselben echten Coverausschnitte aus
+diesem Screenshot wie das Desktop-Portal. Keine erfundene App-Oberfläche und
+kein neues Bild-Asset. Die vorhandene Desktop-Szene mit zwei Telefonen bleibt.
+
+Mobil sind der lange Hero-Einleitungstext und die zusätzliche Abschnittsnavigation
+im Header ausgeblendet; Überschrift, App-Bild, echter Play-Link und die drei
+Kostenlos-/Werbefrei-/In-App-Kauf-Hinweise bilden den Einstieg. Alle weiteren
+Inhalte stehen darunter weiterhin bereit.
+
+Die Bücher sind zunächst eingefroren. Die Art der Parallax-Steuerung bleibt
+entsprechend Erics Wunsch offen: Scrollen, Touch oder optional Bewegungssensoren.
+In diesem Schritt werden keine Sensoren abgefragt. Die Ebenen sind so getrennt,
+dass später nur Bildobjekte bewegt werden müssen; Text und Button bleiben fest.
+Keine zusätzlichen Laufzeitabhängigkeiten, Dauertimer oder Render-Schleifen.
+
+Sensor-Recherche aus dem vorherigen Gespräch: iOS Safari benötigt eine bewusste
+Nutzeraktion und beim erstmaligen Freigeben einen Berechtigungsdialog; die
+Entscheidung wird für die Browsersitzung gemerkt. Android/Chrome ist je nach
+Version und Einstellungen häufig ohne Rückfrage möglich; ein langfristig
+plattformübergreifend rückfragefreier Gyro-Effekt ist nicht verlässlich planbar.
+https://bugs.webkit.org/show_bug.cgi?id=196992
+https://developer.mozilla.org/en-US/docs/Web/API/DeviceOrientationEvent/requestPermission_static
+https://groups.google.com/a/chromium.org/g/blink-dev/c/ckd2rFmT3PA
+
+
+Prüfung dieses Schritts: **75/75 Tests bestanden**. Lokaler Produktions-Bundlecheck
+mit Wrangler `--dry-run` erfolgreich, keine Veröffentlichung. Die Originalbild-
+Prüfsummen sind weiterhin unverändert. Im Browser wurden Viewports 320×740,
+390×844, 430×932 und 760×900 sowie die normale Desktopansicht geprüft.
+Der Browser reserviert dabei 15 px für die Scrollleiste; gemessene Inhaltsbreiten
+sind 305, 375, 415, 745 und 1944 px, jeweils ohne horizontalen Überlauf.
+Die 320er Ansicht wurde nach einer Abstandskorrektur erneut geprüft.
+Der einzige mobile App-Screenshot ist vollständig geladen (720 px Originalbreite),
+das hintere Telefon ist mobil ausgeblendet, die sechs Buchebenen sind dekorativ.
+Am Desktop sind beide Telefone sichtbar und die mobilen Buchebenen ausgeblendet.
+Die Website verwendet für die aktualisierte Startseite die Cachekennung landing-12.
+Parallax wurde bewusst noch nicht als Interaktion umgesetzt.
