@@ -143,3 +143,33 @@ Affiliate-Links, qualifizierte Käufe, Provision und keine Mehrkosten.
 Die Downloadüberschrift lautet „Tritt der Community kostenlos bei!“, wobei nur
 „kostenlos“ rosé hervorgehoben ist. Auf schmalen Bildschirmen darf diese längere
 Überschrift zugunsten lesbarer Schrift zweizeilig stehen.
+
+
+## Hero und Budget-Details
+
+Die Desktop-Telefone reagieren auf Mausbewegung im gesamten Hero-Abschnitt.
+Scrollen dreht sie leicht gegenläufig um die Z-Achse und versetzt die vier
+Hintergrundbücher. Beide Ereignisse teilen einen angeforderten Render-Frame;
+außerhalb des Sichtbereichs, im verborgenen Tab und bei reduzierter Bewegung
+sind die Listener entfernt. Das linke Gerät trägt ein matteres Bordeaux-Gehäuse
+mit Hörmuschel, das rechte einen helleren Rahmen mit Kameraöffnung. Die beiden
+Original-Screenshots bleiben unverändert. Headline, Download und Häkchen stehen
+auf derselben linken Kante wie die Kopfmarke, auch mobil mit sicheren Seitenabständen.
+
+Unter dem Budget-Beispiel steht links ein perspektivisches Android-Mockup mit
+dem originalen Budget-Screenshot. Rechts erläutern zwei gleich formatierte
+Textblöcke die Monatsplanung und den Wert der Sammlung. Die alte Bildunterschrift
+entfällt. Der Benachrichtigungs-Screenshot bleibt nach der App-Galerie in einer
+aufklappbaren Entwicklungsvorschau erhalten, einschließlich des Hinweises auf
+simulierte Beispielmeldungen, Status und Termine.
+
+## Durchgehendes Regal
+
+Ein dekoratives Bücherregal ersetzt die obere Trennlinie des Datenschutzbereichs
+und reicht über die gesamte Bildschirmbreite. Achtzig originale, generische
+Buchrücken verteilen sich flexibel über eine mindestens 2280 Pixel breite Reihe;
+das äußere Element schneidet Überstand ab. Einzelne Buchrücken werden in einer
+26-Sekunden-Folge sanft ein Stück nach vorn gezogen und zurückgeschoben. Kein
+Buch verlässt die Reihe. Nur CSS-Transformationen bewegen die Bücher. Ein
+Visibility-Controller pausiert sie außerhalb des Sichtbereichs, in verborgenen
+Tabs und bei reduzierter Bewegung; es läuft keine JavaScript-Animationsschleife.

@@ -1,3 +1,5 @@
+import { LANDING_PLANNING_DETAILS, LANDING_NOTIFICATION_PREVIEW } from "./landing-planning-details.js";
+import { LANDING_SHELF_DIVIDER_MARKUP } from "./landing-shelf-divider.js";
 import { LANDING_APP_SHOWCASE } from "./landing-app-showcase.js";
 import { LANDING_PRIVACY_MARKUP } from "./landing-privacy-section.js";
 import { LANDING_STYLES } from "./landing-styles.js";
@@ -16,7 +18,6 @@ const description = "Verwalte deine Manga und Light Novels, entdecke monatliche 
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const downloadIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg>';
 function cta() { return `<a class="button store-download" href="${PLAY}" aria-label="Manga Tracker kostenlos bei Google Play herunterladen">${downloadIcon}<span class="store-label"><strong>Kostenlos herunterladen</strong><small>bei Google Play</small></span></a>`; }
-function responsiveCopy(wide, mobile) { return `<span class="wide-copy">${wide}</span><span class="mobile-copy">${mobile}</span>`; }
 function catScene() {
   return `<div class="cat-scene" data-cat-scene>
     <div class="manga-shelf" aria-hidden="true"></div>
@@ -112,9 +113,10 @@ export function renderLandingPage(origin) {
 
     <section id="planung" class="planning section" aria-labelledby="planning-title">
       ${LANDING_BUDGET_MARKUP}
-      <div class="planning-grid wrap"><figure>${phone("budget", "Einkaufsliste für One Piece, Jujutsu Kaisen und Spy x Family mit einem Test-Monatsbudget von 60 Euro")}<figcaption>Einkaufsliste & Monatsbudget · Testdaten</figcaption></figure><div class="planning-copy"><h3>Deine Wunschbände.<br>Dein Monatsbudget.</h3><p>${responsiveCopy("Speichere interessante Manga für später und ordne geplante Käufe einem Monat zu. So bleibt neben deinem nächsten Band auch dein Budget im Blick.", "Wunschbände merken, Käufe planen und dein Monatsbudget im Blick behalten.")}</p><div class="notification-copy"><h3>Neue Bände?<br>Bleib auf dem Laufenden.</h3><p>${responsiveCopy("Persönliche Hinweise in der App helfen dir, neue Bände deiner Reihen und Änderungen an Erscheinungsterminen zu bemerken.", "Neue Bände und Terminänderungen deiner Reihen im Blick behalten.")}</p><span class="preview-badge">Erweiterte Bandhinweise in Entwicklung</span><p class="small">Die erweiterten sammlungsbezogenen Bandhinweise werden weiterentwickelt.</p></div></div><figure id="benachrichtigungen" class="notification-shot">${phone("notifications", "Echter App-Screenshot: Benachrichtigungen für One Piece, Jujutsu Kaisen und Spy x Family mit simulierten Beispielmeldungen, Status und Terminen")}<figcaption>Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine</figcaption></figure></div>
+      ${LANDING_PLANNING_DETAILS}
     </section>
 
+    ${LANDING_SHELF_DIVIDER_MARKUP}
     ${LANDING_PRIVACY_MARKUP}
     <section id="download" class="download wrap" aria-labelledby="download-title">
       <div class="download-heading"><img class="download-icon" src="/landing/app-icon.png" alt="Manga Tracker" width="192" height="192" loading="lazy"><h2 id="download-title">Tritt der Community <em>kostenlos</em> bei!</h2></div>
@@ -128,6 +130,7 @@ export function renderLandingPage(origin) {
       ${catScene()}
     </section>
     ${LANDING_APP_SHOWCASE}
+    ${LANDING_NOTIFICATION_PREVIEW}
   </main>
   <footer class="footer wrap"><a class="brand" href="/" aria-label="Manga Tracker Startseite"><img src="/landing/app-icon.png" alt="" width="192" height="192"><span>Manga Tracker</span></a><p>Eine App von RealityForge GbR</p><nav aria-label="Rechtliches"><a href="https://realityforge.eu/legal-notice/">Impressum</a><a href="https://realityforge.eu/privacy-policy/">Datenschutz Website</a><a href="https://realityforge.eu/privacy-policy/manga-tracker/">Datenschutz App</a></nav></footer>
 <script>${LANDING_MOTION_SCRIPT}</script>

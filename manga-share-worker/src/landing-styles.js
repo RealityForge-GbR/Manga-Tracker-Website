@@ -1,3 +1,5 @@
+import { LANDING_PLANNING_DETAILS_STYLES } from "./landing-planning-details-styles.js";
+import { LANDING_SHELF_DIVIDER_STYLES } from "./landing-shelf-divider-styles.js";
 import { LANDING_APP_SHOWCASE_STYLES } from "./landing-app-showcase-styles.js";
 import { LANDING_PRIVACY_STYLES } from "./landing-privacy-styles.js";
 import { LANDING_SHARE_STYLES } from "./landing-share-styles.js";
@@ -959,6 +961,8 @@ ${LANDING_SCAN_STYLES}
 ${LANDING_SHARE_STYLES}
 ${LANDING_PRIVACY_STYLES}
 ${LANDING_APP_SHOWCASE_STYLES}
+${LANDING_PLANNING_DETAILS_STYLES}
+${LANDING_SHELF_DIVIDER_STYLES}
 @media(prefers-reduced-motion:reduce) {
   :root {
     scroll-behavior:auto

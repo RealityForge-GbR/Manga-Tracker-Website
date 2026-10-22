@@ -46,22 +46,22 @@ export const LANDING_HERO_FLOAT_STYLES = `
   .hero-copy {
     display:flex;
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
-    text-align:center;
+    text-align:left;
     min-width:0
   }
   .hero h1 {
     max-width:380px;
-    margin:0 auto 28px;
+    margin:0 0 28px;
     color:var(--text);
     font-size:clamp(28px,2.6vw,36px);
     font-weight:550;
     line-height:1.25;
     letter-spacing:-.035em
   }
-  .hero-actions {justify-content:center}
-  .hero-benefits {width:max-content;max-width:100%;margin:23px auto 0;text-align:left;gap:8px}
+  .hero-actions {justify-content:flex-start}
+  .hero-benefits {width:max-content;max-width:100%;margin:23px 0 0;text-align:left;gap:8px}
   .hero-visual {
     height:610px;
     width:100%;
@@ -81,7 +81,7 @@ export const LANDING_HERO_FLOAT_STYLES = `
     width:clamp(195px,18.8vw,248px);
     top:15%;
     left:7%;
-    transform:translate3d(calc(var(--hero-x,0) * -7px),calc(var(--hero-y,0) * -5px),0) rotateY(9deg) rotateX(2deg) rotateZ(-7deg);
+    transform:translate3d(calc(var(--hero-x,0) * -7px),calc(var(--hero-y,0) * -5px),0) rotateY(calc(9deg + var(--hero-x,0) * 3deg)) rotateX(calc(2deg - var(--hero-y,0) * 2deg)) rotateZ(calc(-7deg + var(--hero-progress,0) * 6deg));
     transform-origin:50% 50%;
     z-index:1
   }
@@ -90,16 +90,34 @@ export const LANDING_HERO_FLOAT_STYLES = `
     top:4%;
     right:9%;
     left:auto;
-    transform:translate3d(calc(var(--hero-x,0) * 11px),calc(var(--hero-y,0) * 8px),0) rotateY(-8deg) rotateX(3deg) rotateZ(5deg);
+    transform:translate3d(calc(var(--hero-x,0) * 11px),calc(var(--hero-y,0) * 8px),0) rotateY(calc(-8deg + var(--hero-x,0) * 3deg)) rotateX(calc(3deg - var(--hero-y,0) * 2deg)) rotateZ(calc(5deg - var(--hero-progress,0) * 9deg));
     transform-origin:50% 50%;
     z-index:2
   }
+  .hero-visual .hero-bob>.hero-back {
+    padding:19px 6px 13px;
+    border-color:var(--bordeaux);
+    border-radius:23px;
+    background:linear-gradient(105deg,var(--bordeaux),var(--contrast) 8%,var(--surface) 58%,var(--contrast));
+    box-shadow:inset 1px 0 0 var(--muted),inset -2px 0 0 var(--bg),-5px 8px 0 -3px var(--contrast),4px 20px 28px var(--bg)
+  }
+  .hero-visual .hero-bob>.hero-back::before {
+    top:8px;
+    left:calc(50% - 14px);
+    width:28px;
+    height:3px;
+    border:0;
+    border-radius:3px;
+    background:var(--secondary)
+  }
+  .hero-visual .hero-bob>.hero-back::after {bottom:5px;opacity:.35}
+  .hero-visual .hero-bob>.hero-back>img {border-radius:15px}
   .hero-bob {
     animation:hero-phone-bob 12s ease-in-out infinite;
     animation-play-state:paused
   }
   .hero-bob-back {animation-duration:15s;animation-delay:-5s}
-  .hero-book-field {display:block;position:absolute;inset:0;pointer-events:none;z-index:0}
+  .hero-book-field {display:block;position:absolute;inset:0;pointer-events:none;z-index:0;transform:translate3d(calc(var(--hero-x,0) * -3px),calc(var(--hero-progress,0) * -42px),0)}
   .hero-ambient-book {
     position:absolute;
     left:var(--book-x);
@@ -117,6 +135,7 @@ export const LANDING_HERO_FLOAT_STYLES = `
     animation-delay:var(--book-delay);
     animation-play-state:paused
   }
+  .is-hero-floating .hero-front-rig,.is-hero-floating .hero-back-rig,.is-hero-floating .hero-book-field {transition:transform 180ms cubic-bezier(.2,.65,.35,1);will-change:transform}
   .is-hero-floating .hero-bob,.is-hero-floating .hero-ambient-book {animation-play-state:running;will-change:transform}
   @keyframes hero-phone-bob {
     0%,100% {transform:translate3d(0,-6px,0) rotateZ(-.35deg)}

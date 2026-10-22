@@ -7,12 +7,12 @@ export const LANDING_MOBILE_HERO_STYLES = `
   :root {
     --mobile-viewport:100vh;
     --mobile-header-height:calc(64px + env(safe-area-inset-top,0px));
-    --mobile-inline:max(20px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))
+    --mobile-inline:max(16px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))
   }
   .header.wrap {
     width:100%;
     height:var(--mobile-header-height);
-    padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));
+    padding:calc(10px + env(safe-area-inset-top,0px)) var(--mobile-inline) 10px;
     flex-wrap:nowrap
   }
   .header nav,.header-download {
@@ -36,8 +36,8 @@ export const LANDING_MOBILE_HERO_STYLES = `
     order:1;
     color:var(--text);
     max-width:560px;
-    justify-self:center;
-    text-align:center;
+    justify-self:start;
+    text-align:left;
     font-size:clamp(22px,5.6vw,28px);
     line-height:1.2;
     letter-spacing:-.04em;
@@ -175,7 +175,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
   }
   .hero-actions {
     order:4;
-    justify-content:center;
+    justify-content:flex-start;
     margin-top:6px
   }
   .hero-actions .button {
@@ -184,7 +184,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
   }
   .hero.wrap .hero-benefits {
     order:5;
-    justify-self:center;
+    justify-self:start;
     width:min(100%,320px);
     gap:3px;
     font-size:12px;
@@ -233,18 +233,18 @@ export const LANDING_MOBILE_HERO_STYLES = `
 }
 @media(max-width:1050px) and (max-height:500px) and (orientation:landscape) {
   .hero.wrap {
-    grid-template-columns:minmax(0,.9fr) minmax(0,1fr);
+    grid-template-columns:minmax(0,1fr) minmax(0,.9fr);
     grid-template-rows:auto auto minmax(0,1fr);
     column-gap:16px;
     min-height:0
   }
   .hero.wrap h1 {
-    grid-column:2;
+    grid-column:1;
     grid-row:1;
     font-size:22px
   }
   .hero.wrap .hero-visual {
-    grid-column:1;
+    grid-column:2;
     grid-row:1 / 4;
     width:100%;
     max-width:none
@@ -253,7 +253,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
     width:min(40vw,calc((var(--mobile-viewport) - var(--mobile-header-height) - 24px) * .4),240px);
     width:min(40vw,40cqh,240px)
   }
-  .hero-actions {grid-column:2;grid-row:2}
-  .hero.wrap .hero-benefits {grid-column:2;grid-row:3;align-self:start}
+  .hero-actions {grid-column:1;grid-row:2}
+  .hero.wrap .hero-benefits {grid-column:1;grid-row:3;align-self:start}
 }
 `;

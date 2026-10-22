@@ -6,7 +6,7 @@ export const LANDING_PRIVACY_STYLES = `
   column-gap:76px;
   row-gap:36px;
   padding-block:72px 80px;
-  border-top:1px solid var(--line)
+  border-top:0
 }
 .privacy-lock {width:280px;height:280px;justify-self:center;position:relative}
 .privacy-lock-art {position:absolute;inset:0;display:block;width:100%;height:100%;fill:none;stroke:none;stroke-width:1;overflow:visible}
