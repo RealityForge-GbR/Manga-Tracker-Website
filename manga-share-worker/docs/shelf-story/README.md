@@ -216,3 +216,25 @@ hinein. Seine Größe bleibt bis über der Öffnung unverändert. Die Klappen
 Bildstreifen bleiben deutlich kleiner als ein zusätzliches Video. Es gibt
 weiterhin genau zwei Käufe, keinen automatischen Budget-Neustart und keine
 neue Endlosschleife.
+
+
+## Buchkörper, Funken und Blickrichtung
+
+Das Budget-Handy wendet seine Bildschirmfläche rechts zum Erklärungstext.
+Ein nach hinten versetztes Gehäuse, ein passender linker Seitenrand und
+umgesetzte Lichtkanten machen die Tiefe sichtbar; der Original-Screenshot
+bleibt unverändert.
+
+Der durchgehende Regaltrenner zeigt beim Herausziehen vollständige Buchkörper
+mit dekorativen, eigens gestalteten Covern, Buchrücken und hellen Seiten.
+Farblich passende Regalfächer und eine Rückwand ersetzen die dunklen Lücken.
+Nur die neun bewegten Bücher benötigen zusätzliche 3D-Flächen; die übrigen
+Buchrücken bleiben einfach gezeichnet.
+Die Bücher bleiben während des Herausziehens teilweise im Regal.
+
+Wenige kleine Funken in Rosé und Eierschalenweiß steigen verteilt über die
+ganze Reihe auf und verblassen wieder. Sie verwenden CSS-Transformationen und
+Transparenz. Die bestehende Sichtbarkeitssteuerung pausiert Bücher und Funken
+gemeinsam außerhalb des Sichtbereichs und im verborgenen Tab. Reduzierte
+Bewegung deaktiviert die Effekte. Es werden keine zusätzlichen Bilddateien,
+Videos oder JavaScript-Berechnungen pro Animationsbild benötigt.

@@ -2,6 +2,7 @@ export const LANDING_PLANNING_DETAILS = `
 <div class="budget-details wrap">
   <figure class="budget-device-scene" aria-label="Originalansicht der Budgetplanung in einem Android-Mockup">
     <div class="budget-device">
+      <span class="budget-device-back" aria-hidden="true"></span>
       <span class="budget-device-camera" aria-hidden="true"></span>
       <img src="/landing/budget.webp" alt="Einkaufsliste für One Piece, Jujutsu Kaisen und Spy x Family mit einem Test-Monatsbudget von 60 Euro" width="720" height="1433" loading="lazy" decoding="async">
     </div>

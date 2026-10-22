@@ -34,13 +34,14 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
   border:1px solid var(--muted);
   border-radius:31px;
   background:linear-gradient(112deg,var(--muted),var(--secondary) 4%,var(--bg) 12%,var(--elevated) 93%,var(--muted));
-  box-shadow:inset 2px 0 1px var(--bordeaux),inset -1px 0 1px var(--text),7px 5px 0 -3px var(--bordeaux),10px 9px 0 -5px var(--contrast),16px 25px 38px var(--bg);
-  transform:rotateY(-13deg) rotateZ(-4deg);
+  box-shadow:inset 2px 0 1px var(--text),inset -1px 0 1px var(--bordeaux),-5px 3px 0 -3px var(--bordeaux),-9px 5px 0 -5px var(--contrast),-16px 25px 38px var(--bg);
+  transform:rotateY(18deg) rotateZ(3deg);
   transform-style:preserve-3d
 }
-.budget-device>img {width:100%;height:auto;border-radius:20px}
+.budget-device-back {position:absolute;inset:-1px;border:1px solid var(--muted);border-radius:32px;background:var(--contrast);transform:translateZ(-8px)}
+.budget-device>img {position:relative;width:100%;height:auto;border-radius:20px;transform:translateZ(1px)}
 .budget-device-camera {position:absolute;top:7px;left:calc(50% - 3px);width:6px;height:6px;border:1px solid var(--secondary);border-radius:50%;background:var(--bg)}
-.budget-device::before {content:"";position:absolute;right:-5px;top:88px;width:3px;height:58px;border-radius:0 2px 2px 0;background:var(--muted)}
+.budget-device::before {content:"";position:absolute;left:-5px;top:88px;width:3px;height:58px;border-radius:2px 0 0 2px;background:var(--muted)}
 .budget-device::after {content:"";position:absolute;bottom:7px;left:39%;width:22%;height:2px;border-radius:2px;background:var(--muted);opacity:.7}
 .budget-explanations {display:flex;flex-direction:column;justify-content:space-between;gap:55px;min-height:500px;padding-block:15px}
 .budget-explanations article {max-width:460px}
