@@ -86,7 +86,7 @@ function cycle({ reduced = false, observer = true, media = true, brokenObserver 
 
 test("the example waits offscreen and preserves the existing collection", () => {
   const d = cycle();
-  assert.equal(d.amount("budget"), 30);
+  assert.equal(d.amount("budget"), 20);
   assert.equal(d.amount("value"), 80);
   assert.equal(d.fields.count.textContent, "8");
   assert.equal(d.root.attributes.get("data-cycle-added"), "0");
@@ -127,7 +127,7 @@ test("a failed observation disconnects the observer and retains the static finis
   assert.equal(d.disconnected, true);
   assert.equal(d.stage(), "complete");
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
   assert.equal(d.tasks.size, 0);
 });
 
@@ -137,11 +137,11 @@ test("money is debited at the gate and collection value increases only when the 
   d.advance(800);
   assert.equal(d.stage(), "purchase");
   d.advance(1319);
-  assert.equal(d.amount("budget"), 30);
+  assert.equal(d.amount("budget"), 20);
   assert.equal(d.amount("value"), 80);
   d.advance(1);
   assert.equal(d.stage(), "purchase", "debit must not restart the flight");
-  assert.equal(d.amount("budget"), 20);
+  assert.equal(d.amount("budget"), 10);
   assert.equal(d.amount("value"), 80);
   assert.equal(d.fields.count.textContent, "8");
   d.advance(879);
@@ -153,36 +153,36 @@ test("money is debited at the gate and collection value increases only when the 
   assert.equal(d.root.attributes.get("data-cycle-added"), "1");
 });
 
-test("exactly three purchases exhaust the budget and the next book stays unpurchased throughout its return", () => {
+test("exactly two purchases exhaust the budget and the next book stays unpurchased throughout its return", () => {
   const d = cycle();
   d.visible();
   d.advance(800);
-  for (let purchase = 0; purchase < 3; purchase += 1) {
+  for (let purchase = 0; purchase < 2; purchase += 1) {
     d.advance(1320);
-    assert.equal(d.amount("budget"), 30 - 10 * (purchase + 1));
+    assert.equal(d.amount("budget"), 20 - 10 * (purchase + 1));
     assert.equal(d.amount("value"), 80 + 10 * purchase);
     d.advance(880);
-    assert.equal(d.amount("budget") + d.amount("value"), 110);
+    assert.equal(d.amount("budget") + d.amount("value"), 100);
     assert.equal(d.fields.count.textContent, String(9 + purchase));
     d.advance(220);
   }
   assert.equal(d.stage(), "blocked");
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
-  assert.equal(d.root.attributes.get("data-cycle-added"), "3");
+  assert.equal(d.amount("value"), 100);
+  assert.equal(d.root.attributes.get("data-cycle-added"), "2");
   d.advance(1900);
   assert.equal(d.stage(), "blocked");
   assert.equal(d.amount("budget"), 0, "the extra attempt cannot spend more money");
-  assert.equal(d.amount("value"), 110, "the rejected book cannot increase collection value");
-  assert.equal(d.fields.count.textContent, "11");
+  assert.equal(d.amount("value"), 100, "the rejected book cannot increase collection value");
+  assert.equal(d.fields.count.textContent, "10");
   assert.equal(d.root.attributes.has("data-cycle-charge"), false);
   d.advance(1899);
   assert.equal(d.stage(), "blocked");
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
   d.advance(1);
   assert.equal(d.stage(), "closing", "the carton closes only after the rejected book has returned");
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
   d.advance(749);
   assert.equal(d.stage(), "closing");
   d.advance(1);
@@ -192,11 +192,11 @@ test("exactly three purchases exhaust the budget and the next book stays unpurch
 test("zero budget stays blocked without selling books, refilling money or running more timers", () => {
   const d = cycle();
   d.visible();
-  d.advance(12610);
+  d.advance(10190);
   assert.equal(d.stage(), "complete");
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
-  assert.equal(d.fields.count.textContent, "11");
+  assert.equal(d.amount("value"), 100);
+  assert.equal(d.fields.count.textContent, "10");
   assert.equal(d.tasks.size, 0);
   assert.ok(!d.root.classes.has("is-cycle-playing"));
   d.visible(false);
@@ -205,8 +205,8 @@ test("zero budget stays blocked without selling books, refilling money or runnin
   d.hidden(false);
   d.advance(120000);
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
-  assert.equal(d.fields.count.textContent, "11");
+  assert.equal(d.amount("value"), 100);
+  assert.equal(d.fields.count.textContent, "10");
   assert.equal(d.tasks.size, 0);
 });
 
@@ -215,7 +215,7 @@ test("offscreen and hidden scenes pause mid-flight and resume with the exact rem
     const d = cycle();
     d.visible();
     d.advance(2400);
-    assert.equal(d.amount("budget"), 20);
+    assert.equal(d.amount("budget"), 10);
     assert.equal(d.amount("value"), 80);
     const stale = d.callbacks.at(-1);
     pause(d);
@@ -230,7 +230,7 @@ test("offscreen and hidden scenes pause mid-flight and resume with the exact rem
     assert.equal(d.amount("value"), 80);
     d.advance(1);
     assert.equal(d.amount("value"), 90);
-    assert.equal(d.amount("budget"), 20, "resuming must not debit twice");
+    assert.equal(d.amount("budget"), 10, "resuming must not debit twice");
   }
 });
 
@@ -238,11 +238,11 @@ test("the rejected book pauses on its return and finishes without changing the c
   for (const pause of [(d) => d.visible(false), (d) => d.hidden()]) {
     const d = cycle();
     d.visible();
-    d.advance(11260);
+    d.advance(8840);
     assert.equal(d.stage(), "blocked");
     assert.equal(d.amount("budget"), 0);
-    assert.equal(d.amount("value"), 110);
-    assert.equal(d.fields.count.textContent, "11");
+    assert.equal(d.amount("value"), 100);
+    assert.equal(d.fields.count.textContent, "10");
     const stale = d.callbacks.at(-1);
     pause(d);
     assert.equal(d.tasks.size, 0);
@@ -251,8 +251,8 @@ test("the rejected book pauses on its return and finishes without changing the c
     d.advance(30000);
     assert.equal(d.stage(), "blocked", "a canceled timeout cannot complete the return while hidden");
     assert.equal(d.amount("budget"), 0);
-    assert.equal(d.amount("value"), 110);
-    assert.equal(d.fields.count.textContent, "11");
+    assert.equal(d.amount("value"), 100);
+    assert.equal(d.fields.count.textContent, "10");
     d.hidden(false);
     d.visible();
     d.advance(599);
@@ -260,8 +260,8 @@ test("the rejected book pauses on its return and finishes without changing the c
     d.advance(1);
     assert.equal(d.stage(), "closing");
     assert.equal(d.amount("budget"), 0);
-    assert.equal(d.amount("value"), 110);
-    assert.equal(d.fields.count.textContent, "11");
+    assert.equal(d.amount("value"), 100);
+    assert.equal(d.fields.count.textContent, "10");
     assert.equal(d.tasks.size, 1, "closing has its own final milestone");
     d.advance(750);
     assert.equal(d.stage(), "complete");
@@ -283,7 +283,7 @@ test("the carton starts shut offscreen, opens before the first flight and never 
   assert.equal(d.stage(), "initial", "the opening finishes before a book may leave");
   d.advance(1);
   assert.equal(d.stage(), "purchase");
-  d.advance(11060);
+  d.advance(8640);
   assert.equal(d.stage(), "closing");
   d.advance(750);
   assert.equal(d.stage(), "complete");
@@ -300,7 +300,7 @@ test("the carton starts shut offscreen, opens before the first flight and never 
 
 test("carton opening and closing pause with the exact remainder while hidden or offscreen", () => {
   for (const pause of [(d) => d.visible(false), (d) => d.hidden()]) {
-    for (const [start, stage, remainder, next] of [[350, "initial", 450, "purchase"], [12160, "closing", 450, "complete"]]) {
+    for (const [start, stage, remainder, next] of [[350, "initial", 450, "purchase"], [9740, "closing", 450, "complete"]]) {
       const d = cycle();
       d.visible();
       d.advance(start);
@@ -318,8 +318,8 @@ test("carton opening and closing pause with the exact remainder while hidden or 
       assert.equal(d.stage(), stage);
       d.advance(1);
       assert.equal(d.stage(), next);
-      assert.equal(d.amount("budget"), stage === "closing" ? 0 : 30);
-      assert.equal(d.amount("value"), stage === "closing" ? 110 : 80);
+      assert.equal(d.amount("budget"), stage === "closing" ? 0 : 20);
+      assert.equal(d.amount("value"), stage === "closing" ? 100 : 80);
     }
   }
 });
@@ -327,7 +327,7 @@ test("carton opening and closing pause with the exact remainder while hidden or 
 test("reduced motion during closing settles on a closed complete carton without pending work", () => {
   const d = cycle();
   d.visible();
-  d.advance(12000);
+  d.advance(9580);
   assert.equal(d.stage(), "closing");
   const stale = d.callbacks.at(-1);
   d.reduce(true);
@@ -337,7 +337,7 @@ test("reduced motion during closing settles on a closed complete carton without 
   assert.ok(!d.root.classes.has("is-cycle-ready"));
   assert.ok(!d.root.classes.has("is-cycle-playing"));
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
 });
 
 test("repeated observer events and visibility changes do not duplicate milestone timers", () => {
@@ -349,7 +349,7 @@ test("repeated observer events and visibility changes do not duplicate milestone
   d.visible();
   assert.equal(d.tasks.size, 1);
   d.advance(600);
-  assert.equal(d.amount("budget"), 20);
+  assert.equal(d.amount("budget"), 10);
   assert.equal(d.amount("value"), 90);
   assert.equal(d.fields.count.textContent, "9");
 });
@@ -361,8 +361,8 @@ test("reduced motion and missing browser APIs provide the finished example witho
     d.advance(60000);
     assert.equal(d.stage(), "complete");
     assert.equal(d.amount("budget"), 0);
-    assert.equal(d.amount("value"), 110);
-    assert.equal(d.fields.count.textContent, "11");
+    assert.equal(d.amount("value"), 100);
+    assert.equal(d.fields.count.textContent, "10");
     assert.equal(d.tasks.size, 0);
     assert.ok(!d.root.classes.has("is-cycle-ready"));
     assert.ok(!d.root.classes.has("is-cycle-playing"));
@@ -377,10 +377,10 @@ test("a reduced-motion change cancels pending work and returning to motion start
   d.reduce(true);
   stale();
   assert.equal(d.tasks.size, 0);
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
   d.reduce(false);
   assert.equal(d.stage(), "initial");
-  assert.equal(d.amount("budget"), 30);
+  assert.equal(d.amount("budget"), 20);
   assert.equal(d.amount("value"), 80);
   d.advance(3000);
   assert.equal(d.amount("value"), 90);
@@ -394,9 +394,9 @@ test("the browser controller survives Worker-style bundling and name preservatio
   const bundled = await import("data:text/javascript;base64," + Buffer.from(outputFiles[0].text).toString("base64"));
   const d = cycle({ script: bundled.LANDING_BUDGET_SCRIPT });
   d.visible();
-  d.advance(12610);
+  d.advance(10190);
   assert.equal(d.stage(), "complete");
   assert.equal(d.amount("budget"), 0);
-  assert.equal(d.amount("value"), 110);
+  assert.equal(d.amount("value"), 100);
   assert.equal(d.tasks.size, 0);
 });

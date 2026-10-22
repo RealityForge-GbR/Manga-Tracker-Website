@@ -15,7 +15,7 @@ function volume(index, color = "#D7A0AF", ink = "#30202A") {
 }
 
 const tones = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
-const books = Array.from({ length:11 }, (_, index) => `<span class="cycle-stack-book" style="--book-index:${index};--book-lean:${[0,3,-2,1,-3,2][index % 6]}px">${volume(index, tones[index % 6], index % 6 === 3 || index % 6 === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
+const books = Array.from({ length:10 }, (_, index) => `<span class="cycle-stack-book" style="--book-index:${index};--book-lean:${[0,3,-2,1,-3,2][index % 6]}px">${volume(index, tones[index % 6], index % 6 === 3 || index % 6 === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
 // The unnumbered continuation is decorative depth, separate from the purchase count.
 const continuation = Array.from({ length:6 }, (_, index) => `<span class="cycle-stack-continuation-book" style="--book-index:${-index - 1};--book-lean:${[1,-2,3,-1,2,0][index]}px">${volume(null, tones[index], index === 3 || index === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
 const budgetWallet = `<svg class="cycle-budget-wallet" viewBox="0 0 240 190" aria-hidden="true">
@@ -30,18 +30,18 @@ const budgetWallet = `<svg class="cycle-budget-wallet" viewBox="0 0 240 190" ari
 </svg>`;
 
 export const LANDING_BUDGET_MARKUP = `
-<div class="budget-cycle" data-budget-cycle data-cycle-stage="complete" data-cycle-added="3" data-cycle-owned="11" data-cycle-empty="true">
+<div class="budget-cycle" data-budget-cycle data-cycle-stage="complete" data-cycle-added="2" data-cycle-owned="10" data-cycle-empty="true">
   <div class="budget-cycle-heading"><h2 id="planning-title">Lege dein Monatsbudget fest …</h2></div>
-  <div class="cycle-stage" role="img" aria-label="Beispiel mit 30 Euro Monatsbudget: Ein Paket öffnet sich. Drei Bücher werden einzeln senkrecht aus dem Paket gehoben, fliegen durch das Budget und landen von oben auf dem Stapel. Jeder Band kostet 10 Euro. Die Sammlung wächst von acht Bänden im Wert von 80 Euro auf elf Bände im Wert von 110 Euro. Bei null Euro versucht ein weiteres Buch zweimal durchzukommen und kehrt anschließend ins Paket zurück. Budget und Wert der Sammlung bleiben dabei unverändert. Nach der Rückkehr schließt sich das Paket wieder.">
+  <div class="cycle-stage" role="img" aria-label="Beispiel mit 20 Euro Monatsbudget: Ein Paket öffnet sich. Zwei Bücher werden einzeln senkrecht aus dem Paket gehoben, fliegen durch das Budget und landen von oben auf dem Stapel. Jeder Band kostet 10 Euro. Die Sammlung wächst von acht Bänden im Wert von 80 Euro auf zehn Bände im Wert von 100 Euro. Bei null Euro versucht ein weiteres Buch zweimal durchzukommen und kehrt anschließend ins Paket zurück. Budget und Wert der Sammlung bleiben dabei unverändert. Nach der Rückkehr schließt sich das Paket wieder.">
     <div class="cycle-parcel-back">${PARCEL_BACK}</div>
     <div class="cycle-parcel-front">${PARCEL_FRONT}</div>
     <div class="cycle-budget">
       ${budgetWallet}
       <div class="cycle-budget-amount"><span>Monatsbudget</span><strong data-cycle-budget>0 €</strong><b class="cycle-zero-alert" aria-hidden="true">0 €</b></div>
-      <div class="cycle-budget-slots" aria-hidden="true"><i style="--slot:0"></i><i style="--slot:1"></i><i style="--slot:2"></i></div>
+      <div class="cycle-budget-slots" aria-hidden="true"><i style="--slot:0"></i><i style="--slot:1"></i></div>
       <span class="cycle-debit" aria-hidden="true">−10 €</span>
     </div>
-    <div class="cycle-collection-value"><span>Wert deiner Sammlung</span><strong data-cycle-value>110 €</strong><span data-cycle-count hidden>11</span></div>
+    <div class="cycle-collection-value"><span>Wert deiner Sammlung</span><strong data-cycle-value>100 €</strong><span data-cycle-count hidden>10</span></div>
     <div class="cycle-stack-window" aria-hidden="true"><div class="cycle-stack">${books}${continuation}</div></div>
     <div class="cycle-flight" aria-hidden="true"><div class="cycle-flying-volume">${volume(null, "var(--cycle-book-color, #D7A0AF)", "var(--cycle-book-ink, #30202A)")}</div></div>
     <div class="cycle-impact" aria-hidden="true"><i></i><i></i><i></i></div>

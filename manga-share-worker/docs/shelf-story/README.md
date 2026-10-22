@@ -87,10 +87,10 @@ Bewegung umgekehrt: zunächst über die Öffnung, dann senkrecht hinein. Die
 Paketvorderseite verdeckt dabei das Buch. So bewegt es sich nicht durch eine
 Seitenwand. Der weiße Paketaufkleber und beide Routenpfeile entfallen.
 
-Eine dunkle Wallet-Karte zeigt den Betrag und drei roséfarbene Markierungen,
-die sich bei den Käufen einzeln abdunkeln. Das Beispiel beginnt mit 30 Euro
-Monatsbudget und acht vorhandenen Bänden im Wert von 80 Euro. Genau drei Käufe
-zu je 10 Euro lassen den Wert auf 110 Euro / elf Bände steigen. Am Budget wird
+Eine dunkle Wallet-Karte zeigt den Betrag und zwei roséfarbene Markierungen,
+die sich bei den Käufen einzeln abdunkeln. Das Beispiel beginnt mit 20 Euro
+Monatsbudget und acht vorhandenen Bänden im Wert von 80 Euro. Genau zwei Käufe
+zu je 10 Euro lassen den Wert auf 100 Euro / zehn Bände steigen. Am Budget wird
 abgebucht, erst bei Ankunft wird der Sammlungswert erhöht.
 
 Der erfolgreiche Flug dauert 2,2 Sekunden; die Abbuchung erfolgt bei 60 Prozent.
@@ -104,8 +104,8 @@ keinen Verkauf, Erlös oder unbemerkten Budget-Neustart.
 Die sichtbaren Beschriftungen „Shop“, „10 € pro Band“, „Budget aufgebraucht“ und
 die Bandanzahl bleiben entfernt. Monatsbudget und „Wert deiner Sammlung“ sind beschriftet.
 
-Der gesamte Ablauf dauert 12,61 Sekunden und benötigt nur einen Milestone-Timer.
-CSS animiert Transformationen und Transparenz. Elf vorbereitete Buchlagen bilden
+Der gesamte Ablauf dauert 10,19 Sekunden und benötigt nur einen Milestone-Timer.
+CSS animiert Transformationen und Transparenz. Zehn vorbereitete Buchlagen bilden
 den gezählten Bestand. Sechs unnummerierte, rein dekorative Lagen verlängern den
 Stapel darunter bis zum unteren Rand des Bandes. Ein mehrstufiger Verlauf blendet
 ihn über eine lange Strecke aus und verbirgt sein Ende. Die Ergänzungen beeinflussen

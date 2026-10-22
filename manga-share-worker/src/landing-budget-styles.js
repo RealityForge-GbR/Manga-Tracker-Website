@@ -1,11 +1,11 @@
 // The fixed set of layers grows out of the frame without adding DOM elements.
-const ownedLayers = Array.from({ length:4 }, (_, added) => `.is-cycle-ready[data-cycle-added="${added}"] .cycle-stack-book:nth-child(n+${9 + added}) {visibility:hidden}`).join("\n");
+const ownedLayers = Array.from({ length:3 }, (_, added) => `.is-cycle-ready[data-cycle-added="${added}"] .cycle-stack-book:nth-child(n+${9 + added}) {visibility:hidden}`).join("\n");
 
 export const LANDING_BUDGET_STYLES = `
 .planning.section {padding-block:55px 100px}
 .planning>.planning-grid {margin-top:85px}
 .budget-cycle {
-  --cycle-error:#e58a92;--cycle-owned:11;
+  --cycle-error:#e58a92;--cycle-owned:10;
   position:relative;width:100%;padding:16px 0 14px;overflow-x:clip;overflow-y:visible;isolation:isolate;
   font-variant-numeric:tabular-nums
 }
@@ -37,7 +37,7 @@ export const LANDING_BUDGET_STYLES = `
 .cycle-budget-amount>strong,.cycle-zero-alert {display:block;margin-top:7px;font-size:47px;line-height:1.1;letter-spacing:-.045em;font-weight:600;color:var(--text)}
 .cycle-zero-alert {position:absolute;top:18px;left:0;right:0;opacity:0;color:var(--cycle-error)}
 .cycle-budget-slots {position:absolute;left:calc(var(--gate-x) - var(--budget-size) * .305);top:calc(var(--budget-top) + var(--budget-size) * .60);width:calc(var(--budget-size) * .56);height:5px;display:flex;gap:7px}
-.cycle-budget-slots>i {flex:1;border-radius:3px;background:var(--rose);opacity:clamp(.12,calc(var(--cycle-budget-level,0) * 3 - var(--slot)),1);transition:opacity .3s ease-out}
+.cycle-budget-slots>i {flex:1;border-radius:3px;background:var(--rose);opacity:clamp(.12,calc(var(--cycle-budget-level,0) * 2 - var(--slot)),1);transition:opacity .3s ease-out}
 .cycle-debit {position:absolute;left:calc(var(--gate-x) - var(--budget-size) * .3);top:calc(var(--budget-top) - 25px);opacity:0;color:var(--cycle-error);font-size:17px;font-weight:600;white-space:nowrap}
 .cycle-collection-value {position:absolute;left:var(--stack-x);top:8px;width:210px;transform:translateX(-50%);text-align:center;z-index:6}
 .cycle-collection-value>span:not([hidden]) {display:block;color:var(--muted);font-size:14px;line-height:20px}

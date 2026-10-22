@@ -6,7 +6,7 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const valueText = root.querySelector("[data-cycle-value]");
   const countText = root.querySelector("[data-cycle-count]");
   if (!budgetText || !valueText || !countText) return;
-  const START_BUDGET = 3000;
+  const START_BUDGET = 2000;
   const PRICE = 1000;
   const BASE_VALUE = 8000;
   const BASE_COUNT = 8;
