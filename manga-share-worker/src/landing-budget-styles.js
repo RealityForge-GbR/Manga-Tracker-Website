@@ -10,7 +10,7 @@ export const LANDING_BUDGET_STYLES = `
   font-variant-numeric:tabular-nums
 }
 .budget-cycle::before {content:"";position:absolute;inset:0;z-index:-1;background:var(--secondary);border-block:1px solid var(--bordeaux);transform:skewY(-1.4deg);pointer-events:none}
-.budget-cycle-heading {position:relative;z-index:6;text-align:center;padding-inline:24px}
+.budget-cycle-heading {transform:translateY(16px);position:relative;z-index:6;text-align:center;padding-inline:24px}
 .budget-cycle-heading h2 {margin:0;font-size:clamp(23px,2.3vw,29px);line-height:1.25;font-weight:550;letter-spacing:-.035em;color:var(--text)}
 .cycle-stage {
   --shop-x:17%;--gate-x:50%;--stack-x:83%;--book-y:124px;--stack-tail:28px;
@@ -65,7 +65,7 @@ ${ownedLayers}
 .is-cycle-ready[data-cycle-stage="landed"] .cycle-impact {animation:cycle-land-mark .18s ease-out both}
 .budget-cycle.is-cycle-ready .cycle-flight,.budget-cycle.is-cycle-ready .cycle-flying-volume,.budget-cycle.is-cycle-ready .cycle-debit,.budget-cycle.is-cycle-ready .cycle-budget-wallet,.budget-cycle.is-cycle-ready .cycle-zero-alert,.budget-cycle.is-cycle-ready .cycle-impact,.budget-cycle.is-cycle-ready .parcel-frame-strip {animation-play-state:paused}
 .budget-cycle.is-cycle-playing .cycle-flight,.budget-cycle.is-cycle-playing .cycle-flying-volume,.budget-cycle.is-cycle-playing .cycle-debit,.budget-cycle.is-cycle-playing .cycle-budget-wallet,.budget-cycle.is-cycle-playing .cycle-zero-alert,.budget-cycle.is-cycle-playing .cycle-impact,.budget-cycle.is-cycle-playing .parcel-frame-strip {animation-play-state:running}
-.budget-cycle-ending {position:relative;z-index:6;text-align:center;padding-inline:22px;margin:0;font-size:clamp(18px,1.8vw,23px);line-height:1.3;letter-spacing:-.025em;font-weight:500;color:var(--text)}
+.budget-cycle-ending {transform:translateY(-16px);position:relative;z-index:6;text-align:center;padding-inline:22px;margin:0;font-size:clamp(18px,1.8vw,23px);line-height:1.3;letter-spacing:-.025em;font-weight:500;color:var(--text)}
 @keyframes parcel-open {from {transform:translateX(0)}to {transform:translateX(-93.3333333333%)}}
 @keyframes parcel-close {from {transform:translateX(-93.3333333333%)}to {transform:translateX(0)}}
 @keyframes cycle-purchase-flight {
@@ -115,6 +115,7 @@ ${ownedLayers}
   .planning.section {padding-block:32px 48px}
   .planning>.planning-grid {margin-top:48px}
   .budget-cycle {padding-block:16px 12px}
+  .budget-cycle-heading {transform:translateY(8px)}
   .budget-cycle-heading h2 {font-size:clamp(18px,5.4vw,25px);max-width:500px;margin-inline:auto}
   .cycle-stage {
     --shop-x:14%;--gate-x:52%;--stack-x:85%;
@@ -131,7 +132,7 @@ ${ownedLayers}
   .cycle-collection-value>span:not([hidden]) {font-size:11px;line-height:16px}
   .cycle-collection-value>strong {font-size:34px;margin-top:8px}
   .cycle-stack-window {mask-image:linear-gradient(to bottom,#000 0%,#000 20%,#0009 42%,#0003 64%,#0001 75%,transparent 100%)}
-  .budget-cycle-ending {font-size:18px;max-width:350px;margin:0 auto;padding-inline:18px}
+  .budget-cycle-ending {transform:translateY(-8px);font-size:18px;max-width:350px;margin:0 auto;padding-inline:18px}
 }
 @media(max-width:360px) {
   .cycle-stage {--stack-x:86%;--book-width:90px;--parcel-width:112px;--parcel-top:125px;--budget-size:104px;--budget-top:90px;width:calc(100% - 24px)}
