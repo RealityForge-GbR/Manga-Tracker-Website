@@ -1,4 +1,4 @@
-// Only milestone timers run in JavaScript. CSS owns the flights between them.
+// One timer advances the purchase milestones; CSS handles every flight and drop.
 export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const root = document.querySelector("[data-budget-cycle]");
   if (!root) return;
@@ -6,23 +6,22 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const valueText = root.querySelector("[data-cycle-value]");
   const countText = root.querySelector("[data-cycle-count]");
   if (!budgetText || !valueText || !countText) return;
-  const START_BUDGET = 2000;
+  const START_BUDGET = 10000;
   const PRICE = 1000;
-  const BASE_VALUE = 3000;
-  const BASE_COUNT = 3;
+  const BASE_VALUE = 8000;
+  const BASE_COUNT = 8;
+  const PURCHASES = START_BUDGET / PRICE;
+  const COVER_COLORS = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
   const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-  const stages = [
-    { name: "initial", duration: 1000, action: "reset" },
-    { name: "first", duration: 1200 },
-    { name: "first", duration: 1200, action: "debit" },
-    { name: "first-done", duration: 700, action: "arrive" },
-    { name: "second", duration: 1200 },
-    { name: "second", duration: 1200, action: "debit" },
-    { name: "second-done", duration: 700, action: "arrive" },
-    { name: "blocked", duration: 2400 },
-    { name: "complete", duration: 1700 },
-    { name: "reset", duration: 700 }
-  ];
+  const stages = [{ name: "initial", duration: 600, action: "reset" }];
+  for (let purchase = 0; purchase < PURCHASES; purchase += 1) {
+    stages.push(
+      { name: "purchase", duration: 560 },
+      { name: "purchase", duration: 840, action: "debit" },
+      { name: "landed", duration: 180, action: "arrive" }
+    );
+  }
+  stages.push({ name: "blocked", duration: 2400 }, { name: "complete", duration: 0 });
   const now = () => typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : Date.now();
   let reduced;
   try { reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)"); } catch {}
@@ -45,6 +44,10 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
     countText.textContent = String(count);
     root.setAttribute("data-cycle-added", String(count - BASE_COUNT));
     root.setAttribute("data-cycle-owned", String(count));
+    root.setAttribute("data-cycle-empty", String(remaining === 0));
+    root.style.setProperty("--cycle-owned", String(count));
+    root.style.setProperty("--cycle-book-color", COVER_COLORS[count % COVER_COLORS.length]);
+    root.style.setProperty("--cycle-book-ink", count % 6 === 3 || count % 6 === 5 ? "#D7A0AF" : "#30202A");
     root.style.setProperty("--cycle-budget-level", String(remaining / START_BUDGET));
   }
   function setStage(name) {
@@ -67,15 +70,15 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
     index = -1;
     pending = 0;
     remaining = 0;
-    value = BASE_VALUE + 2 * PRICE;
-    count = BASE_COUNT + 2;
+    value = BASE_VALUE + PURCHASES * PRICE;
+    count = BASE_COUNT + PURCHASES;
     root.removeAttribute("data-cycle-charge");
     root.classList.remove("is-cycle-ready");
     setStage("complete");
     render();
   }
   function enter(next) {
-    index = next % stages.length;
+    index = Math.min(next, stages.length - 1);
     const stage = stages[index];
     setStage(stage.name);
     if (stage.action === "reset") {
@@ -86,7 +89,7 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
     } else if (stage.action === "debit" && !pending && remaining >= PRICE) {
       remaining -= PRICE;
       pending = PRICE;
-      root.setAttribute("data-cycle-charge", stage.name);
+      root.setAttribute("data-cycle-charge", String(count + 1));
     } else if (stage.action === "arrive" && pending === PRICE) {
       value += pending;
       count += 1;
@@ -99,6 +102,10 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const canPlay = () => ready && visible && !document.hidden && reduced && !reduced.matches;
   function schedule() {
     if (!canPlay() || timer !== undefined) return;
+    if (index === stages.length - 1) {
+      root.classList.remove("is-cycle-playing");
+      return;
+    }
     const current = ++generation;
     deadline = now() + delay;
     timer = setTimeout(() => {

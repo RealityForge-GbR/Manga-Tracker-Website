@@ -1,57 +1,63 @@
-function volume(number, color = "#D7A0AF", ink = "#30202A") {
-  return `<svg class="cycle-volume-art" viewBox="0 0 28 112" aria-hidden="true">
-    <rect x="1" y="1" width="26" height="110" rx="2" fill="${color}" stroke="#30202A" stroke-width="1.5"/>
-    <path d="M4 3v106M24 4v103" stroke="${ink}" stroke-opacity=".5" stroke-width="1"/>
-    <path d="M7 11h14M7 14h14M7 99h14M7 102h14" stroke="${ink}" stroke-width=".8"/>
-    <text x="14" y="29" font-size="8" text-anchor="middle" fill="${ink}" stroke="none">0${number}</text>
-    <path d="m14 40 6 9-6 9-6-9Zm0 19v26m0-8c-7 0-8-7-8-7 7 0 8 7 8 7Zm0-5c7 0 8-7 8-7-7 0-8 7-8 7Z" fill="none" stroke="${ink}" stroke-width="1"/>
+// Original, code-drawn books; no game artwork or invented app screenshots.
+function volume(index, color = "#D7A0AF", ink = "#30202A") {
+  return `<svg class="cycle-volume-art" viewBox="0 0 160 80" aria-hidden="true">
+    <path d="m8 30 91-27 53 25-91 28Z" fill="${color}" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m8 30 53 26v16L8 46Z" fill="${ink}" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m61 56 91-28v16L61 72Z" fill="#F7EEE8" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m65 61 82-25m-82 29 82-25" stroke="#C2B3B8" stroke-width="1"/>
+    <path d="m16 28 83-24m-2 5 39 18-76 23-38-18" fill="none" stroke="${ink}" stroke-width="1" stroke-opacity=".45"/>
+    <path d="m82 16 10 4-11 4-10-4Zm-18 9 27 13m-20-9 11 5" fill="none" stroke="${ink}" stroke-width="1.4"/>
+    <path d="m14 35 3 1v10l-3-1Zm34 16 3 1v10l-3-1Z" fill="${color}"/>
+    <text x="26" y="47" transform="rotate(26 26 47)" font-size="6" font-family="sans-serif" letter-spacing="1" fill="#F7EEE8">${index === null ? "MANGA" : "MANGA " + String(index + 1).padStart(2,"0")}</text>
   </svg>`;
 }
 
-const shop = `<svg class="cycle-shop-art" viewBox="0 0 160 185" aria-hidden="true">
-  <path d="M18 45h124v125H18Z" fill="#211A22" stroke="#5A3948" stroke-width="3"/>
-  <path d="M20 12h120l16 34H4Z" fill="#5A3948" stroke="#30202A" stroke-width="2"/>
-  <path d="m20 12-5 34h25l4-34Zm49 0-1 34h24l-1-34Zm47 0 4 34h25l-5-34Z" fill="#D7A0AF"/>
-  <path d="M4 46h25v9c0 13-25 13-25 0Zm49 0h27v9c0 13-27 13-27 0Zm54 0h25v9c0 13-25 13-25 0Z" fill="#C2B3B8" stroke="#30202A" stroke-width="1.5"/>
-  <path d="M29 46h24v9c0 13-24 13-24 0Zm51 0h27v9c0 13-27 13-27 0Zm52 0h24v9c0 13-24 13-24 0Z" fill="#5A3948" stroke="#30202A" stroke-width="1.5"/>
-  <rect x="27" y="76" width="106" height="71" rx="2" fill="#171217" stroke="#342735" stroke-width="2"/>
-  <path d="M36 142V92h12v50m5 0V87h11v55m36 0V95h12v47m4 0V89h9v53" fill="#5A3948" stroke="#D7A0AF" stroke-width="1"/>
-  <path d="M38 100h8m9-4h7m40 10h8m7-7h6" stroke="#F7EEE8" stroke-width="1"/>
-  <path d="M14 149h132v10H14Z" fill="#5A3948" stroke="#30202A" stroke-width="2"/>
-  <path d="M24 170v9m112-9v9" stroke="#5A3948" stroke-width="5"/>
+const tones = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
+const books = Array.from({ length:18 }, (_, index) => `<span class="cycle-stack-book" style="--book-index:${index};--book-lean:${[0,3,-2,1,-3,2][index % 6]}px">${volume(index, tones[index % 6], index % 6 === 3 || index % 6 === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
+const parcelBack = `<svg class="cycle-parcel-art" viewBox="0 0 240 220" aria-hidden="true">
+  <ellipse cx="121" cy="207" rx="91" ry="10" fill="#171217" opacity=".25"/>
+  <path d="m41 83 84-32 75 39v81l-82 38-77-44Z" fill="#5A3948" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+  <path d="m41 83 84-32 75 39-82 36Z" fill="#171217" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+  <g class="parcel-flap parcel-flap-back-left"><path d="m41 83 84-32-28-41-81 32Z" fill="#D7A0AF" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/><path d="m45 76 73-28" stroke="#F7EEE8" stroke-width="1" opacity=".35"/></g>
+  <g class="parcel-flap parcel-flap-back-right"><path d="m125 51 75 39 24-40-76-37Z" fill="#C2B3B8" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/><path d="m134 53 62 32" stroke="#F7EEE8" stroke-width="1" opacity=".4"/></g>
+  <path d="m47 85 71 35 75-33" stroke="#D7A0AF" stroke-width="1.5" opacity=".3"/>
 </svg>`;
-
-const gate = `<svg class="cycle-gate-art" viewBox="0 0 160 190" aria-hidden="true">
-  <path d="M25 181V69c0-57 110-57 110 0v112" stroke="#30202A" stroke-width="13"/>
-  <path d="M25 181V69c0-57 110-57 110 0v112" stroke="#5A3948" stroke-width="8"/>
-  <path d="M31 179V70c0-50 98-50 98 0v109" stroke="#D7A0AF" stroke-width="1.5"/>
-  <path d="M16 182h128" stroke="#5A3948" stroke-width="9" stroke-linecap="round"/>
-  <path d="M30 63v111m100-111v111" stroke="#C2B3B8" stroke-opacity=".15" stroke-width="2"/>
-  <g class="cycle-gate-alert"><path d="M25 181V69c0-57 110-57 110 0v112" stroke="#E58A92" stroke-width="6"/><path d="M80 57v117" stroke="#E58A92" stroke-width="4" stroke-linecap="round"/></g>
+const parcelFront = `<svg class="cycle-parcel-art" viewBox="0 0 240 220" aria-hidden="true">
+  <path d="m41 83 77 43v83l-77-44Z" fill="#5A3948" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+  <path d="m118 126 82-36v81l-82 38Z" fill="#D7A0AF" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/>
+  <path d="m122 134 72-32m-72 100 72-34" stroke="#F7EEE8" stroke-width="1" opacity=".25"/>
+  <path d="m105 128 10 5v67l-10-6Z" fill="#D7A0AF" opacity=".25"/>
+  <path d="m144 152 36-16v28l-36 17Z" fill="#F7EEE8" stroke="#30202A" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="m150 155 2-1v17l-2 1m5-19 2-1v17l-2 1m7-20 2-1v17l-2 1m5-19 1-1v17l-1 1m5-19 2-1v17l-2 1" fill="#5A3948"/>
+  <g class="parcel-flap parcel-flap-front-left"><path d="m41 83 77 43-29 25-76-43Z" fill="#C2B3B8" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/><path d="m43 91 66 36" stroke="#F7EEE8" stroke-width="1" opacity=".4"/></g>
+  <g class="parcel-flap parcel-flap-front-right"><path d="m118 126 82-36 32 29-81 37Z" fill="#5A3948" stroke="#30202A" stroke-width="2" stroke-linejoin="round"/><path d="m126 128 71-31" stroke="#D7A0AF" stroke-width="1" opacity=".45"/></g>
+</svg>`;
+const budgetDisc = `<svg class="cycle-budget-disc" viewBox="0 0 200 200" aria-hidden="true">
+  <defs><radialGradient id="budget-disc-shade" cx=".35" cy=".2" r=".9"><stop stop-color="#342735"/><stop offset="1" stop-color="#211A22"/></radialGradient></defs>
+  <circle cx="100" cy="103" r="94" fill="#30202A" opacity=".45"/>
+  <circle cx="100" cy="100" r="93" fill="url(#budget-disc-shade)" stroke="#5A3948" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#5A3948" stroke-width="3"/>
+  <circle class="cycle-budget-progress" cx="100" cy="100" r="86" fill="none" stroke="#D7A0AF" stroke-width="4" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+  <path d="M39 54a77 77 0 0 1 88-25" fill="none" stroke="#F7EEE8" stroke-width="1" opacity=".12"/>
 </svg>`;
 
 export const LANDING_BUDGET_MARKUP = `
-<div class="budget-cycle" data-budget-cycle data-cycle-stage="complete" data-cycle-added="2" data-cycle-owned="5">
-  <div class="cycle-stage" role="img" aria-label="Beispiel: 20 Euro Monatsbudget reichen für zwei Manga zu je 10 Euro. Die bestehende Sammlung wächst von drei Bänden im Wert von 30 Euro auf fünf Bände im Wert von 50 Euro. Ein dritter Kauf wird bei null Euro Budget gestoppt.">
-    <svg class="cycle-route cycle-route-wide" viewBox="0 0 1000 380" preserveAspectRatio="none"><path d="M160 198H840M840 287C840 354 160 354 160 287"/><path d="m489 333-9 5 9 5m160-151 9 6-9 6"/></svg>
-    <svg class="cycle-route cycle-route-small" viewBox="0 0 360 510" preserveAspectRatio="none"><path d="M79 214H263M288 254C321 310 275 357 202 357M141 430C25 430 22 324 62 277"/><path d="m168 208 9 6-9 6m-113 68 7-11 3 13"/></svg>
-    <div class="cycle-shop">${shop}<span>Shop</span></div>
+<div class="budget-cycle" data-budget-cycle data-cycle-stage="complete" data-cycle-added="10" data-cycle-owned="18" data-cycle-empty="true">
+  <div class="budget-cycle-heading"><h2 id="planning-title">Lege dein Monatsbudget fest …</h2></div>
+  <div class="cycle-stage" role="img" aria-label="Beispiel mit 100 Euro Monatsbudget: Ein Paket öffnet sich. Bücher fliegen nacheinander daraus durch das Budget und landen von oben auf dem Stapel. Jeder Band kostet 10 Euro. Die bestehende Sammlung wächst von acht Bänden im Wert von 80 Euro auf 18 Bände im Wert von 180 Euro. Bei null Euro wird das nächste Buch aufgehalten und fliegt zurück ins Paket. Budget und Sammlungswert bleiben dabei unverändert.">
+    <svg class="cycle-route" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M215 192H395M610 192H710"/><path d="m335 187 7 5-7 5m327-10 7 5-7 5"/></svg>
+    <div class="cycle-parcel-back">${parcelBack}</div>
+    <div class="cycle-parcel-front">${parcelFront}</div>
     <div class="cycle-budget">
-      <div class="cycle-budget-amount"><span>Monatsbudget</span><strong data-cycle-budget>0 €</strong><b class="cycle-zero-alert">0 €</b></div>
-      <div class="cycle-gate">${gate}</div>
-      <span class="cycle-debit">−10 €</span>
-      <span class="cycle-budget-meter"><i></i></span>
+      ${budgetDisc}
+      <div class="cycle-budget-amount"><span>Monatsbudget</span><strong data-cycle-budget>0 €</strong><b class="cycle-zero-alert" aria-hidden="true">0 €</b></div>
+      <svg class="cycle-budget-seal" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="10" width="12" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2"/></svg>
+      <span class="cycle-debit" aria-hidden="true">−10 €</span>
     </div>
-    <div class="cycle-stack">
-      <span class="cycle-stack-book" style="--stack-index:0">${volume(1, "#C2B3B8")}</span>
-      <span class="cycle-stack-book" style="--stack-index:1">${volume(2, "#5A3948", "#F7EEE8")}</span>
-      <span class="cycle-stack-book" style="--stack-index:2">${volume(3, "#F7EEE8")}</span>
-      <span class="cycle-stack-book cycle-stack-first" style="--stack-index:3">${volume(4)}</span>
-      <span class="cycle-stack-book cycle-stack-second" style="--stack-index:4">${volume(5, "#F7EEE8")}</span>
-      <i class="cycle-stack-base"></i>
-    </div>
-    <div class="cycle-collection-value"><strong data-cycle-value>50 €</strong><span>Sammlungswert</span><small><span data-cycle-count>5</span> Bände</small></div>
-    <div class="cycle-flight"><div class="cycle-flying-volume"><span class="cycle-flight-first">${volume(4)}</span><span class="cycle-flight-second">${volume(5, "#F7EEE8")}</span><span class="cycle-flight-blocked">${volume(6, "#5A3948", "#F7EEE8")}</span></div></div>
+    <div class="cycle-collection-value"><span>Sammlungswert</span><strong data-cycle-value>180 €</strong><span data-cycle-count hidden>18</span></div>
+    <div class="cycle-stack-window" aria-hidden="true"><div class="cycle-stack">${books}</div></div>
+    <div class="cycle-flight" aria-hidden="true"><div class="cycle-flying-volume">${volume(null, "var(--cycle-book-color, #D7A0AF)", "var(--cycle-book-ink, #30202A)")}</div></div>
+    <div class="cycle-impact" aria-hidden="true"><i></i><i></i><i></i></div>
   </div>
   <p class="budget-cycle-ending">… und erfasse den Wert deiner Sammlung.</p>
 </div>`;

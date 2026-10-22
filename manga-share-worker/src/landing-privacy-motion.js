@@ -1,4 +1,4 @@
-// CSS owns the lock close-and-colour sequence. JavaScript only gates playback.
+// CSS closes and colours the lock once. JavaScript gates playback and retains the closed state.
 // Keep this literal so Worker keepNames helpers cannot leak into browser code.
 export const LANDING_PRIVACY_SCRIPT = String.raw`(() => {
   const root = document.querySelector("[data-privacy-lock]");
@@ -9,13 +9,15 @@ export const LANDING_PRIVACY_SCRIPT = String.raw`(() => {
     preference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   } catch {}
   if (!preference || typeof preference.matches !== "boolean" || typeof window.IntersectionObserver !== "function" || (typeof preference.addEventListener !== "function" && typeof preference.addListener !== "function")) return;
+  let completed = preference.matches;
   let visible = false;
   let observing = false;
   let ready = false;
   let playing = false;
   let observer;
   function sync() {
-    const nextReady = !preference.matches;
+    if (preference.matches) completed = true;
+    const nextReady = !completed;
     const nextPlaying = nextReady && visible && !document.hidden;
     if (nextReady !== ready) {
       ready = nextReady;
@@ -33,15 +35,22 @@ export const LANDING_PRIVACY_SCRIPT = String.raw`(() => {
       if (!observing) return;
       const entry = entries.find((item) => item.target === root);
       if (!entry) return;
-      visible = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+      visible = entry.isIntersecting;
       sync();
-    }, { threshold: [0, 0.2] });
+    }, { rootMargin: "0px 0px 100px 0px", threshold: 0 });
     observer.observe(root);
     observing = true;
   } catch {
     observer?.disconnect();
     return;
   }
+  root.addEventListener("animationend", (event) => {
+    if (event.animationName !== "privacy-lock-shut") return;
+    completed = true;
+    sync();
+    observing = false;
+    observer.disconnect();
+  });
   document.addEventListener("visibilitychange", sync);
   if (typeof preference.addEventListener === "function") preference.addEventListener("change", sync);
   else preference.addListener(sync);

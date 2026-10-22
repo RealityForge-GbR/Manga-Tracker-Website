@@ -13,10 +13,10 @@ export const LANDING_PRIVACY_STYLES = `
 .lock-shackle {transform-origin:92px 128px;transform-box:view-box}
 .lock-white {opacity:0}
 .lock-snap-lines {opacity:0;transform-origin:140px 115px;transform-box:view-box}
-.is-lock-ready .lock-shackle {animation:privacy-lock-shut 6s linear infinite both}
-.is-lock-ready .lock-white {animation:privacy-lock-tint 6s linear infinite both}
-.is-lock-ready .lock-whole {animation:privacy-lock-settle 6s linear infinite both}
-.is-lock-ready .lock-snap-lines {animation:privacy-lock-snap 6s linear infinite both}
+.is-lock-ready .lock-shackle {animation:privacy-lock-shut 4.8s linear 1 both}
+.is-lock-ready .lock-white {animation:privacy-lock-tint 4.8s linear 1 both}
+.is-lock-ready .lock-whole {animation:privacy-lock-settle 4.8s linear 1 both}
+.is-lock-ready .lock-snap-lines {animation:privacy-lock-snap 4.8s linear 1 both}
 .is-lock-ready .lock-shackle,.is-lock-ready .lock-white,.is-lock-ready .lock-whole,.is-lock-ready .lock-snap-lines {animation-play-state:paused}
 .is-lock-playing .lock-shackle,.is-lock-playing .lock-white,.is-lock-playing .lock-whole,.is-lock-playing .lock-snap-lines {animation-play-state:running}
 .trust-copy h2 {margin:0 0 22px;font-size:clamp(48px,5.4vw,72px);line-height:1.04;font-weight:600;letter-spacing:-.05em}
@@ -25,28 +25,26 @@ export const LANDING_PRIVACY_STYLES = `
 .trust-support {grid-column:1/-1;display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:24px;border-top:1px solid var(--line);padding-top:28px}
 .support-heart {width:56px;height:56px;fill:none;stroke:none;stroke-width:1;justify-self:center}
 .trust-support strong {color:var(--text);font-size:inherit;font-weight:650}
-.trust-support>p {max-width:960px;text-wrap:pretty}
+.trust-support>p {text-wrap:pretty}
 @keyframes privacy-lock-shut {
-  0%,25% {transform:translateY(-18px) rotate(-18deg)}
-  34% {transform:translateY(-18px) rotate(0deg);animation-timing-function:cubic-bezier(.5,0,.8,1)}
-  41% {transform:translateY(1px) rotate(0deg)}
-  45%,86% {transform:translateY(0) rotate(0deg);animation-timing-function:ease-in-out}
-  94%,100% {transform:translateY(-18px) rotate(-18deg)}
+  0%,15% {transform:translateY(-18px) rotate(-18deg)}
+  24% {transform:translateY(-18px) rotate(0deg);animation-timing-function:cubic-bezier(.5,0,.8,1)}
+  31% {transform:translateY(1px) rotate(0deg)}
+  35%,100% {transform:translateY(0) rotate(0deg)}
 }
 @keyframes privacy-lock-tint {
-  0%,40% {opacity:1}
-  47%,86% {opacity:0}
-  94%,100% {opacity:1}
+  0%,30% {opacity:1}
+  37%,100% {opacity:0}
 }
 @keyframes privacy-lock-settle {
-  0%,40%,49%,100% {transform:translateY(0)}
-  43% {transform:translateY(3px)}
-  46% {transform:translateY(-1px)}
+  0%,30%,39%,100% {transform:translateY(0)}
+  33% {transform:translateY(3px)}
+  36% {transform:translateY(-1px)}
 }
 @keyframes privacy-lock-snap {
-  0%,40% {opacity:0;transform:scale(.8)}
-  44% {opacity:1;transform:scale(1)}
-  54%,100% {opacity:0;transform:scale(1.12)}
+  0%,30% {opacity:0;transform:scale(.8)}
+  34% {opacity:1;transform:scale(1)}
+  44%,100% {opacity:0;transform:scale(1.12)}
 }
 @media(max-width:1050px) and (min-width:761px) {
   .trust {grid-template-columns:230px minmax(0,1fr);column-gap:44px;row-gap:30px;padding-block:60px 70px}

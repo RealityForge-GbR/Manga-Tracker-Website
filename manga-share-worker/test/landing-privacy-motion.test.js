@@ -11,9 +11,9 @@ function scene({ reduced = false, hidden = false, root = true, media = true, obs
   class Events {
     constructor() { this.events = new Map(); }
     addEventListener(name, callback) { this.events.set(name, callback); }
-    dispatch(name) { this.events.get(name)?.(); }
+    dispatch(name, event) { this.events.get(name)?.(event); }
   }
-  const element = { classes: new Set(), changes: [] };
+  const element = Object.assign(new Events(), { classes: new Set(), changes: [] });
   element.classList = {
     add(...names) { for (const name of names) { element.classes.add(name); element.changes.push(["add", name]); } },
     remove(...names) { for (const name of names) { element.classes.delete(name); element.changes.push(["remove", name]); } },
@@ -60,20 +60,22 @@ function scene({ reduced = false, hidden = false, root = true, media = true, obs
     get ready() { return element.classes.has("is-lock-ready"); },
     get playing() { return element.classes.has("is-lock-playing"); },
     visible(ratio = 1, isIntersecting = ratio > 0) { intersection?.([{ target: element, isIntersecting, intersectionRatio: ratio }]); },
+    finish(animationName = "privacy-lock-shut") { element.dispatch("animationend", { animationName }); },
     unrelatedEntry() { intersection?.([{ target: {}, isIntersecting: false, intersectionRatio: 0 }]); },
     hidden(value = true) { document.hidden = value; document.dispatch("visibilitychange"); },
     reduce(value = true) { preference.matches = value; preference.dispatch("change"); },
   };
 }
 
-test("lock playback waits for at least 20% visibility without a JavaScript animation loop", () => {
+test("lock playback starts 100px before scrolling into view without a JavaScript animation loop", () => {
   const s = scene();
   assert.equal(s.ready, true);
   assert.equal(s.playing, false);
-  assert.deepEqual(Array.from(s.options.threshold), [0, 0.2]);
-  s.visible(0.19);
+  assert.equal(s.options.rootMargin, "0px 0px 100px 0px");
+  assert.equal(s.options.threshold, 0);
+  s.visible(0, false);
   assert.equal(s.playing, false);
-  s.visible(0.2);
+  s.visible(0.01);
   assert.equal(s.playing, true);
   s.unrelatedEntry();
   assert.equal(s.playing, true);
@@ -81,7 +83,7 @@ test("lock playback waits for at least 20% visibility without a JavaScript anima
   assert.equal(s.playing, false);
 });
 
-test("offscreen and hidden scenes pause without recreating the CSS timeline", () => {
+test("the lock pauses mid-close, then stays closed after completion and later scrolling", () => {
   const s = scene();
   s.visible();
   s.element.changes.length = 0;
@@ -99,6 +101,20 @@ test("offscreen and hidden scenes pause without recreating the CSS timeline", ()
   s.visible();
   s.hidden(false);
   assert.equal(s.element.changes.length, writes, "unchanged playback avoids repeated class writes");
+  s.finish("privacy-lock-snap");
+  assert.equal(s.playing, true, "decorative animation events do not complete the lock");
+  s.finish();
+  assert.equal(s.ready, false, "completion retains the static closed rose illustration");
+  assert.equal(s.playing, false);
+  assert.equal(s.disconnected, true);
+  s.visible(0);
+  s.visible();
+  s.hidden();
+  s.hidden(false);
+  s.reduce();
+  s.reduce(false);
+  assert.equal(s.ready, false, "scrolling, tab changes and preference changes cannot reopen a completed lock");
+  assert.equal(s.playing, false);
 });
 
 test("an initially hidden page stays paused even when the scene is in view", () => {
@@ -110,22 +126,21 @@ test("an initially hidden page stays paused even when the scene is in view", () 
   assert.equal(s.playing, true);
 });
 
-test("reduced motion shows the static illustration and preference changes are honored", () => {
+test("reduced motion closes the lock permanently, including during an unfinished close", () => {
   for (const legacyMedia of [false, true]) {
-    const s = scene({ reduced: true, legacyMedia });
-    s.visible();
-    assert.equal(s.ready, false);
-    assert.equal(s.playing, false);
-    s.reduce(false);
-    assert.equal(s.ready, true);
-    assert.equal(s.playing, true);
-    s.reduce();
-    assert.equal(s.ready, false);
-    assert.equal(s.playing, false);
-    s.visible(0);
-    s.reduce(false);
-    assert.equal(s.ready, true);
-    assert.equal(s.playing, false);
+    for (const reduced of [false, true]) {
+      const s = scene({ reduced, legacyMedia });
+      s.visible();
+      assert.equal(s.playing, !reduced);
+      s.reduce();
+      assert.equal(s.ready, false);
+      assert.equal(s.playing, false);
+      s.reduce(false);
+      s.visible(0);
+      s.visible();
+      assert.equal(s.ready, false, "a lock already shown closed cannot reopen");
+      assert.equal(s.playing, false);
+    }
   }
 });
 

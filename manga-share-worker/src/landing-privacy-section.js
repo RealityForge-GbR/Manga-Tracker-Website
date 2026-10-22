@@ -28,6 +28,6 @@ export const LANDING_PRIVACY_MARKUP = `
   </div>
   <div class="trust-support">
     <svg class="support-heart" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 12h14v8h8v-8h14v8h8v20h-8v8h-8v4h-6v6h-8v-6h-6v-4h-8v-8H6V20h8Z" fill="#D7A0AF" stroke="#30202A" stroke-width="2" stroke-linejoin="miter"/><path d="M17 20h8m-10 4v9" stroke="#F7EEE8" stroke-width="2" stroke-linecap="square"/></svg>
-    <p><strong>So finanzieren wir uns.</strong> Über freiwillige Affiliate-Links in der App erhalten wir bei qualifizierten Käufen eine Provision. Für dich entstehen keine Mehrkosten.</p>
+    <p><strong>So finanzieren wir uns.</strong><br>Über freiwillige Affiliate-Links in der App erhalten wir bei qualifizierten Käufen eine Provision. Für dich entstehen keine Mehrkosten.</p>
   </div>
 </section>`;
