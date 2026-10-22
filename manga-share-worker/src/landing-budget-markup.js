@@ -16,6 +16,8 @@ function volume(index, color = "#D7A0AF", ink = "#30202A") {
 
 const tones = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
 const books = Array.from({ length:11 }, (_, index) => `<span class="cycle-stack-book" style="--book-index:${index};--book-lean:${[0,3,-2,1,-3,2][index % 6]}px">${volume(index, tones[index % 6], index % 6 === 3 || index % 6 === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
+// The unnumbered continuation is decorative depth, separate from the purchase count.
+const continuation = Array.from({ length:6 }, (_, index) => `<span class="cycle-stack-continuation-book" style="--book-index:${-index - 1};--book-lean:${[1,-2,3,-1,2,0][index]}px">${volume(null, tones[index], index === 3 || index === 5 ? "#D7A0AF" : "#30202A")}</span>`).join("");
 const budgetWallet = `<svg class="cycle-budget-wallet" viewBox="0 0 240 190" aria-hidden="true">
   <defs><linearGradient id="budget-wallet-shade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#342735"/><stop offset="1" stop-color="#211A22"/></linearGradient></defs>
   <rect x="16" y="25" width="209" height="147" rx="24" fill="#171217" opacity=".4"/>
@@ -37,11 +39,10 @@ export const LANDING_BUDGET_MARKUP = `
       ${budgetWallet}
       <div class="cycle-budget-amount"><span>Monatsbudget</span><strong data-cycle-budget>0 €</strong><b class="cycle-zero-alert" aria-hidden="true">0 €</b></div>
       <div class="cycle-budget-slots" aria-hidden="true"><i style="--slot:0"></i><i style="--slot:1"></i><i style="--slot:2"></i></div>
-      <svg class="cycle-budget-seal" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="10" width="12" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2"/></svg>
       <span class="cycle-debit" aria-hidden="true">−10 €</span>
     </div>
     <div class="cycle-collection-value"><span>Wert deiner Sammlung</span><strong data-cycle-value>110 €</strong><span data-cycle-count hidden>11</span></div>
-    <div class="cycle-stack-window" aria-hidden="true"><div class="cycle-stack">${books}</div></div>
+    <div class="cycle-stack-window" aria-hidden="true"><div class="cycle-stack">${books}${continuation}</div></div>
     <div class="cycle-flight" aria-hidden="true"><div class="cycle-flying-volume">${volume(null, "var(--cycle-book-color, #D7A0AF)", "var(--cycle-book-ink, #30202A)")}</div></div>
     <div class="cycle-impact" aria-hidden="true"><i></i><i></i><i></i></div>
   </div>

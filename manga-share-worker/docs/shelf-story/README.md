@@ -63,7 +63,7 @@ Keine Sensorfreigabe, neue Bibliothek, Videodatei oder JavaScript-Bildschleife.
 ## Budget-Stapel
 
 Der Budget-Abschnitt ist ein farblich abgesetztes Band in Sekundärhintergrund
-(#342735), etwa 420 Pixel hoch am Desktop und 434 Pixel auf dem Handy. Ein
+(#342735), etwa 416 Pixel hoch am Desktop und 385 Pixel auf dem Handy. Ein
 separater Hintergrund wird um -1,4 Grad geschert: Beide Kanten steigen dezent
 nach rechts, während Text und Illustrationen aufrecht bleiben. Paket,
 Monatsbudget und Sammlungswert stehen von links nach rechts. Die echten
@@ -105,10 +105,14 @@ Die sichtbaren Beschriftungen „Shop“, „10 € pro Band“, „Budget aufge
 die Bandanzahl bleiben entfernt. Monatsbudget und „Wert deiner Sammlung“ sind beschriftet.
 
 Der gesamte Ablauf dauert 12,61 Sekunden und benötigt nur einen Milestone-Timer.
-CSS animiert Transformationen und Transparenz. Elf vorbereitete Buchlagen halten
-die Anzahl der Elemente begrenzt. Alle elf Lagen bleiben vollständig sichtbar,
-ohne Verlauf oder Beschnitt am unteren Rand. Die Bühne ist dafür am Desktop
-438 Pixel hoch, mobil 380 Pixel. Der Anflug bleibt unter der Wertbeschriftung
+CSS animiert Transformationen und Transparenz. Elf vorbereitete Buchlagen bilden
+den gezählten Bestand. Sechs unnummerierte, rein dekorative Lagen verlängern den
+Stapel darunter bis zum unteren Rand des Bandes. Ein mehrstufiger Verlauf blendet
+ihn über eine lange Strecke aus und verbirgt sein Ende. Die Ergänzungen beeinflussen
+weder Käufe noch Budget oder angezeigten Wert. Die Bühne ist am Desktop auf
+320 Pixel, mobil auf 284 Pixel reduziert; Paket und Budget stehen weiter oben.
+Der feste Bildbereich läuft 28 Pixel (mobil 48 Pixel) unter dem Bühnenende weiter.
+Das Schlosssymbol am Monatsbudget entfällt; der kleine Verschluss bleibt ohne Schloss. Der Anflug bleibt unter der Wertbeschriftung
 (20 Pixel Anhebung am Desktop, 40 Pixel mobil). Auch der kurze Abzug von
 10 Euro erscheint außerhalb des Flugwegs oberhalb der Budgetkarte.
 Außerhalb des Sichtbereichs oder bei verborgenem Tab pausieren Zeit und Bewegung
