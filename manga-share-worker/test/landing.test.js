@@ -32,8 +32,13 @@ test("homepage works independently of unavailable API and assets bindings", asyn
       assert.match(response.headers.get("content-security-policy"), new RegExp("script-src 'sha256-" + scriptDigest.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "'"));
       assert.doesNotMatch(html, /<script\s|<iframe\b|<form\b|<[a-z][^>]*\son\w+=|google-analytics|googletagmanager|fonts\.googleapis|fbq\(/i);
       assert.doesNotMatch(html, /Hanako/);
-      assert.match(html, /src="\/landing\/notifications\.webp"/);
-      assert.match(html, /Echter App-Screenshot · Entwicklungsvorschau<br>Simulierte Beispieldaten: Meldungen, Status und Termine/);
+      assert.doesNotMatch(html, /data-shelf-story|shelf-bubble|retained-preview|id="benachrichtigungen"|src="\/landing\/notifications\.webp"/);
+      assert.match(html, /data-shelf-divider/);
+      assert.match(html, /<h3>Teile Manga mit Freunden\.<\/h3>/);
+      const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
+      for (const match of html.matchAll(/href="#([^"#]+)"/g)) {
+        assert.ok(ids.has(decodeURIComponent(match[1])), `Missing local anchor: ${match[1]}`);
+      }
       const expectedOrigin = origin.startsWith("http:") ? "https://mangatracker.de" : origin;
       assert.ok(html.includes(`<link rel="canonical" href="${expectedOrigin}/">`));
       assert.ok(html.includes(`property="og:image" content="${expectedOrigin}/landing/app-icon-source.png"`));
@@ -52,8 +57,9 @@ test("all homepage images are local, dimensioned and exist, with deferred below-
   }
   assert.equal((html.match(/fetchpriority="high"/g) || []).length, 1);
   assert.match(html, /loading="lazy"/);
-  assert.match(html, /Meine Reihen<\/figcaption>/);
-  assert.match(html, /Bandstatus<\/figcaption>/);
+  assert.match(html, /src="\/landing\/series\.webp"/);
+  assert.match(html, /id="entdecken"/);
+  assert.match(html, /id="sammlung"/);
   for (const path of ["legal-notice/", "privacy-policy/", "privacy-policy/manga-tracker/"]) {
     assert.ok(html.includes(`href="https://realityforge.eu/${path}"`));
   }
@@ -109,7 +115,7 @@ test("homepage bypasses former cached landing without changing detail cache name
   globalThis.caches = { default: { async match(key) { keys.push(key.url); return undefined; }, async put() {} } };
   try {
     await handleRequest(new Request("https://mangatracker.de/?campaign=test"));
-    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-42/"]);
+    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-43/"]);
   } finally {
     if (previous === undefined) delete globalThis.caches; else globalThis.caches = previous;
   }

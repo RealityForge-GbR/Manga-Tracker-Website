@@ -1,11 +1,10 @@
-import { LANDING_PLANNING_DETAILS, LANDING_NOTIFICATION_PREVIEW } from "./landing-planning-details.js";
+import { LANDING_PLANNING_DETAILS } from "./landing-planning-details.js";
 import { LANDING_SHELF_DIVIDER_MARKUP } from "./landing-shelf-divider.js";
 import { LANDING_APP_SHOWCASE } from "./landing-app-showcase.js";
 import { LANDING_PRIVACY_MARKUP } from "./landing-privacy-section.js";
 import { LANDING_STYLES } from "./landing-styles.js";
 import { LANDING_MOTION_SCRIPT } from "./landing-motion.js";
 import { LANDING_BUDGET_MARKUP } from "./landing-budget-markup.js";
-import { renderShelfStory } from "./landing-shelf-story.js";
 
 export const LANDING_ASSETS = new Set([
   "app-icon.png", "app-icon-source.png", "collection-mascot.webp", "releases.webp", "library.webp",
@@ -109,8 +108,6 @@ export function renderLandingPage(origin) {
       </figure>
     </section>
 
-    ${renderShelfStory()}
-
     <section id="planung" class="planning section" aria-labelledby="planning-title">
       ${LANDING_BUDGET_MARKUP}
       ${LANDING_PLANNING_DETAILS}
@@ -130,7 +127,6 @@ export function renderLandingPage(origin) {
       ${catScene()}
     </section>
     ${LANDING_APP_SHOWCASE}
-    ${LANDING_NOTIFICATION_PREVIEW}
   </main>
   <footer class="footer wrap"><a class="brand" href="/" aria-label="Manga Tracker Startseite"><img src="/landing/app-icon.png" alt="" width="192" height="192"><span>Manga Tracker</span></a><p>Eine App von RealityForge GbR</p><nav aria-label="Rechtliches"><a href="https://realityforge.eu/legal-notice/">Impressum</a><a href="https://realityforge.eu/privacy-policy/">Datenschutz Website</a><a href="https://realityforge.eu/privacy-policy/manga-tracker/">Datenschutz App</a></nav></footer>
 <script>${LANDING_MOTION_SCRIPT}</script>

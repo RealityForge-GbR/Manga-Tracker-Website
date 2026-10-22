@@ -50,3 +50,11 @@ Bildladezustände, Pause/Fortsetzung, Präferenzen und Produktions-Minifizierung
 Auf Desktop stehen drei Karten nebeneinander. Tablet und Handy verwenden die
 bestehende native Touch-/Tastatur-Galerie mit CSS Scroll Snap. Es gibt keine
 neuen Bilddateien, Fremd-Bibliotheken oder Netzwerkquellen zur Laufzeit.
+
+
+## Entfernte Benachrichtigungsvorschau
+
+Die separate, aufklappbare Entwicklungsvorschau unter diesen drei Karten wurde
+am 22.10.2026 auf Nutzerwunsch entfernt. Unter den Karten folgt nun die Fußzeile.
+Die originale Screenshotdatei und ihr Herkunftsnachweis bleiben unverändert.
+Die erste Karte trägt jetzt `id="entdecken"` als Ziel des bestehenden Menülinks.

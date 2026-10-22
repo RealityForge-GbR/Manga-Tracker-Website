@@ -1,3 +1,11 @@
+> Stand 22.10.2026: Die komplette hohe Regalstrecke mit allen neun Sprechblasen
+> wurde auf Nutzerwunsch von der Website entfernt. Sie wird nicht mehr gerendert;
+> Story-, Scan- und Share-Controller sowie deren Styles werden nicht mehr ausgeliefert.
+> Die Dateien und Originalbilder bleiben als bisheriger Entwurf/Herstellungsnachweis
+> erhalten. Der waagerechte, animierte Büchertrenner ist davon unabhängig und bleibt.
+> Auch die Benachrichtigungsvorschau unter den Featurekarten ist entfernt.
+> Die folgenden früheren Beschreibungen der Regalstrecke sind historischer Stand.
+
 # Regal-Scroll-Prototyp
 
 Die Regalzeichnung ist eine ausdrücklich gewünschte Illustration, kein App-Screenshot.
@@ -344,3 +352,13 @@ Telefonhöhe ist durch konkrete Gehäusemaße begrenzt; der echte Screenshot wir
 unverändert und ohne Verzerrung in das Gehäuse eingepasst. Überschrift und weißes
 Etikett beginnen oben, letzter Absatz und Bildunterschrift schließen unten ab.
 Tablet und Handy behalten ihren Lesefluss untereinander bzw. in zwei Spalten.
+
+
+### Teilen-Text im Sammlungsblock
+
+Zwischen Monatsbudget und Sammlungswert steht jetzt ein dritter Artikel:
+„Teile Manga mit Freunden.“ Er beschreibt das Weiterempfehlen eines einzelnen
+Bandes per Link zu Cover und Details, keinen automatischen Bibliotheks-Transfer.
+Kleinere Textabstände halten die drei Artikel in derselben Desktop-Spaltenhöhe.
+`#sammlung` verweist jetzt auf diesen Block. `#entdecken` verweist auf die erste
+verbleibende Featurekarte; die Hauptnavigation behält gültige Fragmentziele.

@@ -1,7 +1,7 @@
 import { LANDING_ACHIEVEMENT_MARKUP } from "./landing-achievement-scene.js";
 
 const views = [
-  { name: "releases", title: "Neuerscheinungen verfolgen", copy: "Sieh, welche neuen Bände in diesem Monat erscheinen.", alt: "Originale App-Startseite mit den Manga-Neuerscheinungen im Oktober", pose: "releases" },
+  { id: "entdecken", name: "releases", title: "Neuerscheinungen verfolgen", copy: "Sieh, welche neuen Bände in diesem Monat erscheinen.", alt: "Originale App-Startseite mit den Manga-Neuerscheinungen im Oktober", pose: "releases" },
   { title: "Achievements bekommen", copy: "Schalte beim Sammeln deine nächsten Erfolge frei.", pose: "achievements" },
   { name: "series", title: "Reihen folgen", copy: "Deine Lieblingsreihen auf einen Blick.", alt: "Originale Reihenübersicht in Manga Tracker", pose: "series" },
 ];
@@ -10,7 +10,7 @@ export const LANDING_APP_SHOWCASE = `
 <section id="app-ansichten" class="app-showcase wrap" aria-labelledby="showcase-title">
   <h2 id="showcase-title">Ein Blick in Manga Tracker.</h2>
   <div class="showcase-gallery" role="region" aria-label="Neuerscheinungen, Achievements und Reihen in Manga Tracker" tabindex="0">
-    ${views.map((view) => `<article class="showcase-card showcase-${view.pose}">
+    ${views.map((view) => `<article${view.id ? ` id="${view.id}"` : ""} class="showcase-card showcase-${view.pose}">
       <div class="showcase-card-copy"><h3>${view.title}</h3><p>${view.copy}</p></div>
       ${view.pose === "achievements" ? LANDING_ACHIEVEMENT_MARKUP : `<figure class="showcase-device"><img src="/landing/${view.name}.webp" alt="${view.alt}" width="720" height="1433" loading="lazy" decoding="async"></figure>`}
     </article>`).join("")}

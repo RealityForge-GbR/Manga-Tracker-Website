@@ -4,12 +4,9 @@ import { LANDING_PLANNING_DETAILS_STYLES } from "./landing-planning-details-styl
 import { LANDING_SHELF_DIVIDER_STYLES } from "./landing-shelf-divider-styles.js";
 import { LANDING_APP_SHOWCASE_STYLES } from "./landing-app-showcase-styles.js";
 import { LANDING_PRIVACY_STYLES } from "./landing-privacy-styles.js";
-import { LANDING_SHARE_STYLES } from "./landing-share-styles.js";
-import { LANDING_SCAN_STYLES } from "./landing-scan-styles.js";
 import { LANDING_BUDGET_STYLES } from "./landing-budget-styles.js";
 import { LANDING_CAT_STYLES } from "./landing-cat-styles.js";
 import { LANDING_MOBILE_HERO_STYLES } from "./landing-mobile-hero-styles.js";
-import { LANDING_SHELF_STYLES } from "./landing-shelf-styles.js";
 import { LANDING_HERO_FLOAT_STYLES } from "./landing-hero-float-styles.js";
 
 export const LANDING_STYLES = `
@@ -958,9 +955,6 @@ ${LANDING_BUDGET_STYLES}
 ${LANDING_CAT_STYLES}
 ${LANDING_MOBILE_HERO_STYLES}
 ${LANDING_HERO_FLOAT_STYLES}
-${LANDING_SHELF_STYLES}
-${LANDING_SCAN_STYLES}
-${LANDING_SHARE_STYLES}
 ${LANDING_PRIVACY_STYLES}
 ${LANDING_APP_SHOWCASE_STYLES}
 ${LANDING_ACHIEVEMENT_STYLES}
