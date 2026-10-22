@@ -12,6 +12,7 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const BASE_COUNT = 8;
   const PURCHASES = START_BUDGET / PRICE;
   const COVER_COLORS = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
+  const BOOK_LEANS = [0, 3, -2, 1, -3, 2];
   const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const stages = [{ name: "initial", duration: 800, action: "reset" }];
   for (let purchase = 0; purchase < PURCHASES; purchase += 1) {
@@ -52,6 +53,7 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
     root.style.setProperty("--cycle-owned", String(count));
     root.style.setProperty("--cycle-book-color", COVER_COLORS[count % COVER_COLORS.length]);
     root.style.setProperty("--cycle-book-ink", count % 6 === 3 || count % 6 === 5 ? "#D7A0AF" : "#30202A");
+    root.style.setProperty("--cycle-book-lean", BOOK_LEANS[count % BOOK_LEANS.length] + "px");
     root.style.setProperty("--cycle-budget-level", String(remaining / START_BUDGET));
   }
   function setStage(name) {

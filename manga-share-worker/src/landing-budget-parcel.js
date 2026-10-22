@@ -1,6 +1,7 @@
-// Fifteen matching vector frames use the same lightweight strip technique as the cat.
+// Matching vector frames retain the strip technique, with a finer opening cadence.
 // Front and back layers leave a real opening for the books between them.
-const FRAME_COUNT = 15;
+export const PARCEL_FRAME_COUNT = 24;
+const FRAME_COUNT = PARCEL_FRAME_COUNT;
 const A = [41,83], B = [125,51], C = [200,90], D = [118,126];
 const midpoint = (a,b) => a.map((value,index) => (value + b[index]) / 2);
 const point = (p) => p.map((value) => Number(value.toFixed(2))).join(" ");

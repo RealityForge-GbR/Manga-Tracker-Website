@@ -74,7 +74,7 @@ https://play.google.com/store/apps/details?id=com.ketchapp.stack), mit eigenen
 nativ gezeichneten Büchern. Die Buchbreite ist am Desktop 190 Pixel. Es werden
 keine Spielgrafiken oder erfundenen App-Screenshots verwendet.
 
-Das Paket öffnet und schließt seine vier Klappen mit 15 festen Vektor-Bildern.
+Das Paket öffnet und schließt seine vier Klappen mit 24 festen Vektor-Bildern.
 Zwei übereinanderliegende SVG-Bildstreifen halten Vorder- und Rückseite getrennt;
 die CSS-Technik entspricht der Katze, benötigt aber keine neue Rastergrafik.
 Geschlossene Klappen bedecken die Öffnung tatsächlich. Die vorderen Klappen
@@ -193,3 +193,26 @@ Visuell und über Geometrie geprüft: 1920×1080, 1440×900, 1366×768,
 1280×600, 1024×768, 768×1024, 820×1180 und 1051×400; außerdem die
 bestehende mobile Ansicht mit 390×760. Keine horizontalen Überstände;
 Kopfzeile und Hero enden in allen genannten Größen am ersten Bildschirmrand.
+
+
+## Flüssiger Budget-Ablauf
+
+Die Buchflüge verwenden vorberechnete, kontinuierliche Kurven statt wiederholtem
+Abbremsen an einzelnen Wegpunkten. Position und Geschwindigkeit stimmen am
+Budgetübergang überein; Abbuchung und Ankunft behalten ihre bisherigen
+Zeitpunkte. Einhundert kurze CSS-Abschnitte werden vom Browser interpoliert,
+ohne JavaScript-Berechnung pro Bild.
+
+Bei der Landung liegt das neue Buch sofort exakt auf seiner späteren Position,
+einschließlich des seitlichen Versatzes. Nur der bisherige Stapel federt in
+200 Millisekunden eine Buchhöhe nach unten. Dadurch entfällt der bisherige
+Sprung des neuen Buchs um eine Buchhöhe. Die Bewegung pausiert gemeinsam mit
+dem Flug außerhalb des Sichtbereichs und im verborgenen Tab.
+
+Das abgewiesene Buch erreicht die Budgetgrenze zweimal. Es hebt sich danach
+erst über die Kartonklappen, fliegt über die Öffnung zurück und sinkt senkrecht
+hinein. Seine Größe bleibt bis über der Öffnung unverändert. Die Klappen
+öffnen und schließen mit 24 statt 15 Vektorframes; die beiden schmalen
+Bildstreifen bleiben deutlich kleiner als ein zusätzliches Video. Es gibt
+weiterhin genau zwei Käufe, keinen automatischen Budget-Neustart und keine
+neue Endlosschleife.
