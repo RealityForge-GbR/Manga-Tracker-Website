@@ -35,13 +35,26 @@ export const LANDING_HERO_FLOAT_STYLES = `
   opacity:.65
 }
 .hero-visual .hero-bob>.phone>img {border-radius:19px}
-@media(min-width:761px) {
+@media(min-width:761px) and (min-height:501px), (min-width:1051px) {
+  :root {
+    --entry-header-padding:clamp(10px,calc(4vh - 10px),26px);
+    --entry-header-height:calc(44px + var(--entry-header-padding) * 2 + env(safe-area-inset-top,0px));
+    --entry-space:clamp(16px,4vh,56px)
+  }
+  .header.wrap {
+    height:var(--entry-header-height);
+    padding-top:calc(var(--entry-header-padding) + env(safe-area-inset-top,0px));
+    padding-bottom:var(--entry-header-padding);
+    flex-wrap:nowrap
+  }
   .hero {
     grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+    grid-template-rows:minmax(0,1fr);
     gap:36px;
-    min-height:690px;
-    padding-top:25px;
-    padding-bottom:50px
+    height:calc(100vh - var(--entry-header-height));
+    height:calc(100svh - var(--entry-header-height));
+    min-height:calc(300px + var(--entry-space) * 2);
+    padding-block:var(--entry-space)
   }
   .hero-copy {
     display:flex;
@@ -63,10 +76,20 @@ export const LANDING_HERO_FLOAT_STYLES = `
   .hero-actions {justify-content:flex-start}
   .hero-benefits {width:max-content;max-width:100%;margin:23px 0 0;text-align:left;gap:8px}
   .hero-visual {
-    height:610px;
+    --hero-front-width:min(50%,calc((100vh - var(--entry-header-height) - var(--entry-space) * 2) * .4),360px);
+    --hero-back-width:min(44%,calc((100vh - var(--entry-header-height) - var(--entry-space) * 2) * .34),320px);
+    height:100%;
+    min-height:0;
     width:100%;
+    container-type:size;
     perspective:1200px;
     perspective-origin:50% 50%
+  }
+  @supports(width:1cqw) {
+    .hero-visual {
+      --hero-front-width:min(50cqw,40cqh,360px);
+      --hero-back-width:min(44cqw,34cqh,320px)
+    }
   }
   .hero-visual::before {
     content:"";
@@ -78,19 +101,19 @@ export const LANDING_HERO_FLOAT_STYLES = `
   }
   .hero-back-rig {
     position:absolute;
-    width:clamp(195px,18.8vw,248px);
-    top:15%;
-    left:7%;
-    transform:translate3d(calc(var(--hero-x,0) * -7px),calc(var(--hero-y,0) * -5px),0) rotateY(calc(9deg + var(--hero-x,0) * 3deg)) rotateX(calc(2deg - var(--hero-y,0) * 2deg)) rotateZ(calc(-7deg + var(--hero-progress,0) * 6deg));
+    width:var(--hero-back-width);
+    top:54%;
+    left:calc(50% - var(--hero-back-width) * .9);
+    transform:translateY(-50%) translate3d(calc(var(--hero-x,0) * -7px),calc(var(--hero-y,0) * -5px),0) rotateY(calc(9deg + var(--hero-x,0) * 3deg)) rotateX(calc(2deg - var(--hero-y,0) * 2deg)) rotateZ(calc(-7deg + var(--hero-progress,0) * 6deg));
     transform-origin:50% 50%;
     z-index:1
   }
   .hero-front-rig {
-    width:clamp(220px,21vw,278px);
-    top:4%;
-    right:9%;
-    left:auto;
-    transform:translate3d(calc(var(--hero-x,0) * 11px),calc(var(--hero-y,0) * 8px),0) rotateY(calc(-8deg + var(--hero-x,0) * 3deg)) rotateX(calc(3deg - var(--hero-y,0) * 2deg)) rotateZ(calc(5deg - var(--hero-progress,0) * 9deg));
+    width:var(--hero-front-width);
+    top:50%;
+    right:auto;
+    left:calc(50% - var(--hero-front-width) * .18);
+    transform:translateY(-50%) translate3d(calc(var(--hero-x,0) * 11px),calc(var(--hero-y,0) * 8px),0) rotateY(calc(-8deg + var(--hero-x,0) * 3deg)) rotateX(calc(3deg - var(--hero-y,0) * 2deg)) rotateZ(calc(5deg - var(--hero-progress,0) * 9deg));
     transform-origin:50% 50%;
     z-index:2
   }
@@ -146,12 +169,9 @@ export const LANDING_HERO_FLOAT_STYLES = `
     50% {transform:translate3d(0,var(--book-travel),0) rotate(calc(var(--book-tilt) + 3deg))}
   }
 }
-@media(min-width:761px) and (max-width:1050px) {
-  .hero {grid-template-columns:minmax(245px,.9fr) minmax(0,1.1fr);gap:16px;min-height:590px}
+@media(min-width:761px) and (max-width:1050px) and (min-height:501px) {
+  .hero {grid-template-columns:minmax(245px,.9fr) minmax(0,1.1fr);gap:16px}
   .hero h1 {font-size:clamp(27px,3.2vw,32px);max-width:340px}
-  .hero-visual {height:510px}
-  .hero-back-rig {width:clamp(164px,20vw,205px);top:20%;left:3%}
-  .hero-front-rig {width:clamp(180px,23vw,235px);top:8%;right:5%}
 }
 @media(max-width:760px) {
   .hero-back-rig {display:none}

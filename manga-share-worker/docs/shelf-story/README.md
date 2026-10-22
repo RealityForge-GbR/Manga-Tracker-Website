@@ -173,3 +173,23 @@ das äußere Element schneidet Überstand ab. Einzelne Buchrücken werden in ein
 Buch verlässt die Reihe. Nur CSS-Transformationen bewegen die Bücher. Ein
 Visibility-Controller pausiert sie außerhalb des Sichtbereichs, in verborgenen
 Tabs und bei reduzierter Bewegung; es läuft keine JavaScript-Animationsschleife.
+
+
+## Bildschirmfüllender Einstieg auf Desktop und Tablet
+
+Kopfzeile und Hero ergeben zusammen eine kleine Viewport-Höhe (`100svh`,
+mit `100vh` als Fallback). Die Kopfzeilenabstände reagieren auf die Höhe des
+Fensters; der Hero nutzt die verbleibende Fläche. Der nächste Abschnitt beginnt
+unterhalb dieses Einstiegs und wird erst beim Scrollen sichtbar.
+
+Die Produktbühne füllt die Höhe ihrer Grid-Zeile. Beide Telefonbreiten richten
+sich nach Bühnenbreite und Bühnenhöhe, mit festen Obergrenzen. Die Geräte
+bleiben auch bei flachen Fenstern als gemeinsame Gruppe mittig ausgerichtet.
+Maus- und Scroll-Parallax bleiben erhalten. Die bestehende mobile Ansicht und
+das Layout für schmale Querformate bleiben separat. Bei extrem geringer Höhe
+darf der Hero zugunsten lesbarer Inhalte höher als ein Viewport sein.
+
+Visuell und über Geometrie geprüft: 1920×1080, 1440×900, 1366×768,
+1280×600, 1024×768, 768×1024, 820×1180 und 1051×400; außerdem die
+bestehende mobile Ansicht mit 390×760. Keine horizontalen Überstände;
+Kopfzeile und Hero enden in allen genannten Größen am ersten Bildschirmrand.
