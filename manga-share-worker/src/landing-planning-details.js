@@ -1,3 +1,5 @@
+import { LANDING_BARCODE_MORPH_MARKUP } from "./landing-barcode-morph.js";
+
 export const LANDING_PLANNING_DETAILS = `
 <div class="budget-details wrap">
   <figure class="budget-device-scene" aria-label="Originalansicht der Budgetplanung in einem Android-Mockup">
@@ -19,6 +21,7 @@ export const LANDING_PLANNING_DETAILS = `
       <p>So behältst du den Gesamtwert im Blick, während dein Regal wächst.</p>
     </article>
   </div>
+  <div class="budget-scan-morph">${LANDING_BARCODE_MORPH_MARKUP}</div>
 </div>`;
 
 // Retain the original development screenshot for later use without crowding planning.

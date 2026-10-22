@@ -238,3 +238,31 @@ Transparenz. Die bestehende Sichtbarkeitssteuerung pausiert Bücher und Funken
 gemeinsam außerhalb des Sichtbereichs und im verborgenen Tab. Reduzierte
 Bewegung deaktiviert die Effekte. Es werden keine zusätzlichen Bilddateien,
 Videos oder JavaScript-Berechnungen pro Animationsbild benötigt.
+
+
+## Vom Barcode ins Regal
+
+Rechts neben Budget-Handy und Erklärungen scannt eine Lichtkante einen echten
+EAN-13 von links nach rechts. Die vorhandenen Barcode-Streifen falten sich zu
+sechs unterschiedlich hohen Buchrücken zusammen; Seiten und Ornamente erscheinen,
+bevor die Bände versetzt auf ein Regalbrett fallen. Die Illustration zeigt mit
+„Band für Band ins Regal.“ das Einscannen einzelner Bände, keine automatische
+Übernahme einer ganzen Sammlung mit einem einzigen Barcode.
+
+Das Muster gehört zur bereits auf der Website verwendeten Beispiel-ISBN
+9783551771575. Prüfziffer und 95 Module sind gegen die EAN-13-Kodierung mit
+LGGLGL-Parität geprüft. Referenz: [GS1 General Specifications, Abschnitte
+5.2.2.2.1 und 5.2.2.3.1](https://ref.gs1.org/standards/genspecs/9.0.0/).
+Ein Test rekonstruiert das vollständige Muster aus genau den später bewegten
+Streifen; weitere Tests prüfen Buchabstände und den Kontakt zum Brett.
+
+Auf Desktop erhält der Block drei Spalten und mehr Breite, sodass Handy und
+Texte weiter links stehen. Auf Tablets folgt die Animation unter den zwei
+bestehenden Spalten, auf Handys unter den Erklärungen. Der echte Budget-Screenshot
+bleibt unverändert. Es sind keine weiteren Bilddateien oder Bibliotheken nötig.
+
+Ein Durchlauf dauert 8,8 Sekunden. CSS übernimmt sämtliche Bilder; der kleine
+Controller pausiert außerhalb des sichtbaren Bereichs und im verborgenen Tab.
+Bei reduzierter Bewegung oder fehlenden Browser-Funktionen bleibt das fertige
+Regal stehen. Die lokalen SVG-Regeln verhindern, dass globale Symbol-Umrisse
+Barcode und Buchrücken verfälschen.
