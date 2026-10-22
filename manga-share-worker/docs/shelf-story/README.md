@@ -220,9 +220,11 @@ neue Endlosschleife.
 
 ## Buchkörper, Funken und Blickrichtung
 
-Das Budget-Handy zeigt seine Bildschirmfläche frontal und ist nur um vier
-Grad auf der Z-Achse nach rechts gedreht. X- und Y-Achse sind ungedreht;
-Gehäuse und Original-Screenshot bleiben erhalten.
+Das Budget-Handy dreht sich in echter CSS-3D-Perspektive um seine senkrechte
+Mittelachse (rotateY mit 22 Grad), entsprechend der eingezeichneten Achse im
+Nutzer-Screenshot. Es gibt keine Neigung nach vorn und keine Drehung in der
+Bildschirmebene. Das nach hinten versetzte Gehäuse und der echte Screenshot
+bleiben erhalten.
 
 Der durchgehende Regaltrenner zeigt beim Herausziehen vollständige Buchkörper
 mit dekorativen, eigens gestalteten Covern, Buchrücken und hellen Seiten.
@@ -279,10 +281,21 @@ entfällt. Ablauf, Landung, Barcode und Pausensteuerung bleiben unverändert.
 
 ### Mehr Fallhöhe und bleibendes Barcode-Etikett
 
-Das helle Barcode-Etikett einschließlich seiner ISBN bleibt während des ganzen
-Durchlaufs sichtbar. Nur seine schwarzen Streifen werden zu Büchern. Der Barcode
+Das helle Barcode-Etikett bleibt während des ganzen Durchlaufs sichtbar;
+die ausgeschriebenen ISBN-Zahlen sind entfernt. Nur seine schwarzen Streifen werden zu Büchern. Der Barcode
 beginnt nun bei y=64 statt 104; das Brett steht bei y=468 statt 348. Die Bühne
 ist entsprechend 540 statt 420 Einheiten hoch, ohne die Bücher zu verkleinern.
 So endet das Etikett oberhalb der gelandeten Bücher und der Fallweg wächst um
 160 Einheiten. Für den längeren Fall bleibt etwas mehr Zeit; das sanfte Nachfedern
 und die gemeinsame Pausensteuerung bleiben erhalten.
+
+
+### Gemeinsame Oberkante von Überschrift und Barcode
+
+Textspalte und Barcode-Bühne richten sich im Desktop-Raster am selben oberen
+Zeilenrand aus. Der SVG-Ausschnitt beginnt direkt bei der Oberkante des weißen
+Rechtecks (y=42), ohne den früheren internen oberen Leerraum. So stimmt seine
+Oberkante unabhängig von Spaltenbreite und Umbrüchen mit dem ersten h3 überein.
+Die Höhe des weißen Etiketts beträgt ohne Zahlenzeile 160 Einheiten; die Streifen
+haben damit oben und unten denselben Abstand. Auf schmaleren Geräten bleibt
+die bestehende Anordnung untereinander erhalten.
