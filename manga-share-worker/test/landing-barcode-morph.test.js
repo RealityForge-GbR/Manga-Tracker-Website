@@ -60,7 +60,7 @@ test("every actual barcode stripe survives into one of six non-overlapping shelf
       assert.equal(reconstructed[cursor], "0", "a stripe module must not be duplicated between morph groups");
       reconstructed[cursor] = "1";
     }
-    assert.equal(104 + volume.drop + volume.height, 348, "book bottoms meet the actual shelf surface");
+    assert.equal(64 + volume.drop + volume.height, 468, "book bottoms meet the actual shelf surface");
     assert.ok(Math.abs(volume.startX + volume.shift - volume.targetX) < 0.00001);
     if (index) assert.ok(volume.targetX - BARCODE_MORPH_VOLUMES[index - 1].targetX >= 37, "rendered book pages must not overlap the adjacent spine");
   }

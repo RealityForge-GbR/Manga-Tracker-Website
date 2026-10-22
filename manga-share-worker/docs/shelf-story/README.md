@@ -272,6 +272,17 @@ Barcode und Buchrücken verfälschen.
 Das Brett hat eine parallele Vorderkante sowie eine nach rechts oben laufende
 Tiefe (14/−10), passend zu den Seitenflächen der Bücher (7/−5). Seine Oberseite,
 Vorderkante und rechte Stirnfläche bilden einen zusammenhängenden Körper.
-Die vorderen Buchunterkanten landen weiterhin exakt auf y=348; die hinteren
+Die vorderen Buchunterkanten landen weiterhin exakt auf y=468; die hinteren
 Kanten liegen auf derselben Brettfläche. Der frühere symmetrische Trapezwinkel
 entfällt. Ablauf, Landung, Barcode und Pausensteuerung bleiben unverändert.
+
+
+### Mehr Fallhöhe und bleibendes Barcode-Etikett
+
+Das helle Barcode-Etikett einschließlich seiner ISBN bleibt während des ganzen
+Durchlaufs sichtbar. Nur seine schwarzen Streifen werden zu Büchern. Der Barcode
+beginnt nun bei y=64 statt 104; das Brett steht bei y=468 statt 348. Die Bühne
+ist entsprechend 540 statt 420 Einheiten hoch, ohne die Bücher zu verkleinern.
+So endet das Etikett oberhalb der gelandeten Bücher und der Fallweg wächst um
+160 Einheiten. Für den längeren Fall bleibt etwas mehr Zeit; das sanfte Nachfedern
+und die gemeinsame Pausensteuerung bleiben erhalten.
