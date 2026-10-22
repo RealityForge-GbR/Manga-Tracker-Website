@@ -328,3 +328,19 @@ Desktop aktiv. Auf Tablets folgen Telefon und Texte im Zweispaltenraster, die
 bis zu 560 Pixel breite Scan-Animation darunter. Auf Handys folgt alles in einer
 Spalte; die volle Breite bleibt abzüglich der äußeren Abstände verfügbar.
 Es gibt weder zusätzliche Resize-Listener noch neue Animationsberechnungen.
+
+
+### Ruhigere Größen und gemeinsame Kanten (aktuelle Anpassung)
+
+Die vorherige starke, unbegrenzte Vergrößerung ist zurückgenommen. Der Abschnitt
+bleibt responsiv, hat jedoch höchstens 1560 Pixel Gesamtbreite und großzügigere
+Spaltenabstände von 36 bis 84 Pixeln. Überschriften sind auf 34 Pixel und Fließtext
+auf 17 Pixel begrenzt. Die diagonalen Einzelversätze entfallen gemäß der neuen
+Nutzerkorrektur zugunsten einer gemeinsamen oberen und unteren Linie.
+
+Desktop verwendet eine gemeinsame Spaltenhöhe von 520 bis 620 Pixeln. Telefon,
+Texte und die ganze Barcode-/Regalszene richten sich daran aus. Die perspektivische
+Telefonhöhe ist durch konkrete Gehäusemaße begrenzt; der echte Screenshot wird
+unverändert und ohne Verzerrung in das Gehäuse eingepasst. Überschrift und weißes
+Etikett beginnen oben, letzter Absatz und Bildunterschrift schließen unten ab.
+Tablet und Handy behalten ihren Lesefluss untereinander bzw. in zwei Spalten.

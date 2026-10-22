@@ -439,7 +439,7 @@ export async function handleRequest(request, env = {}, ctx = {}) {
     for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
     return asHead(request, new Response(asset.body, { status: asset.status, headers }));
   }
-  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900", DEFAULT_API_BASE, LANDING_MOTION_SCRIPT), "landing-41");
+  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900", DEFAULT_API_BASE, LANDING_MOTION_SCRIPT), "landing-42");
   const match = /^\/manga\/([^/]+)\/?$/.exec(url.pathname);
   if (!match || !isValidIsbn13(match[1])) return cached(request, ctx, async () => htmlResponse(renderStatePage(404, "Manga nicht gefunden", "Diese Manga-Seite ist nicht verfügbar. Prüfe den Link oder öffne Manga Tracker.", siteOrigin), 404, "public, max-age=30, s-maxage=120"));
   const isbn = match[1];

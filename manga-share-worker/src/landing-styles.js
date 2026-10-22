@@ -1,3 +1,4 @@
+import { LANDING_ACHIEVEMENT_STYLES } from "./landing-achievement-styles.js";
 import { LANDING_BARCODE_MORPH_STYLES } from "./landing-barcode-morph-styles.js";
 import { LANDING_PLANNING_DETAILS_STYLES } from "./landing-planning-details-styles.js";
 import { LANDING_SHELF_DIVIDER_STYLES } from "./landing-shelf-divider-styles.js";
@@ -962,6 +963,7 @@ ${LANDING_SCAN_STYLES}
 ${LANDING_SHARE_STYLES}
 ${LANDING_PRIVACY_STYLES}
 ${LANDING_APP_SHOWCASE_STYLES}
+${LANDING_ACHIEVEMENT_STYLES}
 ${LANDING_PLANNING_DETAILS_STYLES}
 ${LANDING_BARCODE_MORPH_STYLES}
 ${LANDING_SHELF_DIVIDER_STYLES}

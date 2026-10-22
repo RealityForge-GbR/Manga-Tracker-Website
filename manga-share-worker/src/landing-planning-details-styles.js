@@ -1,12 +1,12 @@
 export const LANDING_PLANNING_DETAILS_STYLES = `
 .planning.section {padding-bottom:52px}
 .budget-details.wrap {
-  width:calc(100% - clamp(40px,8vw,224px));
+  width:min(1560px,calc(100% - clamp(64px,10vw,240px)));
   container-type:inline-size;
   display:grid;
-  grid-template-columns:minmax(220px,.74fr) minmax(300px,1.05fr) minmax(300px,1.02fr);
-  align-items:center;
-  gap:clamp(22px,1.8vw,56px);
+  grid-template-columns:minmax(260px,.72fr) minmax(280px,1.08fr) minmax(280px,1fr);
+  align-items:stretch;
+  gap:clamp(36px,4vw,84px);
   margin-top:85px;
   max-width:none
 }
@@ -15,8 +15,8 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
   display:grid;
   place-items:center;
   min-width:0;
-  padding:18px 8px 30px;
-  perspective:max(1200px,100cqw);
+  padding:14px 8px;
+  perspective:1200px;
   isolation:isolate
 }
 .budget-device-scene::before {
@@ -30,7 +30,7 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
 }
 .budget-device {
   position:relative;
-  width:100%;
+  width:280px;
   max-width:100%;
   padding:20px 7px 19px;
   border:1px solid var(--muted);
@@ -46,12 +46,12 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
 .budget-device-camera {position:absolute;top:7px;left:calc(50% - 3px);width:6px;height:6px;border:1px solid var(--secondary);border-radius:50%;background:var(--bg)}
 .budget-device::before {content:"";position:absolute;left:-5px;top:88px;width:3px;height:58px;border-radius:2px 0 0 2px;background:var(--muted)}
 .budget-device::after {content:"";position:absolute;bottom:7px;left:39%;width:22%;height:2px;border-radius:2px;background:var(--muted);opacity:.7}
-.budget-explanations {display:flex;flex-direction:column;justify-content:space-between;gap:clamp(40px,3.3cqw,90px);min-height:max(460px,38.4cqw);padding-block:0;align-self:start}
+.budget-explanations {display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-height:0;padding-block:0}
 .budget-explanations article {max-width:none}
-.budget-explanations h3 {margin:0 0 18px;font-size:clamp(24px,2.5cqw,48px);line-height:1.15;letter-spacing:-.04em;font-weight:600;color:var(--text)}
-.budget-explanations p {margin:0 0 13px;font-size:clamp(15px,1.25cqw,22px);line-height:1.7;text-wrap:pretty}
+.budget-explanations h3 {margin:0 0 18px;font-size:clamp(26px,2.2cqw,34px);line-height:1.15;letter-spacing:-.04em;font-weight:600;color:var(--text)}
+.budget-explanations p {margin:0 0 13px;font-size:clamp(15px,1.1cqw,17px);line-height:1.7;text-wrap:pretty}
 .budget-explanations p:last-child {margin:0}
-.budget-scan-morph {min-width:0;align-self:start}
+.budget-scan-morph {min-width:0}
 .budget-scan-morph .barcode-morph {max-width:none}
 .retained-preview {margin-block:0 60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted)}
 .retained-preview summary {width:fit-content;cursor:pointer;font-size:14px;line-height:1.6}
@@ -60,9 +60,13 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
 .retained-preview .phone {width:260px}
 .retained-preview figcaption {margin:0;max-width:500px;font-size:11px;line-height:1.6;text-align:center;color:var(--muted)}
 @media(min-width:1101px) {
-  .budget-details {--budget-rise:clamp(64px,7.2cqw,180px)}
-  .budget-device-scene {align-self:start;padding-top:calc(18px + var(--budget-rise))}
-  .budget-explanations {margin-top:calc(var(--budget-rise) * .5)}
+  .budget-details {--budget-panel-height:clamp(520px,38vw,620px)}
+  .budget-device-scene {height:var(--budget-panel-height);perspective:calc(var(--budget-panel-height) * 3.72 - 1080px)}
+  .budget-device {height:calc(var(--budget-panel-height) - 28px);width:calc((var(--budget-panel-height) - 28px) * .5);min-height:0;min-width:0}
+  .budget-device>img {height:100%;object-fit:contain}
+  .budget-scan-morph .barcode-morph {height:100%;display:flex;flex-direction:column;justify-content:space-between}
+  .budget-scan-morph .barcode-morph-scene {flex:none}
+  .budget-scan-morph .barcode-morph figcaption {margin:0}
 }
 @media(max-width:1100px) and (min-width:761px) {
   .budget-details.wrap {width:calc(100% - 64px);grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:30px 40px;margin-top:65px}
