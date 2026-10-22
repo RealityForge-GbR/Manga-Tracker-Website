@@ -77,3 +77,22 @@ die horizontale Bildschirmmitte erreicht. Die Startzone wird aus der tatsächlic
 Viewporthöhe in Pixeln berechnet und vor dem Start bei Größenänderungen angepasst.
 Nach dem ersten Start gilt die normale Sichtbarkeitspause. Das Schloss bleibt
 nach dem Schließen dauerhaft zu. Der Start benötigt keine Scroll- oder Frame-Schleife.
+
+## Mobiler Teilen-Kreislauf und Schloss (22.10.2026)
+
+Die mobile Teilen-Karte verwendet drei Buchfarben in einem 12-Sekunden-Zyklus.
+Alle vier Sekunden startet ein Band; der nächste ist links bereits sichtbar,
+während rechts ein gelieferter Band liegen bleibt. Ein quintischer Verlauf
+liefert stetige Geschwindigkeit beim Abflug und bei der Ankunft. Sichtbare
+Bücher springen nicht an den Anfang zurück; die Rücksetzung erfolgt nur bei
+vollständiger Transparenz. Kettensymbol und gepunkteter Pfad wurden entfernt.
+Vier Geometrie- und Übergabeprüfungen sichern Kontinuität, Überlappung,
+Zeichnungsgrenzen und den nahtlosen Zyklus. Pausen und reduzierte Bewegung
+verwenden weiterhin den vorhandenen Karten-Controller.
+
+Das mobile Schloss verwendet weiterhin denselben einmaligen Start an der
+Bildschirmmitte und denselben Abschluss-Controller. Die Bewegung beginnt ohne
+die vorherige anfängliche Haltephase und schließt über 3,6 Sekunden langsam.
+Die Akzentfarbe erscheint erst beim Einrasten. Bei erneuter Sichtbarkeit bleibt
+das Schloss geschlossen. Ab 761 Pixeln bleibt die bisherige 4,8-Sekunden-CSS-
+Animation unverändert. Der Budgetbereich wurde in dieser Änderung nicht geändert.

@@ -1,3 +1,4 @@
+import { LANDING_MOBILE_LOCK_STYLES } from "./landing-mobile-lock-styles.js";
 import { LANDING_MOBILE_SHARE_STYLES } from "./landing-mobile-share-scene.js";
 import { LANDING_MOBILE_LAYOUT_STYLES } from "./landing-mobile-layout-styles.js";
 import { LANDING_BUDGET_MOBILE_STYLES } from "./landing-budget-mobile-styles.js";
@@ -968,6 +969,7 @@ ${LANDING_SHELF_DIVIDER_STYLES}
 ${LANDING_RESPONSIVE_STYLES}
 ${LANDING_MOBILE_SHARE_STYLES}
 ${LANDING_MOBILE_LAYOUT_STYLES}
+${LANDING_MOBILE_LOCK_STYLES}
 ${LANDING_BUDGET_MOBILE_STYLES}
 @media(prefers-reduced-motion:reduce) {
   :root {
