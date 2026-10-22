@@ -35,7 +35,7 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
   border-radius:31px;
   background:linear-gradient(112deg,var(--muted),var(--secondary) 4%,var(--bg) 12%,var(--elevated) 93%,var(--muted));
   box-shadow:inset 2px 0 1px var(--text),inset -1px 0 1px var(--bordeaux),-5px 3px 0 -3px var(--bordeaux),-9px 5px 0 -5px var(--contrast),-16px 25px 38px var(--bg);
-  transform:rotateY(18deg) rotateZ(3deg);
+  transform:rotateZ(4deg);
   transform-style:preserve-3d
 }
 .budget-device-back {position:absolute;inset:-1px;border:1px solid var(--muted);border-radius:32px;background:var(--contrast);transform:translateZ(-8px)}

@@ -220,10 +220,9 @@ neue Endlosschleife.
 
 ## Buchkörper, Funken und Blickrichtung
 
-Das Budget-Handy wendet seine Bildschirmfläche rechts zum Erklärungstext.
-Ein nach hinten versetztes Gehäuse, ein passender linker Seitenrand und
-umgesetzte Lichtkanten machen die Tiefe sichtbar; der Original-Screenshot
-bleibt unverändert.
+Das Budget-Handy zeigt seine Bildschirmfläche frontal und ist nur um vier
+Grad auf der Z-Achse nach rechts gedreht. X- und Y-Achse sind ungedreht;
+Gehäuse und Original-Screenshot bleiben erhalten.
 
 Der durchgehende Regaltrenner zeigt beim Herausziehen vollständige Buchkörper
 mit dekorativen, eigens gestalteten Covern, Buchrücken und hellen Seiten.
@@ -266,3 +265,13 @@ Controller pausiert außerhalb des sichtbaren Bereichs und im verborgenen Tab.
 Bei reduzierter Bewegung oder fehlenden Browser-Funktionen bleibt das fertige
 Regal stehen. Die lokalen SVG-Regeln verhindern, dass globale Symbol-Umrisse
 Barcode und Buchrücken verfälschen.
+
+
+### Regalbrett in der Buchperspektive
+
+Das Brett hat eine parallele Vorderkante sowie eine nach rechts oben laufende
+Tiefe (14/−10), passend zu den Seitenflächen der Bücher (7/−5). Seine Oberseite,
+Vorderkante und rechte Stirnfläche bilden einen zusammenhängenden Körper.
+Die vorderen Buchunterkanten landen weiterhin exakt auf y=348; die hinteren
+Kanten liegen auf derselben Brettfläche. Der frühere symmetrische Trapezwinkel
+entfällt. Ablauf, Landung, Barcode und Pausensteuerung bleiben unverändert.
