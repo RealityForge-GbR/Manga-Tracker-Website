@@ -6,7 +6,7 @@ export const LANDING_HERO_FLOAT_SCRIPT = String.raw`(() => {
   let viewport;
   let preference;
   try {
-    viewport = window.matchMedia?.("(min-width: 761px)");
+    viewport = window.matchMedia?.("(min-width: 761px) and (min-height: 501px), (min-width: 1051px)");
     preference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   } catch {}
   let visible = false;

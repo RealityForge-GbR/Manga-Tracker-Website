@@ -7,7 +7,7 @@ export const LANDING_MOBILE_PARALLAX_SCRIPT = String.raw`(() => {
   let viewport;
   let preference;
   try {
-    viewport = window.matchMedia?.("(max-width: 760px)");
+    viewport = window.matchMedia?.("(max-width: 760px), (max-width: 1050px) and (max-height: 500px) and (orientation: landscape)");
     preference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   } catch {}
   let visible = false;

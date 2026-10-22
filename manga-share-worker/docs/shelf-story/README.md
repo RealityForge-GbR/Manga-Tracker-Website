@@ -62,37 +62,44 @@ Keine Sensorfreigabe, neue Bibliothek, Videodatei oder JavaScript-Bildschleife.
 
 ## Budget-Stapel
 
-Der Budget-Abschnitt ist ein durchgehendes, farblich abgesetztes Band in
-Sekundärhintergrund (#342735). Am Desktop ist er rund 420 statt zuvor 350 Pixel
-hoch, mobil rund 434 statt 362 Pixel: jeweils etwa 20 Prozent mehr. Die
-Buchbreite steigt am Desktop von 132 auf 190 Pixel. Paket, Monatsbudget und
-Sammlungswert stehen auch auf dem Handy von links nach rechts. Die echten
+Der Budget-Abschnitt ist ein farblich abgesetztes Band in Sekundärhintergrund
+(#342735), etwa 420 Pixel hoch am Desktop und 434 Pixel auf dem Handy. Ein
+separater Hintergrund wird um -1,4 Grad geschert: Beide Kanten steigen dezent
+nach rechts, während Text und Illustrationen aufrecht bleiben. Paket,
+Monatsbudget und Sammlungswert stehen von links nach rechts. Die echten
 App-Aufnahmen folgen separat.
 
-Die Stapelbewegung orientiert sich an der isometrischen Turmidee von „Stack“
-(Ketchapp, https://play.google.com/store/apps/details?id=com.ketchapp.stack),
-mit eigenen nativ gezeichneten Büchern. Es werden keine Spielgrafiken übernommen.
-Das Paket öffnet seine vier Klappen. Bücher steigen nacheinander aus der Öffnung,
-fliegen hinter einer runden Budgetanzeige hindurch und landen von oben auf dem
-Stapel. Hinter- und Vorderseite des Pakets liegen auf getrennten Ebenen, damit
-Bücher beim Austreten und bei der Rückkehr von den vorderen Flächen verdeckt
-werden. Der roséfarbene Ring der Budgetanzeige leert sich bei jedem Kauf. Beim Landen rutschen die älteren Bände nach unten und verschwinden am
-Bildrand. Die Zeichnung enthält keine erfundene App-Oberfläche.
+Die Stapelidee orientiert sich an „Stack“ (Ketchapp,
+https://play.google.com/store/apps/details?id=com.ketchapp.stack), mit eigenen
+nativ gezeichneten Büchern. Die Buchbreite ist am Desktop 190 Pixel. Es werden
+keine Spielgrafiken oder erfundenen App-Screenshots verwendet.
 
-Das Beispiel beginnt mit 100 Euro Monatsbudget und acht vorhandenen Bänden im
-Wert von 80 Euro. Zehn Käufe zu je 10 Euro lassen den Wert auf 180 Euro / 18 Bände
-steigen. Am Budget wird abgebucht, erst bei Ankunft wird der Sammlungswert erhöht.
-Bei null Euro wird der nächste Band an der Budgetanzeige aufgehalten. Er kehrt
-wieder um und verschwindet zurück im Paket. Budget und Sammlung bleiben dabei
-unverändert und anschließend stehen. Ein kleines Schloss kennzeichnet die
-Sperre. Es gibt keinen Verkauf, Erlös oder unbemerkten Budget-Neustart.
+Das Paket öffnet seine vier Klappen. Jedes Buch bleibt zuerst mittig über der
+Öffnung, wird senkrecht angehoben und wächst erst oberhalb der Klappen auf seine
+volle Größe. Die Höhe wird aus Paketposition, Paket- und Buchgröße berechnet.
+Erst danach beginnt die seitliche Bewegung. Beim Rückflug läuft dieselbe
+Bewegung umgekehrt: zunächst über die Öffnung, dann senkrecht hinein. Die
+Paketvorderseite verdeckt dabei das Buch. So bewegt es sich nicht durch eine
+Seitenwand. Der weiße Paketaufkleber und beide Routenpfeile entfallen.
+
+Eine dunkle Wallet-Karte zeigt den Betrag und drei roséfarbene Markierungen,
+die sich bei den Käufen einzeln abdunkeln. Das Beispiel beginnt mit 30 Euro
+Monatsbudget und acht vorhandenen Bänden im Wert von 80 Euro. Genau drei Käufe
+zu je 10 Euro lassen den Wert auf 110 Euro / elf Bände steigen. Am Budget wird
+abgebucht, erst bei Ankunft wird der Sammlungswert erhöht.
+
+Der erfolgreiche Flug dauert 2,2 Sekunden; die Abbuchung erfolgt bei 60 Prozent.
+Bei null Euro versucht das nächste Buch zweimal, die Budgetgrenze zu passieren.
+Es federt dazwischen zurück, löst zwei kurze Fehlermarkierungen aus und kehrt
+anschließend vollständig ins Paket zurück. Dieser Ablauf dauert 3,8 Sekunden.
+Budget und Sammlung bleiben dabei unverändert und anschließend stehen. Es gibt
+keinen Verkauf, Erlös oder unbemerkten Budget-Neustart.
 
 Die sichtbaren Beschriftungen „Shop“, „10 € pro Band“, „Budget aufgebraucht“ und
-die Bandanzahl entfallen. Monatsbudget und Sammlungswert bleiben beschriftet.
+die Bandanzahl bleiben entfernt. Monatsbudget und Sammlungswert sind beschriftet.
 
-Die Bewegung dauert etwa 18,8 Sekunden, davon 2,4 Sekunden für den abgewiesenen
-Band und seinen Rückflug. Sie benötigt nur einen Milestone-Timer.
-CSS animiert Transformationen und Transparenz. 18 vorbereitete Buchlagen halten
+Der gesamte Ablauf dauert 11,86 Sekunden und benötigt nur einen Milestone-Timer.
+CSS animiert Transformationen und Transparenz. Elf vorbereitete Buchlagen halten
 die Anzahl der Elemente begrenzt; der Stapel wächst optisch aus dem Bild.
 Außerhalb des Sichtbereichs oder bei verborgenem Tab pausieren Zeit und Bewegung
 gemeinsam. Reduzierte Bewegung oder fehlende Browserfunktionen zeigen das

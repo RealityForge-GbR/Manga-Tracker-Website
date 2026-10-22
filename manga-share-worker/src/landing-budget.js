@@ -6,22 +6,22 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
   const valueText = root.querySelector("[data-cycle-value]");
   const countText = root.querySelector("[data-cycle-count]");
   if (!budgetText || !valueText || !countText) return;
-  const START_BUDGET = 10000;
+  const START_BUDGET = 3000;
   const PRICE = 1000;
   const BASE_VALUE = 8000;
   const BASE_COUNT = 8;
   const PURCHASES = START_BUDGET / PRICE;
   const COVER_COLORS = ["#D7A0AF", "#F7EEE8", "#C2B3B8", "#5A3948", "#D7A0AF", "#342735"];
   const money = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-  const stages = [{ name: "initial", duration: 600, action: "reset" }];
+  const stages = [{ name: "initial", duration: 800, action: "reset" }];
   for (let purchase = 0; purchase < PURCHASES; purchase += 1) {
     stages.push(
-      { name: "purchase", duration: 560 },
-      { name: "purchase", duration: 840, action: "debit" },
-      { name: "landed", duration: 180, action: "arrive" }
+      { name: "purchase", duration: 1320 },
+      { name: "purchase", duration: 880, action: "debit" },
+      { name: "landed", duration: 220, action: "arrive" }
     );
   }
-  stages.push({ name: "blocked", duration: 2400 }, { name: "complete", duration: 0 });
+  stages.push({ name: "blocked", duration: 3800 }, { name: "complete", duration: 0 });
   const now = () => typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : Date.now();
   let reduced;
   try { reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)"); } catch {}
