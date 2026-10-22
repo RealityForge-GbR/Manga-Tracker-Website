@@ -24,7 +24,7 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
   .budget-explanations article:nth-child(3) {order:3;margin-top:32px}
   .budget-scan-morph {order:4;width:min(100%,330px);max-width:330px;margin-top:4px}
   .budget-scan-morph .barcode-morph {width:100%;max-width:330px}
-  .budget-scan-morph .barcode-morph figcaption {margin:-10px 0 0;font-size:15px}
+  .budget-scan-morph .barcode-morph figcaption {display:none}
   .budget-explanations article:nth-child(2) {display:none}
   .budget-explanations h3 {font-size:clamp(25px,6.8vw,31px);line-height:1.17;margin-bottom:16px;text-wrap:balance}
   .budget-explanations p {font-size:15px;line-height:1.65;margin-bottom:12px;text-wrap:pretty}
