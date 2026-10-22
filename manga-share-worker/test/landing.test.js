@@ -115,7 +115,7 @@ test("homepage bypasses former cached landing without changing detail cache name
   globalThis.caches = { default: { async match(key) { keys.push(key.url); return undefined; }, async put() {} } };
   try {
     await handleRequest(new Request("https://mangatracker.de/?campaign=test"));
-    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-48/"]);
+    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-49/"]);
   } finally {
     if (previous === undefined) delete globalThis.caches; else globalThis.caches = previous;
   }

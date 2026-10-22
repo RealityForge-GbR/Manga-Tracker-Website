@@ -45,14 +45,15 @@ export const LANDING_RESPONSIVE_STYLES = `
 }
 @media(min-width:1101px) {
   .hero {grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(32px,3vw,64px)}
-  .hero h1 {max-width:clamp(380px,28vw,560px);font-size:clamp(32px,min(3.2vw,4.8vh),52px);line-height:1.18;margin-bottom:clamp(24px,3vh,40px);text-wrap:balance}
-  .hero .store-download {min-height:clamp(66px,min(5.2vw,7.8vh),92px);padding:14px clamp(22px,2vw,36px);gap:clamp(12px,1vw,16px)}
-  .hero .store-download>svg {width:clamp(24px,1.5vw,30px);height:clamp(24px,1.5vw,30px)}
-  .hero .store-label strong {font-size:clamp(15px,min(1.1vw,1.6vh),19px)}
-  .hero .store-label small {font-size:clamp(12px,min(.8vw,1.2vh),14px)}
-  .hero-benefits {font-size:clamp(14px,min(1vw,1.6vh),18px);gap:clamp(8px,.8vh,12px);margin-top:clamp(22px,2.5vh,32px)}
-  .hero-benefits li {padding-left:clamp(23px,1.7vw,29px)}
-  .hero-benefits li::before {width:clamp(6px,.45vw,8px);height:clamp(10px,.7vw,13px)}
+  .hero-copy {container-type:inline-size}
+  .hero h1 {width:100%;max-width:640px;font-size:clamp(32px,min(3.9vw,5.9vh,10.4cqw),64px);line-height:1.16;margin-bottom:clamp(24px,3.2vh,44px);text-wrap:balance}
+  .hero .store-download {min-height:clamp(70px,min(6.5vw,9.8vh),112px);padding:16px clamp(26px,2.4vw,46px);gap:clamp(14px,1.2vw,20px)}
+  .hero .store-download>svg {width:clamp(26px,1.8vw,36px);height:clamp(26px,1.8vw,36px)}
+  .hero .store-label strong {font-size:clamp(17px,min(1.35vw,2vh),23px)}
+  .hero .store-label small {font-size:clamp(13px,min(.95vw,1.4vh),16px)}
+  .hero-benefits {font-size:clamp(15px,min(1.25vw,2vh),22px);gap:clamp(9px,1.2vh,16px);margin-top:clamp(24px,3vh,38px)}
+  .hero-benefits li {padding-left:clamp(25px,2vw,35px)}
+  .hero-benefits li::before {width:clamp(7px,.5vw,10px);height:clamp(11px,.85vw,16px)}
   .hero-back-rig {left:calc(44% - var(--hero-back-width) * .9)}
   .hero-front-rig {left:calc(44% - var(--hero-front-width) * .18)}
 }

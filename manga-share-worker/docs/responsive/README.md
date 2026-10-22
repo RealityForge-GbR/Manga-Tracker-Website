@@ -35,7 +35,7 @@ Hero, Budgetgrafik und Erklärungen, Featurekarten sowie Datenschutz und Downloa
 Das gemeinsame Seitenraster war bereits live. Im Hero blieb auf großen Monitoren
 jedoch ein großer Abstand zwischen dem auf 380 Pixel begrenzten Text und den
 Telefonen. Ab 1101 Pixeln nutzt der Text nun eine ausgewogen umbrochene Breite
-von 380–560 Pixeln und eine Schriftgröße von 32–52 Pixeln. Die Größe reagiert
+von 380–640 Pixeln und eine Schriftgröße von 32–64 Pixeln. Die Größe reagiert
 auf Breite und Höhe des Bildschirms. CTA, Buttontext, Symbol und Kurzvorteile
 wachsen gemeinsam mit. Das Geräte-Duo steht näher am Text; seine bisherigen
 Größenobergrenzen bleiben bestehen. Auf Tablets erhalten Titel und CTA eine
@@ -61,3 +61,9 @@ Geprüft auf 16 Viewports von 390×844 bis 3440×1440, darunter 1920×800,
 1600×1200 und 1280×634 für verschiedene Seitenverhältnisse. Titel, CTA und
 Häkchen passen ohne Überlauf in den Einstieg; die gemeinsame linke Außenkante
 bleibt bestehen. 145 Tests und Produktions-Dry-Run erfolgreich.
+
+Auf weiteren Nutzerwunsch ist die linke Gruppe auf großen Desktops nochmals
+deutlich größer: im 1920×1080-Beispiel knapp 64 Pixel Titelgröße, etwa
+106 Pixel Buttonhöhe und knapp 22 Pixel für die Häkchenzeilen. Die tatsächliche
+Spaltenbreite begrenzt die Überschrift zusätzlich über einen Inline-Container.
+Niedrige Laptopansichten behalten eine kompakte, vollständig sichtbare Gruppe.
