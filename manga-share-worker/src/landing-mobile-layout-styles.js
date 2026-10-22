@@ -1,5 +1,6 @@
 // Mobile has its own reading order and scene sizes; desktop/tablet stay on their shared grid.
 export const LANDING_MOBILE_LAYOUT_STYLES = `
+.showcase-mobile-only {display:none}
 @media(max-width:760px) {
   .header.wrap {justify-content:center}
   .hero.wrap h1 {justify-self:center;text-align:center;max-width:370px;text-wrap:balance}
@@ -24,7 +25,7 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
   .budget-scan-morph {order:4;width:min(100%,330px);max-width:330px;margin-top:4px}
   .budget-scan-morph .barcode-morph {width:100%;max-width:330px}
   .budget-scan-morph .barcode-morph figcaption {margin:-10px 0 0;font-size:15px}
-  .budget-explanations article:nth-child(2) {order:5;margin-top:30px;padding-block:30px;border-block:1px solid var(--line)}
+  .budget-explanations article:nth-child(2) {display:none}
   .budget-explanations h3 {font-size:clamp(25px,6.8vw,31px);line-height:1.17;margin-bottom:16px;text-wrap:balance}
   .budget-explanations p {font-size:15px;line-height:1.65;margin-bottom:12px;text-wrap:pretty}
 
@@ -37,19 +38,51 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
     padding:0;
     scroll-snap-type:none
   }
-  .showcase-card {width:100%;height:490px;min-width:0;border-radius:26px;scroll-snap-align:none}
-  .showcase-card-copy {padding:26px 20px 0}
-  .showcase-card h3 {font-size:clamp(23px,6.1vw,28px);line-height:1.16;margin-bottom:10px;text-wrap:balance}
-  .showcase-card p {max-width:29ch;font-size:14px;line-height:1.55;text-wrap:pretty}
-  .showcase-card::before {width:300px;height:300px;left:calc(50% - 150px);top:185px}
-  .showcase-device {width:174px;padding:12px 5px 12px;border-radius:24px;bottom:-6px}
-  .showcase-device>img {border-radius:16px}
-  .showcase-releases .showcase-device {bottom:-6px;transform:translateX(-50%) rotate(-3deg)}
-  .showcase-series .showcase-device {transform:translateX(-50%) rotate(3deg)}
-  .achievement-scene {inset:137px 14px 24px;gap:10px}
-  .achievement-artwork {width:78%;max-width:205px}
-  .achievement-caption>span {font-size:11px}
-  .achievement-caption>strong {font-size:21px}
+  .showcase-card {
+    --showcase-art-width:clamp(92px,26vw,132px);
+    display:grid;
+    grid-template-columns:minmax(0,1fr) var(--showcase-art-width);
+    align-items:center;
+    gap:clamp(12px,3.5vw,18px);
+    width:100%;height:auto;min-height:clamp(230px,60vw,310px);
+    padding:clamp(16px,4.6vw,22px);
+    border-radius:24px;scroll-snap-align:none;overflow:visible
+  }
+  .showcase-card-copy {grid-column:1;grid-row:1;min-width:0;padding:0;text-align:center}
+  .showcase-card h3 {font-size:clamp(17px,4.9vw,22px);line-height:1.16;margin-bottom:12px;letter-spacing:-.04em;text-wrap:balance;hyphens:none}
+  .showcase-card p {max-width:26ch;font-size:clamp(13px,3.5vw,14px);line-height:1.55;text-wrap:pretty}
+  .showcase-card::before {width:auto;height:auto;inset:12px 8px 12px 50%;border-radius:50%}
+  .showcase-card .showcase-device {
+    position:relative;grid-column:2;grid-row:1;justify-self:center;
+    left:auto;bottom:auto;width:100%;max-width:100%;margin:0;
+    padding:9px 4px 9px;border-radius:19px;
+    transform:perspective(700px) rotateY(-6deg) rotateZ(-3deg);
+    transform-origin:center
+  }
+  .showcase-device>img {border-radius:12px}
+  .showcase-series .showcase-device {transform:perspective(700px) rotateY(6deg) rotateZ(3deg)}
+  .is-showcase-card-ready .showcase-device {animation:showcase-mobile-float 5.8s ease-in-out infinite both paused}
+  .showcase-series.is-showcase-card-ready .showcase-device {animation-name:showcase-mobile-float-reverse;animation-delay:-2.9s}
+  .is-showcase-card-playing .showcase-device {animation-play-state:running;will-change:transform}
+  .achievement-scene {
+    position:relative;inset:auto;grid-column:2;grid-row:1;
+    width:100%;height:calc(var(--showcase-art-width) * 2.2 + 10px);
+    gap:8px;margin:0;overflow:hidden
+  }
+  .achievement-artwork {width:calc(100% - 12px);max-width:none}
+  .achievement-caption {width:100%;gap:4px}
+  .achievement-caption>span {font-size:9px;line-height:1.3}
+  .achievement-caption>strong {font-size:clamp(13px,3.6vw,17px);line-height:1.2}
+  .showcase-sharing {--showcase-art-width:clamp(108px,34vw,148px);background:var(--contrast);border-color:var(--bordeaux)}
+  .showcase-sharing .mobile-share-scene {grid-column:2;grid-row:1;width:100%;height:calc(var(--showcase-art-width) * 1.6);max-width:none}
+  @keyframes showcase-mobile-float {
+    0%,100% {transform:perspective(700px) translateY(3px) rotateY(-6deg) rotateZ(-3deg)}
+    50% {transform:perspective(700px) translateY(-3px) rotateY(3deg) rotateZ(-1.5deg)}
+  }
+  @keyframes showcase-mobile-float-reverse {
+    0%,100% {transform:perspective(700px) translateY(-3px) rotateY(6deg) rotateZ(3deg)}
+    50% {transform:perspective(700px) translateY(3px) rotateY(-3deg) rotateZ(1.5deg)}
+  }
 
   .shelf-divider {--divider-height:84px;height:calc(var(--divider-height) + 40px);margin-top:10px}
   .trust.wrap {
@@ -71,10 +104,7 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
 }
 @media(max-width:359px) {
   .budget-details.wrap,.app-showcase.wrap,.trust.wrap {width:calc(100% - 32px)}
-  .showcase-card {height:480px}
-  .showcase-card-copy {padding-inline:18px}
-  .showcase-device {width:166px}
-  .achievement-scene {inset:143px 10px 22px}
+  .showcase-card {padding:14px;gap:12px}
   .budget-explanations h3 {font-size:25px}
 }
 `;

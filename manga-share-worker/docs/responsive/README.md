@@ -74,9 +74,9 @@ Bis einschließlich 760 Pixeln zentriert `landing-mobile-layout-styles.js` den
 Einstieg, die Erklärungstexte und den Datenschutzabschnitt. Der Hero bleibt
 exakt einen sichtbaren Bildschirm hoch. Der Budgettext steht vor dem kleineren
 Android-Mockup; die Sammlungserklärung steht vor der auf 330 Pixel begrenzten
-Barcode-Animation. Das Teilen wird als eigener kurzer Textblock gezeigt.
+Barcode-Animation. Das Teilen steht mobil als vierte Featurekarte unter den drei bisherigen Funktionen.
 
-Die drei Funktionen stehen als 480–490 Pixel hohe Karten untereinander.
+Die vier Funktionen stehen als kompakte Karten mit Text links und vollständigem Motiv rechts untereinander.
 Horizontaler Swipe ist auf Mobile nicht mehr nötig. Die originalen Screenshots
 und das originale Collector-Arc-Artwork werden wiederverwendet. Dessen Start
 an der Bildschirmmitte sowie der spätere, einmalige Schlossverschluss bleiben
@@ -100,3 +100,28 @@ Die gemessenen Desktop-Größen bei 1920×1080 sind unverändert. Auch Breite,
 Höhe, Schrift und Abstände des Community-Kastens bei 390×844 stimmen überein.
 16 neue Geometrieprüfungen decken Flugbahn, Debit-Milestone, zwei Rückstöße,
 senkrechte Rückgabe, geschützte Wertanzeige und stetige Geschwindigkeit ab.
+
+### Kompakte animierte Featurekarten
+
+Die Karten verwenden auf Mobile normalen Gridfluss statt absolut positionierter,
+am unteren Rand abgeschnittener Handys. Ihre Höhe wächst mit dem Text.
+Bei 390 Pixeln Bildschirmbreite liegen die vier Höhen bei rund 240, 271, 240
+und 250 Pixeln, statt zuvor 490 Pixeln pro Karte. Bei 320 Pixeln sind sie
+230–242 Pixel hoch. Handys, Achievement-Artwork und Beschriftungen passen
+vollständig hinein; bei 320, 360, 390, 430, 600 und 760 Pixeln wurden alle
+Motivgrenzen und Textbreiten im Browser geprüft.
+
+Die zwei echten App-Mockups schweben mit ±3 Pixeln Bewegung und sanfter
+Drehung. Collector Arc behält seine originale Sakura-Freischaltung samt
+Start an der Bildschirmmitte. Die neue vierte Karte zeigt schematisch einen
+Manga, der über einen Link zwischen zwei Handys geteilt wird; die Grafik
+gibt keinen erfundenen App-Screenshot aus. Der separate Teilen-Text beim
+Budget bleibt auf Desktop sichtbar und wird nur mobil in die Karte verlagert.
+
+Ein gemeinsamer IntersectionObserver pausiert die neue Kartenbewegung außerhalb
+des Bildschirms, in versteckten Tabs und bei reduzierter Bewegung. Kein
+Browser-Frame-Loop und keine neue Bibliothek. Acht Verhaltenstests prüfen
+unter anderem Bildladefehler, Präferenz- und Breakpointwechsel, Teilbatches
+der Sichtbarkeitsmeldungen, die vierte Karte und den minifizierten Controller.
+Die gemessene Desktopgeometrie bleibt innerhalb von 0,001 Pixeln gleich;
+die vierte Karte ist dort ausgeblendet und die neue Bewegung inaktiv.
