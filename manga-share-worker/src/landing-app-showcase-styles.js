@@ -1,6 +1,5 @@
 export const LANDING_APP_SHOWCASE_STYLES = `
-.app-showcase {margin-block:110px 90px;scroll-margin-top:45px}
-.app-showcase>h2 {max-width:840px;margin:0 auto 44px;text-align:center;font-size:clamp(36px,4.4vw,58px);font-weight:600;line-height:1.1;letter-spacing:-.05em;color:var(--text)}
+.app-showcase {margin-block:40px 70px;scroll-margin-top:45px}
 .showcase-gallery {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;outline-offset:7px}
 .showcase-gallery:focus-visible {outline:2px solid var(--rose);border-radius:8px}
 .showcase-card {position:relative;isolation:isolate;height:650px;min-width:0;overflow:hidden;border:1px solid var(--secondary);border-radius:30px;background:var(--surface)}
@@ -8,9 +7,9 @@ export const LANDING_APP_SHOWCASE_STYLES = `
 .showcase-releases {background:var(--secondary);border-color:var(--bordeaux)}
 .showcase-releases::before {background:var(--rose);opacity:.12;top:245px}
 .showcase-series::before {width:360px;height:360px;left:calc(50% - 180px);top:235px;background:var(--elevated);opacity:1}
-.showcase-card-copy {position:relative;z-index:2;padding:35px 31px 0}
+.showcase-card-copy {position:relative;z-index:2;padding:35px 31px 0;text-align:center}
 .showcase-card h3 {margin:0 0 12px;font-size:29px;font-weight:600;letter-spacing:-.045em;line-height:1.15;color:var(--text)}
-.showcase-card p {max-width:285px;margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
+.showcase-card p {max-width:285px;margin:0 auto;font-size:15px;line-height:1.6;color:var(--muted)}
 .showcase-device {position:absolute;left:50%;bottom:-54px;width:252px;max-width:none;margin:0;padding:17px 7px 16px;border:1px solid var(--muted);border-radius:30px;background:linear-gradient(112deg,var(--muted),var(--secondary) 5%,var(--bg) 14%,var(--elevated) 94%,var(--muted));box-shadow:inset 2px 0 1px var(--secondary),inset -1px 0 1px var(--text),6px 9px 0 -5px var(--contrast),0 24px 40px #17121790;transform:translateX(-50%);transform-origin:50% 70%}
 .showcase-device::before {content:"";position:absolute;left:calc(50% - 2px);top:6px;width:5px;height:5px;border:1px solid var(--secondary);border-radius:50%;background:var(--bg)}
 .showcase-device::after {content:"";position:absolute;left:39%;bottom:6px;width:22%;height:2px;border-radius:2px;background:var(--muted);opacity:.65}
@@ -28,8 +27,7 @@ export const LANDING_APP_SHOWCASE_STYLES = `
   .showcase-card {flex:0 0 min(78vw,360px);height:630px;scroll-snap-align:start}
 }
 @media(max-width:760px) {
-  .app-showcase {margin-block:75px 55px}
-  .app-showcase>h2 {max-width:420px;margin-bottom:30px;font-size:clamp(31px,8vw,42px);line-height:1.13;text-align:left}
+  .app-showcase {margin-block:30px 40px}
   .showcase-gallery {gap:16px}
   .showcase-card {height:580px;border-radius:25px}
   .showcase-card-copy {padding:28px 24px 0}

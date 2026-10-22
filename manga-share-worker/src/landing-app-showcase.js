@@ -7,8 +7,7 @@ const views = [
 ];
 
 export const LANDING_APP_SHOWCASE = `
-<section id="app-ansichten" class="app-showcase wrap" aria-labelledby="showcase-title">
-  <h2 id="showcase-title">Ein Blick in Manga Tracker.</h2>
+<section id="app-ansichten" class="app-showcase wrap" aria-label="Funktionen von Manga Tracker">
   <div class="showcase-gallery" role="region" aria-label="Neuerscheinungen, Achievements und Reihen in Manga Tracker" tabindex="0">
     ${views.map((view) => `<article${view.id ? ` id="${view.id}"` : ""} class="showcase-card showcase-${view.pose}">
       <div class="showcase-card-copy"><h3>${view.title}</h3><p>${view.copy}</p></div>

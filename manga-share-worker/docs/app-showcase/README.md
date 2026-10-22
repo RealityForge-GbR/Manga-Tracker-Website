@@ -1,4 +1,4 @@
-# Ein Blick in Manga Tracker
+# Featurekarten
 
 Die drei Karten stehen in der vom Nutzer festgelegten Reihenfolge:
 
@@ -55,6 +55,14 @@ neuen Bilddateien, Fremd-Bibliotheken oder Netzwerkquellen zur Laufzeit.
 ## Entfernte Benachrichtigungsvorschau
 
 Die separate, aufklappbare Entwicklungsvorschau unter diesen drei Karten wurde
-am 22.10.2026 auf Nutzerwunsch entfernt. Unter den Karten folgt nun die Fußzeile.
+am 22.10.2026 auf Nutzerwunsch entfernt.
 Die originale Screenshotdatei und ihr Herkunftsnachweis bleiben unverändert.
 Die erste Karte trägt jetzt `id="entdecken"` als Ziel des bestehenden Menülinks.
+
+## Position und Textausrichtung
+
+Die drei Karten stehen direkt nach dem Budget-/Sammlungsblock und vor dem
+waagerechten Bücherabtrenner. Die bisherige sichtbare Abschnittsüberschrift
+entfällt; ein zugänglicher Abschnittsname bleibt erhalten. Titel und Kurztexte
+sind auf Desktop, Tablet und Handy horizontal zentriert. Die bestehende
+Touch-Galerie und die Achievement-Animation bleiben unverändert.
