@@ -1,3 +1,5 @@
+import { LANDING_MOBILE_LAYOUT_STYLES } from "./landing-mobile-layout-styles.js";
+import { LANDING_BUDGET_MOBILE_STYLES } from "./landing-budget-mobile-styles.js";
 import { LANDING_RESPONSIVE_STYLES } from "./landing-responsive-styles.js";
 import { LANDING_ACHIEVEMENT_STYLES } from "./landing-achievement-styles.js";
 import { LANDING_BARCODE_MORPH_STYLES } from "./landing-barcode-morph-styles.js";
@@ -963,6 +965,8 @@ ${LANDING_PLANNING_DETAILS_STYLES}
 ${LANDING_BARCODE_MORPH_STYLES}
 ${LANDING_SHELF_DIVIDER_STYLES}
 ${LANDING_RESPONSIVE_STYLES}
+${LANDING_MOBILE_LAYOUT_STYLES}
+${LANDING_BUDGET_MOBILE_STYLES}
 @media(prefers-reduced-motion:reduce) {
   :root {
     scroll-behavior:auto

@@ -1,5 +1,5 @@
 // One shared content grid for the active desktop and tablet sections.
-// Mobile keeps its existing full-viewport product scene and swipe gallery.
+// The separate mobile stylesheet owns its viewport scene and stacked feature cards.
 export const LANDING_RESPONSIVE_STYLES = `
 @media(min-width:761px) {
   :root {

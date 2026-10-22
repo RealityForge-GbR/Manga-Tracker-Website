@@ -13,7 +13,7 @@ eigene Größenobergrenzen, damit sie auf großen Monitoren lesbar bleiben.
 Auf Tablets stehen die drei Featurekarten nebeneinander; Schrift, Innenabstände,
 Mockups und die grafischen Budgetelemente passen sich an. Die Budgetdetails
 bleiben bis 1100 Pixeln zweispaltig mit Barcode darunter. Mobil bis 760 Pixeln
-bleiben der eigene Hero und die native horizontale Kartengalerie erhalten.
+nutzen der eigene Hero und die Featurekarten den unten beschriebenen mobilen Aufbau.
 Auch der eigene Hero-Modus für kleine Querformat-Displays bleibt bestehen.
 
 Die Anpassung betrifft Layout und Größen. Animationsabläufe, Originalbilder,
@@ -67,3 +67,36 @@ deutlich größer: im 1920×1080-Beispiel knapp 64 Pixel Titelgröße, etwa
 106 Pixel Buttonhöhe und knapp 22 Pixel für die Häkchenzeilen. Die tatsächliche
 Spaltenbreite begrenzt die Überschrift zusätzlich über einen Inline-Container.
 Niedrige Laptopansichten behalten eine kompakte, vollständig sichtbare Gruppe.
+
+## Eigener mobiler Aufbau (22.10.2026)
+
+Bis einschließlich 760 Pixeln zentriert `landing-mobile-layout-styles.js` den
+Einstieg, die Erklärungstexte und den Datenschutzabschnitt. Der Hero bleibt
+exakt einen sichtbaren Bildschirm hoch. Der Budgettext steht vor dem kleineren
+Android-Mockup; die Sammlungserklärung steht vor der auf 330 Pixel begrenzten
+Barcode-Animation. Das Teilen wird als eigener kurzer Textblock gezeigt.
+
+Die drei Funktionen stehen als 480–490 Pixel hohe Karten untereinander.
+Horizontaler Swipe ist auf Mobile nicht mehr nötig. Die originalen Screenshots
+und das originale Collector-Arc-Artwork werden wiederverwendet. Dessen Start
+an der Bildschirmmitte sowie der spätere, einmalige Schlossverschluss bleiben
+erhalten. Community-Kasten, Katzenanimation und Desktop-/Tablet-Regeln wurden
+nicht umgestaltet.
+
+Die mobile Budget-Szene besitzt eine eigene Geometrie: Wallet oben mittig,
+Paket links darunter, Sammlung rechts darunter. Ein Buch steigt senkrecht
+aus dem Paket und fliegt auf einer gebogenen Bahn hinter der Wallet zur
+Sammlung. Der dritte Band wird zweimal abgewiesen und senkrecht zurückgelegt.
+Budget, Wertanzeige und Abbuchung liegen außerhalb der sichtbaren Flugbahn.
+Der bestehende Controller führt weiterhin genau zwei Käufe aus (20 → 10 → 0 €).
+Die zusätzlichen CSS-Keyframes werden serverseitig erzeugt; es gibt keinen
+neuen Animationsloop im Browser. Sichtbarkeitspausen, Tab-Pausen und reduzierte
+Bewegung bleiben erhalten.
+
+Geprüft: 320×568, 360×800, 375×667, 390×844, 430×932, 600×960, 740×360
+sowie 768×1024, 820×1180, 1024×768, 1280×720 und 2560×1440. Kein
+seitlicher Seitenüberlauf, keine horizontal versteckten Featurekarten.
+Die gemessenen Desktop-Größen bei 1920×1080 sind unverändert. Auch Breite,
+Höhe, Schrift und Abstände des Community-Kastens bei 390×844 stimmen überein.
+16 neue Geometrieprüfungen decken Flugbahn, Debit-Milestone, zwei Rückstöße,
+senkrechte Rückgabe, geschützte Wertanzeige und stetige Geschwindigkeit ab.
