@@ -3,6 +3,8 @@
 export const MOBILE_SHARE_CYCLE_SECONDS = 12;
 export const MOBILE_SHARE_DEPARTURE = .06;
 export const MOBILE_SHARE_ARRIVAL = .27;
+export const MOBILE_SHARE_STORE_START = .42;
+export const MOBILE_SHARE_STORE_END = .48;
 export const MOBILE_SHARE_BOOK_PHASES = [0, 2 / 3, 1 / 3];
 
 const clamp = (value) => Math.min(1, Math.max(0, value));
@@ -30,9 +32,12 @@ export function mobileShareBookPose(progress, phaseOffset = 0) {
       opacity: 1,
     };
   }
+  // Store the arrival before the next book enters the receiver card.
+  // Keeping an old full-size book until the next landing would stack SVG colors.
+  const stored = smooth((phase - MOBILE_SHARE_STORE_START) / (MOBILE_SHARE_STORE_END - MOBILE_SHARE_STORE_START));
   return {
-    x: 144, y: 0, rotation: 0, scale: 1,
-    opacity: 1 - smooth((phase - .61) / .06),
+    x: 144, y: 6 * stored, rotation: 0, scale: 1 - .04 * stored,
+    opacity: 1 - stored,
   };
 }
 

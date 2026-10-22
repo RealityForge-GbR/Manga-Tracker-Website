@@ -20,6 +20,14 @@ export const LANDING_PRIVACY_MARKUP = `
       <g class="lock-snap-lines" stroke="#D7A0AF" stroke-width="2.5" stroke-linecap="round">
         <path d="m221 99 12-9m-8 24 15-1m-23-26 6-14M54 102l-13-7m11 20-15 1"/>
       </g>
+      <g class="mobile-lock-glimmers" fill="#F6A35E" stroke="none" aria-hidden="true">
+        <circle class="mobile-lock-glimmer" cx="91" cy="118" r="3" style="--glimmer-x:-22px;--glimmer-y:-24px"/>
+        <circle class="mobile-lock-glimmer" cx="92" cy="119" r="2" style="--glimmer-x:-30px;--glimmer-y:-7px"/>
+        <circle class="mobile-lock-glimmer" cx="93" cy="117" r="2.5" style="--glimmer-x:3px;--glimmer-y:-32px"/>
+        <circle class="mobile-lock-glimmer" cx="188" cy="118" r="3" style="--glimmer-x:23px;--glimmer-y:-24px"/>
+        <circle class="mobile-lock-glimmer" cx="189" cy="119" r="2" style="--glimmer-x:31px;--glimmer-y:-5px"/>
+        <circle class="mobile-lock-glimmer" cx="187" cy="117" r="2.5" style="--glimmer-x:-3px;--glimmer-y:-32px"/>
+      </g>
     </svg>
   </figure>
   <div class="trust-copy">

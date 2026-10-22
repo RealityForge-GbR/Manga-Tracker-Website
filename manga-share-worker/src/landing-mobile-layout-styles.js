@@ -2,10 +2,18 @@
 export const LANDING_MOBILE_LAYOUT_STYLES = `
 .showcase-mobile-only {display:none}
 @media(max-width:760px) {
-  .header.wrap {justify-content:center}
+  /* One shared left edge for the brand, store button and benefits. */
+  .header.wrap {justify-content:flex-start;padding-inline:max(var(--mobile-inline),calc((100% - 320px) / 2))}
+  /* Keep the initial composition within the small viewport. Reserve the extra
+     browser-toolbar height below it, so the next section cannot peek through. */
+  .hero.wrap {margin-bottom:max(60px,calc(100lvh - 100svh + 20px))}
+  .hero.wrap .hero-front-rig {width:min(56vw,44cqh,258px)}
+  .hero.wrap .mobile-manga-cloud {display:contents}
+  .hero.wrap .mobile-manga.manga-near {filter:blur(1.35px);opacity:.9}
+  .hero.wrap .mobile-manga:not(.manga-near) {filter:blur(.3px)}
   .hero.wrap h1 {justify-self:center;text-align:center;max-width:370px;text-wrap:balance}
   .hero-actions {justify-content:center;width:100%}
-  .hero.wrap .hero-benefits {justify-self:center;width:max-content;max-width:100%;text-align:left}
+  .hero.wrap .hero-benefits {justify-self:center;width:min(100%,320px);max-width:100%;text-align:left}
 
   .planning.section {padding-bottom:26px}
   .budget-details.wrap {
@@ -101,6 +109,9 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
   .trust-support {display:flex;flex-direction:column;gap:12px;width:100%;padding-top:26px;margin-top:12px}
   .support-heart {width:36px;height:36px;margin:0;align-self:center}
   .trust-support>p {max-width:37ch;margin-inline:auto;font-size:14px;line-height:1.65}
+}
+@media(max-width:760px) and (max-height:500px) and (orientation:landscape) {
+  .header.wrap {padding-inline:max(var(--mobile-inline),calc((100% - var(--mobile-inline) * 2 - 16px) / 1.9 / 2 - 160px + var(--mobile-inline)))}
 }
 @media(max-width:359px) {
   .budget-details.wrap,.app-showcase.wrap,.trust.wrap {width:calc(100% - 32px)}

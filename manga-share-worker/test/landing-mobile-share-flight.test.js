@@ -4,6 +4,8 @@ import {
   MOBILE_SHARE_ARRIVAL,
   MOBILE_SHARE_BOOK_PHASES,
   MOBILE_SHARE_DEPARTURE,
+  MOBILE_SHARE_STORE_START,
+  MOBILE_SHARE_STORE_END,
   createMobileShareFlightKeyframes,
   mobileShareBookPose,
 } from "../src/landing-mobile-share-flight.js";
@@ -33,20 +35,64 @@ test("sharing flight leaves and lands at rest without stops in the arc", () => {
   }
 });
 
-test("the alternating color is already on the left while the delivered book remains on the right", () => {
+test("the next color is ready on the left when each book arrives on the right", () => {
   for (const progress of [.27, .27 + 1 / 3, .27 + 2 / 3]) {
     const poses = MOBILE_SHARE_BOOK_PHASES.map((offset) => mobileShareBookPose(progress, offset));
     assert.ok(poses.some((pose) => pose.x === 0 && pose.opacity === 1), "the next color is ready on the source at every arrival");
     assert.ok(poses.some((pose) => Math.abs(pose.x - 144) < .000001 && pose.opacity === 1), "the arriving book is fully visible on the destination");
   }
-  for (let index = 0; index <= 10000; index += 1) {
-    const poses = MOBILE_SHARE_BOOK_PHASES.map((offset) => mobileShareBookPose(index / 10000, offset));
-    assert.ok(poses.some((pose) => pose.x === 144 && pose.opacity === 1), "a fully visible delivered book stays on the right through every handoff");
+});
+
+const corners = [[29, 108], [64, 108], [64, 166], [29, 166]];
+const boundsFor = (pose) => {
+  const angle = pose.rotation * Math.PI / 180;
+  const transformed = corners.map(([x, y]) => {
+    const localX = (x - 47) * pose.scale;
+    const localY = (y - 138) * pose.scale;
+    return [47 + pose.x + localX * Math.cos(angle) - localY * Math.sin(angle), 138 + pose.y + localX * Math.sin(angle) + localY * Math.cos(angle)];
+  });
+  return {
+    left: Math.min(...transformed.map(([x]) => x)), right: Math.max(...transformed.map(([x]) => x)),
+    top: Math.min(...transformed.map(([, y]) => y)), bottom: Math.max(...transformed.map(([, y]) => y)),
+  };
+};
+const intersects = (first, second) => first.left < second.right && first.right > second.left && first.top < second.bottom && first.bottom > second.top;
+
+test("each phone slot holds at most one visible book, including approaching flights", () => {
+  const slots = [
+    {left:20, right:76, top:104, bottom:172},
+    {left:164, right:220, top:104, bottom:172},
+  ];
+  for (let index = 0; index <= 12000; index += 1) {
+    const progress = index / 12000;
+    const visible = MOBILE_SHARE_BOOK_PHASES.map((offset) => mobileShareBookPose(progress, offset)).filter((pose) => pose.opacity > .001);
+    assert.ok(visible.some((pose) => pose.opacity === 1), "a source, flight, or arrival remains visible through the cycle");
+    const bounds = visible.map(boundsFor);
+    for (const slot of slots) {
+      assert.ok(bounds.filter((book) => intersects(book, slot)).length <= 1, `a phone slot has no stacked books at ${progress}`);
+    }
+    for (let first = 0; first < bounds.length; first += 1) {
+      for (let second = first + 1; second < bounds.length; second += 1) {
+        assert.ok(!intersects(bounds[first], bounds[second]), `visible books do not hide one another at ${progress}`);
+      }
+    }
+  }
+});
+
+test("the previous receiver clears before the next book approaches", () => {
+  assert.equal(mobileShareBookPose(MOBILE_SHARE_STORE_START).opacity, 1);
+  assert.equal(mobileShareBookPose(MOBILE_SHARE_STORE_END).opacity, 0);
+  const delta = .000001;
+  for (const boundary of [MOBILE_SHARE_STORE_START, MOBILE_SHARE_STORE_END]) {
+    for (const field of ["y", "scale", "opacity"]) {
+      const left = (mobileShareBookPose(boundary)[field] - mobileShareBookPose(boundary - delta)[field]) / delta;
+      const right = (mobileShareBookPose(boundary + delta)[field] - mobileShareBookPose(boundary)[field]) / delta;
+      assert.ok(Math.abs(left - right) < .002, `${field} stores without a velocity jump at ${boundary}`);
+    }
   }
 });
 
 test("visible books stay inside the SVG and only reset while fully invisible", () => {
-  const corners = [[29, 108], [64, 108], [64, 166], [29, 166]];
   for (const phaseOffset of MOBILE_SHARE_BOOK_PHASES) {
     let previous = mobileShareBookPose(0, phaseOffset);
     for (let index = 0; index <= 10000; index += 1) {
