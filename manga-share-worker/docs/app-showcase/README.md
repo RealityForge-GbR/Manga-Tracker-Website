@@ -47,8 +47,8 @@ außerhalb des Bildes und im verborgenen Tab. Reduzierte Bewegung bzw. fehlende
 Browserfunktionen behalten das statische Artwork. Tests prüfen Federverlauf,
 Bildladezustände, Pause/Fortsetzung, Präferenzen und Produktions-Minifizierung.
 
-Auf Desktop stehen drei Karten nebeneinander. Tablet und Handy verwenden die
-bestehende native Touch-/Tastatur-Galerie mit CSS Scroll Snap. Es gibt keine
+Auf Desktop und Tablet stehen drei Karten nebeneinander. Auf dem Handy bleibt
+die native Touch-/Tastatur-Galerie mit CSS Scroll Snap. Es gibt keine
 neuen Bilddateien, Fremd-Bibliotheken oder Netzwerkquellen zur Laufzeit.
 
 
@@ -65,4 +65,6 @@ Die drei Karten stehen direkt nach dem Budget-/Sammlungsblock und vor dem
 waagerechten Bücherabtrenner. Die bisherige sichtbare Abschnittsüberschrift
 entfällt; ein zugänglicher Abschnittsname bleibt erhalten. Titel und Kurztexte
 sind auf Desktop, Tablet und Handy horizontal zentriert. Die bestehende
-Touch-Galerie und die Achievement-Animation bleiben unverändert.
+mobile Touch-Galerie und die Achievement-Animation bleiben unverändert.
+Ab 761 Pixeln teilen sich die Karten die Außenkanten des Budgetblocks und
+passen Abstände, Schriftgrößen und Mockups an ihre verfügbare Breite an.
