@@ -20,7 +20,9 @@ und nebeneinander gepackt. Der Inhalt wurde dabei nicht neu gezeichnet oder erse
 - Der echte HTML-Link bleibt unabhängig anklickbar; Pfoten überlagern nur die
   dekorative Buttonfläche. Text und Symbole bleiben lesbar.
 - Der Bildstreifen wird erst nahe dem Abschnitt geladen. Außerhalb des sichtbaren
-  Bereichs, bei inaktivem Tab, reduzierter Bewegung und manueller Pause bleibt er still.
+  Bereichs, bei inaktivem Tab und reduzierter Bewegung bleibt er still.
+- Die kleinere Katze und der Download-Link stehen auf einem CSS-Manga-Regal. Der
+  Bücherstapel trägt den Button; ein separates Pausenelement wird nicht angezeigt.
 - Keine Überblendungen, kein Video/Canvas/WebGL und kein JavaScript pro Bildwechsel.
 
 Vorbild ist die frühere RealityForge-Bildstreifen-Technik aus

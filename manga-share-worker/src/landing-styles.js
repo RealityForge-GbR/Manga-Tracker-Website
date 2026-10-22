@@ -1,6 +1,12 @@
+import { LANDING_APP_SHOWCASE_STYLES } from "./landing-app-showcase-styles.js";
+import { LANDING_PRIVACY_STYLES } from "./landing-privacy-styles.js";
+import { LANDING_SHARE_STYLES } from "./landing-share-styles.js";
+import { LANDING_SCAN_STYLES } from "./landing-scan-styles.js";
 import { LANDING_BUDGET_STYLES } from "./landing-budget-styles.js";
 import { LANDING_CAT_STYLES } from "./landing-cat-styles.js";
 import { LANDING_MOBILE_HERO_STYLES } from "./landing-mobile-hero-styles.js";
+import { LANDING_SHELF_STYLES } from "./landing-shelf-styles.js";
+import { LANDING_HERO_FLOAT_STYLES } from "./landing-hero-float-styles.js";
 
 export const LANDING_STYLES = `
 :root {
@@ -145,14 +151,11 @@ a:focus-visible {
   padding-bottom:60px
 }
 h1 {
-  font-size:clamp(52px,5.3vw,80px);
-  line-height:1.06;
-  margin-bottom:28px
-}
-.lead {
-  font-size:17px;
-  max-width:510px;
-  line-height:1.8;
+  color:var(--text);
+  font-size:clamp(32px,3.35vw,50px);
+  font-weight:600;
+  line-height:1.18;
+  letter-spacing:-.04em;
   margin-bottom:30px
 }
 .hero-actions {
@@ -202,32 +205,41 @@ h1 {
   font-size:12px;
   line-height:1.65
 }
-.hero-note {
-  margin:18px 0 0;
-  color:var(--rose);
-  font-weight:600
+.store-download {
+  min-height:64px;
+  padding:12px 22px
+}
+.store-download>svg {width:24px;height:24px}
+.store-label {display:grid;gap:3px;text-align:left}
+.store-label strong {font-size:14px;line-height:1.25;font-weight:750}
+.store-label small {font-size:11px;line-height:1.25;font-weight:500}
+.hero-benefits {
+  list-style:none;
+  display:grid;
+  gap:9px;
+  padding:0;
+  margin:22px 0 0;
+  color:var(--text);
+  font-size:13px;
+  line-height:1.5
+}
+.hero-benefits li {position:relative;padding-left:23px}
+.hero-benefits li::before {
+  content:"";
+  position:absolute;
+  left:2px;
+  top:.3em;
+  width:6px;
+  height:10px;
+  border:solid var(--rose);
+  border-width:0 1.5px 1.5px 0;
+  transform:rotate(45deg)
 }
 .hero-visual {
   position:relative;
   min-width:0;
   height:650px;
   isolation:isolate
-}
-.hero-disc {
-  position:absolute;
-  width:100%;
-  aspect-ratio:1;
-  border:1px solid var(--line);
-  border-radius:50%;
-  top:90px;
-  left:0
-}
-.hero-disc:after {
-  content:"";
-  position:absolute;
-  inset:38px;
-  border:1px solid var(--elevated);
-  border-radius:50%
 }
 .phone {
   position:relative;
@@ -257,53 +269,6 @@ h1 {
 .hero-front-rig .hero-front {
   width:100%
 }
-.book-portal {
-  visibility:hidden;
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  --travel:460px
-}
-.is-motion-ready .book-portal {
-  visibility:visible
-}
-.portal-mouth {
-  position:absolute;
-  left:90%;
-  top:51%;
-  width:31%;
-  height:31%;
-  border:2px solid var(--rose);
-  border-radius:50%;
-  background:radial-gradient(ellipse,transparent 45%,var(--bg) 62%,var(--bordeaux) 82%,var(--rose) 98%);
-  box-shadow:0 0 18px var(--bordeaux),inset 0 0 12px var(--bordeaux);
-  transform:translate(-50%,-50%) rotate(-7deg)
-}
-.portal-ring {
-  position:absolute;
-  inset:-13%;
-  border:1px solid var(--rose);
-  border-radius:50%;
-  opacity:0
-}
-.portal-book {
-  position:absolute;
-  left:90%;
-  top:51%;
-  width:21%;
-  aspect-ratio:2/3;
-  margin-left:-10.5%;
-  margin-top:-15.75%;
-  padding:0 5px 3px 0;
-  border-radius:2px 4px 4px 2px;
-  background:var(--text);
-  border-right:2px solid var(--muted);
-  border-bottom:2px solid var(--rose);
-  box-shadow:5px 6px 0 var(--contrast);
-  opacity:0;
-  transform-origin:center;
-  backface-visibility:hidden
-}
 .book-cover {
   display:block;
   width:100%;
@@ -320,77 +285,6 @@ h1 {
 .book-spy .book-cover {
   background-size:290.323% 404.802%;
   background-position:67.797% 27.062%
-}
-.is-motion-ready .portal-book {
-  animation:book-collect 6.4s linear infinite;
-  animation-delay:var(--delay);
-  animation-play-state:paused
-}
-.is-motion-ready .portal-ring {
-  animation:portal-pull 2.4s ease-in infinite;
-  animation-play-state:paused
-}
-.is-motion-ready .portal-ring:last-child {
-  animation-delay:-1.2s
-}
-.is-collecting .portal-book,.is-collecting .portal-ring {
-  animation-play-state:running
-}
-@keyframes book-collect {
-  0% {
-    opacity:0;
-    transform:translate3d(var(--travel),var(--lift),0) rotate(var(--turn)) scale(1.12)
-  }
-  10% {
-    opacity:1
-  }
-  45% {
-    opacity:1;
-    transform:translate3d(calc(var(--travel) * .52),calc(var(--lift) * .48),0) rotate(calc(var(--turn) * .6)) scale(.94)
-  }
-  76% {
-    opacity:1;
-    transform:translate3d(62px,calc(var(--lift) * .12),0) rotate(-14deg) scale(.58)
-  }
-  96%,100% {
-    opacity:0;
-    transform:translate3d(-12px,0,0) rotate(-48deg) scale(.02)
-  }
-}
-@keyframes portal-pull {
-  0% { opacity:0;transform:scale(1.35) }
-  25% { opacity:.55 }
-  100% { opacity:0;transform:scale(.65) }
-}
-.motion-toggle {
-  position:absolute;
-  right:0;
-  bottom:25px;
-  display:grid;
-  place-items:center;
-  width:44px;
-  height:44px;
-  padding:0;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:var(--bg);
-  color:var(--muted);
-  cursor:pointer;
-  z-index:3
-}
-.motion-toggle[hidden],.motion-toggle .resume-icon,.motion-toggle[aria-pressed="true"] .pause-icon {
-  display:none
-}
-.motion-toggle[aria-pressed="true"] .resume-icon {
-  display:block
-}
-.motion-toggle:hover {
-  border-color:var(--rose);
-  color:var(--rose)
-}
-.motion-toggle:focus-visible {
-  outline:3px solid var(--rose);
-  outline-offset:4px
 }
 .hero-back {
   position:absolute;
@@ -605,38 +499,6 @@ h3 {
 .notification-shot {
   margin-top:155px
 }
-.trust {
-  display:grid;
-  grid-template-columns:1fr 1.35fr;
-  gap:80px;
-  border-top:1px solid var(--line);
-  padding-top:80px;
-  padding-bottom:110px
-}
-.trust dl {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:38px 42px;
-  margin:0
-}
-.trust dt {
-  font-size:15px;
-  font-weight:600;
-  margin-bottom:12px
-}
-.trust dd {
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.8
-}
-.affiliate-note {
-  max-width:360px;
-  margin:25px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8
-}
 .download {
   margin-bottom:70px;
   position:relative;
@@ -731,9 +593,6 @@ h3 {
   .hero.wrap {
     padding-inline:32px
   }
-  .book-portal {
-    --travel:340px
-  }
   .wrap {
     width:calc(100% - 64px)
   }
@@ -746,7 +605,7 @@ h3 {
     padding-top:20px
   }
   .hero h1 {
-    font-size:clamp(46px,6vw,65px)
+    font-size:clamp(30px,3.8vw,40px)
   }
   .hero-visual {
     height:560px
@@ -759,12 +618,6 @@ h3 {
     width:190px;
     left:0;
     top:100px
-  }
-  .hero-disc {
-    top:100px
-  }
-  .lead {
-    font-size:15px
   }
   .hero-actions {
     gap:10px
@@ -801,9 +654,6 @@ h3 {
   .notification-copy {
     margin-top:30px
   }
-  .trust {
-    gap:50px
-  }
   .download {
     padding:50px 45px 0
   }
@@ -814,15 +664,6 @@ h3 {
 @media(max-width:760px) {
   .hero.wrap {
     padding-inline:20px
-  }
-  .book-portal {
-    --travel:210px
-  }
-  .portal-book:nth-of-type(n+7) {
-    display:none
-  }
-  .is-motion-ready .portal-book {
-    animation-duration:4s
   }
   .wrap {
     width:calc(100% - 40px)
@@ -870,14 +711,8 @@ h3 {
     align-items:stretch
   }
   .hero h1 {
-    font-size:clamp(42px,9.8vw,68px);
-    line-height:1.08;
-    margin-bottom:24px
-  }
-  .lead {
-    font-size:14px;
-    line-height:1.8;
-    max-width:460px;
+    font-size:clamp(25px,6.2vw,34px);
+    line-height:1.22;
     margin-bottom:24px
   }
   .hero-actions {
@@ -896,10 +731,6 @@ h3 {
   .text-link {
     font-size:12px
   }
-  .hero-note {
-    font-size:11px;
-    margin-top:12px
-  }
   .hero-visual {
     height:535px;
     margin:25px auto 0;
@@ -916,10 +747,6 @@ h3 {
     left:0;
     top:48px;
     transform:rotate(-8deg)
-  }
-  .hero-disc {
-    top:65px;
-    width:100%
   }
   .section {
     padding-block:65px
@@ -1039,25 +866,6 @@ h3 {
     margin-top:35px;
     padding-top:22px
   }
-  .trust {
-    grid-template-columns:1fr;
-    gap:24px
-  }
-  .trust dl {
-    grid-template-columns:1fr;
-    gap:0
-  }
-  .trust dl>div {
-    padding-block:22px;
-    border-top:1px solid var(--line)
-  }
-  .trust dt {
-    font-size:15px;
-    margin-bottom:8px
-  }
-  .trust dd {
-    font-size:13px
-  }
   .download {
     margin-bottom:40px;
     grid-template-columns:1fr;
@@ -1119,7 +927,7 @@ h3 {
     padding-inline:10px
   }
   .hero h1 {
-    font-size:39px
+    font-size:25px
   }
   .hero-visual {
     height:480px
@@ -1145,10 +953,13 @@ h3 {
 ${LANDING_BUDGET_STYLES}
 ${LANDING_CAT_STYLES}
 ${LANDING_MOBILE_HERO_STYLES}
+${LANDING_HERO_FLOAT_STYLES}
+${LANDING_SHELF_STYLES}
+${LANDING_SCAN_STYLES}
+${LANDING_SHARE_STYLES}
+${LANDING_PRIVACY_STYLES}
+${LANDING_APP_SHOWCASE_STYLES}
 @media(prefers-reduced-motion:reduce) {
-  .book-portal,.motion-toggle {
-    display:none
-  }
   :root {
     scroll-behavior:auto
   }

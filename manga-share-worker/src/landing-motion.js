@@ -1,36 +1,11 @@
+import { LANDING_PRIVACY_SCRIPT } from "./landing-privacy-motion.js";
+import { LANDING_SHARE_SCRIPT } from "./landing-share-motion.js";
+import { LANDING_SCAN_SCRIPT } from "./landing-scan-motion.js";
 import { LANDING_BUDGET_SCRIPT } from "./landing-budget.js";
 import { LANDING_CAT_SCRIPT } from "./landing-cat.js";
 import { LANDING_MOBILE_PARALLAX_SCRIPT } from "./landing-mobile-parallax.js";
+import { LANDING_SHELF_SCRIPT } from "./landing-shelf-motion.js";
 
-// CSS handles the hero frames; the budget uses one timer for each purchase stage.
-const HERO_MOTION_SCRIPT = `(() => {
-  const scene = document.querySelector("[data-manga-portal]");
-  const toggle = document.querySelector("[data-motion-toggle]");
-  if (!scene || !toggle || !("IntersectionObserver" in window) || !window.matchMedia) return;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktop = window.matchMedia("(min-width: 761px)");
-  let visible = false;
-  let paused = false;
-  function sync() {
-    scene.classList.toggle("is-collecting", visible && desktop.matches && !document.hidden && !reduced.matches && !paused);
-    toggle.hidden = reduced.matches || !desktop.matches;
-    toggle.setAttribute("aria-pressed", String(paused));
-    toggle.setAttribute("aria-label", paused ? "Animation abspielen" : "Animation pausieren");
-    toggle.title = paused ? "Animation abspielen" : "Animation pausieren";
-  }
-  const observer = new IntersectionObserver((entries) => {
-    visible = entries.some((entry) => entry.isIntersecting);
-    sync();
-  });
-  scene.classList.add("is-motion-ready");
-  observer.observe(scene);
-  toggle.addEventListener("click", () => { paused = !paused; sync(); });
-  document.addEventListener("visibilitychange", sync);
-  if (reduced.addEventListener) reduced.addEventListener("change", sync);
-  else reduced.addListener(sync);
-  if (desktop.addEventListener) desktop.addEventListener("change", sync);
-  else desktop.addListener(sync);
-  sync();
-})();`;
+import { LANDING_HERO_FLOAT_SCRIPT } from "./landing-hero-float.js";
 
-export const LANDING_MOTION_SCRIPT = `${HERO_MOTION_SCRIPT}\n${LANDING_BUDGET_SCRIPT}\n${LANDING_CAT_SCRIPT}\n${LANDING_MOBILE_PARALLAX_SCRIPT}`;
+export const LANDING_MOTION_SCRIPT = `${LANDING_HERO_FLOAT_SCRIPT}\n${LANDING_BUDGET_SCRIPT}\n${LANDING_CAT_SCRIPT}\n${LANDING_MOBILE_PARALLAX_SCRIPT}\n${LANDING_SHELF_SCRIPT}\n${LANDING_SCAN_SCRIPT}\n${LANDING_SHARE_SCRIPT}\n${LANDING_PRIVACY_SCRIPT}`;

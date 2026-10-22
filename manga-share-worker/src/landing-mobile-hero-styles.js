@@ -1,6 +1,6 @@
 // A centered product scene with scroll-driven depth layers and concise mobile copy.
 export const LANDING_MOBILE_HERO_STYLES = `
-.mobile-manga-cloud,.hero-title-mobile,.mobile-lead,.mobile-copy {
+.mobile-manga-cloud,.mobile-copy {
   display:none
 }
 @media(max-width:760px) {
@@ -24,31 +24,17 @@ export const LANDING_MOBILE_HERO_STYLES = `
   }
   .hero h1 {
     order:1;
-    text-align:center;
-    font-size:clamp(36px,9.8vw,48px);
-    line-height:1.04;
-    letter-spacing:-.055em;
-    margin:0 0 12px
-  }
-  .hero-title-wide,.wide-copy {
-    display:none
-  }
-  .hero-title-mobile,.mobile-copy {
-    display:inline
-  }
-  .mobile-lead {
-    display:block;
-    order:2;
-    max-width:300px;
+    color:var(--text);
+    max-width:560px;
     justify-self:center;
     text-align:center;
-    font-size:13px;
-    line-height:1.65;
-    margin:0 0 8px
+    font-size:clamp(25px,6.2vw,34px);
+    line-height:1.22;
+    letter-spacing:-.04em;
+    margin:0 0 16px
   }
-  .hero .lead {
-    display:none
-  }
+  .wide-copy {display:none}
+  .mobile-copy {display:inline}
   .hero-visual {
     order:3;
     width:calc(100% + 40px);
@@ -60,7 +46,7 @@ export const LANDING_MOBILE_HERO_STYLES = `
     perspective-origin:50% 50%;
     overflow:clip
   }
-  .hero-back,.hero-disc,.hero-visual .book-portal,.hero-visual .motion-toggle {
+  .hero-back-rig {
     display:none
   }
   .hero-visual:before {
@@ -172,13 +158,15 @@ export const LANDING_MOBILE_HERO_STYLES = `
   }
   .hero-actions .button {
     width:min(100%,320px);
-    min-height:54px
+    min-height:64px
   }
-  .hero-note {
+  .hero-benefits {
     order:5;
-    text-align:center;
-    font-size:11px;
-    margin:13px 0 0
+    justify-self:center;
+    width:min(100%,320px);
+    gap:8px;
+    font-size:12px;
+    margin:18px 0 0
   }
   .section {
     padding-block:56px

@@ -35,8 +35,7 @@ function scene({ observer = true, media = true, reduced = false, decode = true, 
     decodeCalls += 1;
     return new Promise((resolve, reject) => { resolveDecode = resolve; rejectDecode = reject; });
   };
-  const toggle = new Element();
-  root.querySelector = (selector) => ({ "[data-cat-sprite]": sprite, "[data-cat-toggle]": toggle })[selector];
+  root.querySelector = (selector) => selector === "[data-cat-sprite]" ? sprite : null;
   const document = new Element();
   document.hidden = false;
   document.querySelector = () => root;
@@ -58,7 +57,7 @@ function scene({ observer = true, media = true, reduced = false, decode = true, 
   };
   vm.runInNewContext(script, { document, window });
   return {
-    root, sprite, toggle, document, preference, observers,
+    root, sprite, document, preference, observers,
     get decodeCalls() { return decodeCalls; },
     near(value = true) { observers.find((item) => item.options.rootMargin)?.callback([{ isIntersecting: value }]); },
     visible(value = true) { observers.find((item) => !item.options.rootMargin)?.callback([{ isIntersecting: value }]); },
@@ -75,7 +74,7 @@ const flush = () => Promise.resolve();
 test("cat artwork loads near the section but plays only after decoding in view", async () => {
   const s = scene();
   assert.equal(s.sprite.getAttribute("src"), null, "the footer image must not load at page start");
-  assert.equal(s.toggle.hidden, true);
+
   s.near();
   assert.equal(s.sprite.getAttribute("src"), "/landing/manga-cat-sprite.webp");
   assert.ok(s.observers.find((item) => item.options.rootMargin).disconnected);
@@ -88,7 +87,7 @@ test("cat artwork loads near the section but plays only after decoding in view",
   assert.equal(isPlaying(s), false, "preloading outside the viewport must not start movement");
   s.visible();
   assert.equal(isPlaying(s), true);
-  assert.equal(s.toggle.hidden, false);
+
   s.load();
   assert.equal(s.decodeCalls, 1, "a duplicate load event must not restart decoding");
 });
@@ -125,27 +124,6 @@ test("a decode completing after the section is hidden cannot start the animation
   assert.equal(isPlaying(s), true);
 });
 
-test("manual pause survives tab and scroll changes and exposes its current action", async () => {
-  const s = scene();
-  s.visible();
-  s.load();
-  s.decoded();
-  await flush();
-  s.toggle.dispatch("click");
-  assert.equal(isPlaying(s), false);
-  assert.equal(s.toggle.getAttribute("aria-pressed"), "true");
-  assert.equal(s.toggle.getAttribute("aria-label"), "Katzenanimation abspielen");
-  s.visible(false);
-  s.hidden();
-  s.visible();
-  s.hidden(false);
-  assert.equal(isPlaying(s), false);
-  s.toggle.dispatch("click");
-  assert.equal(isPlaying(s), true);
-  assert.equal(s.toggle.getAttribute("aria-pressed"), "false");
-  assert.equal(s.toggle.getAttribute("aria-label"), "Katzenanimation pausieren");
-});
-
 test("reduced-motion preference keeps a static cat and responds to later preference changes", async () => {
   const s = scene({ reduced: true });
   s.visible();
@@ -154,14 +132,14 @@ test("reduced-motion preference keeps a static cat and responds to later prefere
   await flush();
   assert.ok(s.root.classes.has("is-cat-ready"));
   assert.equal(isPlaying(s), false);
-  assert.equal(s.toggle.hidden, true);
+
   s.preference.matches = false;
   s.preference.dispatch("change");
   assert.equal(isPlaying(s), true);
   s.preference.matches = true;
   s.preference.dispatch("change");
   assert.equal(isPlaying(s), false);
-  assert.equal(s.toggle.hidden, true);
+
 });
 
 test("missing browser capabilities retain a static image without an unusable pause control", async () => {
@@ -174,7 +152,7 @@ test("missing browser capabilities retain a static image without an unusable pau
     await flush();
     assert.ok(s.root.classes.has("is-cat-ready"));
     assert.equal(isPlaying(s), false);
-    assert.equal(s.toggle.hidden, true);
+
   }
   const oldImage = scene({ decode: false });
   oldImage.visible();
@@ -193,7 +171,7 @@ test("a failed sprite stays still even if an older decode subsequently resolves"
   assert.equal(isPlaying(s), false);
   assert.ok(!s.root.classes.has("is-cat-ready"));
   assert.ok(s.root.classes.has("is-cat-unavailable"));
-  assert.equal(s.toggle.hidden, true);
+
   const fallback = scene();
   fallback.visible();
   fallback.load();

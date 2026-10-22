@@ -4,24 +4,17 @@ export const LANDING_CAT_SCRIPT = String.raw`(() => {
   const root = document.querySelector("[data-cat-scene]");
   if (!root) return;
   const sprite = root.querySelector("[data-cat-sprite]");
-  const toggle = root.querySelector("[data-cat-toggle]");
-  if (!sprite || !toggle) return;
+  if (!sprite) return;
   let preference;
   try { preference = window.matchMedia?.("(prefers-reduced-motion: reduce)"); } catch {}
   let visible = false;
-  let paused = false;
   let ready = false;
   let requested = false;
   let failed = false;
   let decoding = false;
   let hasObserver = false;
   function sync() {
-    root.classList.toggle("is-cat-playing", Boolean(ready && hasObserver && visible && !document.hidden && preference && !preference.matches && !paused));
-    toggle.hidden = !ready || !hasObserver || !preference || preference.matches;
-    toggle.setAttribute("aria-pressed", String(paused));
-    const label = paused ? "Katzenanimation abspielen" : "Katzenanimation pausieren";
-    toggle.setAttribute("aria-label", label);
-    toggle.title = label;
+    root.classList.toggle("is-cat-playing", Boolean(ready && hasObserver && visible && !document.hidden && preference && !preference.matches));
   }
   function markReady() {
     if (failed) return;
@@ -84,7 +77,6 @@ export const LANDING_CAT_SCRIPT = String.raw`(() => {
       loadSprite();
     }
   } else loadSprite();
-  toggle.addEventListener("click", () => { paused = !paused; sync(); });
   document.addEventListener("visibilitychange", sync);
   if (preference?.addEventListener) preference.addEventListener("change", sync);
   else if (preference?.addListener) preference.addListener(sync);
