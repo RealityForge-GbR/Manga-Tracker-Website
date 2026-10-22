@@ -29,3 +29,19 @@ Mockups. Der Einstieg füllt die Viewporthöhe (Rundungstoleranz 0,05 Pixel).
 Der Übergang 1100/1101 wurde gesondert geprüft. Visuelle Kontrollen umfassen
 Hero, Budgetgrafik und Erklärungen, Featurekarten sowie Datenschutz und Download.
 143 bestehende Tests und der Produktions-Dry-Run sind erfolgreich.
+
+## Nachprüfung der weitergeleiteten Kundenansicht
+
+Das gemeinsame Seitenraster war bereits live. Im Hero blieb auf großen Monitoren
+jedoch ein großer Abstand zwischen dem auf 380 Pixel begrenzten Text und den
+Telefonen. Ab 1101 Pixeln nutzt der Text nun eine ausgewogen umbrochene Breite
+von 380–460 Pixeln und eine Schriftgröße von 32–44 Pixeln. CTA und Kurzvorteile
+wachsen moderat mit. Das Geräte-Duo steht näher am Text; seine bisherigen
+Größenobergrenzen bleiben bestehen. Mobile und Tablet bleiben unverändert.
+
+Die acht App-Screenshots sind weiterhin die echten, dokumentierten WebPs mit
+720×1433 Pixeln. Die Originalaufnahmen mit 1080×2400 Pixeln sind hier nicht
+vorhanden. Die zugeschickte WhatsApp-/Fotoansicht ist kein unverkleinerter
+Schärfebeleg. Für höhere Pixeldichten sollten die echten Original-PNGs erneut
+verlustarm als größere Variante eingebunden werden. Es wurde kein Screenshot
+hochgerechnet, nachgezeichnet oder als neue Aufnahme ausgegeben.

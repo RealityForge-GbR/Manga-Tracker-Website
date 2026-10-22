@@ -43,6 +43,16 @@ export const LANDING_RESPONSIVE_STYLES = `
 @media(min-width:761px) and (min-height:501px), (min-width:1051px) {
   .hero.wrap {padding-inline:max(calc(var(--content-gutters) / 2),calc((100% - var(--content-max)) / 2))}
 }
+@media(min-width:1101px) {
+  .hero {grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(32px,3vw,64px)}
+  .hero h1 {max-width:clamp(380px,25vw,460px);font-size:clamp(32px,2.5vw,44px);text-wrap:balance}
+  .hero .store-download {min-height:clamp(64px,4.2vw,76px);padding:14px 26px}
+  .hero .store-label strong {font-size:clamp(14px,1vw,16px)}
+  .hero .store-label small {font-size:clamp(11px,.75vw,12px)}
+  .hero-benefits {font-size:clamp(13px,.8vw,15px)}
+  .hero-back-rig {left:calc(44% - var(--hero-back-width) * .9)}
+  .hero-front-rig {left:calc(44% - var(--hero-front-width) * .18)}
+}
 @media(min-width:761px) and (max-width:1100px) {
   .budget-details.wrap {gap:30px clamp(28px,4vw,40px)}
   .cycle-stage {
