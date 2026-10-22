@@ -35,9 +35,11 @@ Hero, Budgetgrafik und Erklärungen, Featurekarten sowie Datenschutz und Downloa
 Das gemeinsame Seitenraster war bereits live. Im Hero blieb auf großen Monitoren
 jedoch ein großer Abstand zwischen dem auf 380 Pixel begrenzten Text und den
 Telefonen. Ab 1101 Pixeln nutzt der Text nun eine ausgewogen umbrochene Breite
-von 380–460 Pixeln und eine Schriftgröße von 32–44 Pixeln. CTA und Kurzvorteile
-wachsen moderat mit. Das Geräte-Duo steht näher am Text; seine bisherigen
-Größenobergrenzen bleiben bestehen. Mobile und Tablet bleiben unverändert.
+von 380–560 Pixeln und eine Schriftgröße von 32–52 Pixeln. Die Größe reagiert
+auf Breite und Höhe des Bildschirms. CTA, Buttontext, Symbol und Kurzvorteile
+wachsen gemeinsam mit. Das Geräte-Duo steht näher am Text; seine bisherigen
+Größenobergrenzen bleiben bestehen. Auf Tablets erhalten Titel und CTA eine
+kleine Lesbarkeitsanpassung. Die eigene Mobilansicht bleibt unverändert.
 
 Die acht App-Screenshots sind weiterhin die echten, dokumentierten WebPs mit
 720×1433 Pixeln. Die Originalaufnahmen mit 1080×2400 Pixeln sind hier nicht
@@ -45,3 +47,17 @@ vorhanden. Die zugeschickte WhatsApp-/Fotoansicht ist kein unverkleinerter
 Schärfebeleg. Für höhere Pixeldichten sollten die echten Original-PNGs erneut
 verlustarm als größere Variante eingebunden werden. Es wurde kein Screenshot
 hochgerechnet, nachgezeichnet oder als neue Aufnahme ausgegeben.
+
+### Verhältnis der linken Hero-Inhalte
+
+Nach der Kundenpräzisierung skaliert die ganze linke Inhaltsgruppe gemeinsam:
+Titel, Downloadbeschriftung, Icon, Buttonfläche und drei Häkchenzeilen. Breite
+und Höhe begrenzen die Skalierung, damit hohe Desktop-Viewports stärker
+ausgenutzt werden, ohne auf niedrigen Laptop-Bildschirmen Text abzuschneiden.
+Die Linksbündigkeit zur Kopfzeile und die Viewporthöhe bleiben erhalten.
+Die Handys werden für diese Anpassung nicht vergrößert.
+
+Geprüft auf 16 Viewports von 390×844 bis 3440×1440, darunter 1920×800,
+1600×1200 und 1280×634 für verschiedene Seitenverhältnisse. Titel, CTA und
+Häkchen passen ohne Überlauf in den Einstieg; die gemeinsame linke Außenkante
+bleibt bestehen. 145 Tests und Produktions-Dry-Run erfolgreich.

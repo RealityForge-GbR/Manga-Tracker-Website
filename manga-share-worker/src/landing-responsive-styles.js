@@ -45,13 +45,23 @@ export const LANDING_RESPONSIVE_STYLES = `
 }
 @media(min-width:1101px) {
   .hero {grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(32px,3vw,64px)}
-  .hero h1 {max-width:clamp(380px,25vw,460px);font-size:clamp(32px,2.5vw,44px);text-wrap:balance}
-  .hero .store-download {min-height:clamp(64px,4.2vw,76px);padding:14px 26px}
-  .hero .store-label strong {font-size:clamp(14px,1vw,16px)}
-  .hero .store-label small {font-size:clamp(11px,.75vw,12px)}
-  .hero-benefits {font-size:clamp(13px,.8vw,15px)}
+  .hero h1 {max-width:clamp(380px,28vw,560px);font-size:clamp(32px,min(3.2vw,4.8vh),52px);line-height:1.18;margin-bottom:clamp(24px,3vh,40px);text-wrap:balance}
+  .hero .store-download {min-height:clamp(66px,min(5.2vw,7.8vh),92px);padding:14px clamp(22px,2vw,36px);gap:clamp(12px,1vw,16px)}
+  .hero .store-download>svg {width:clamp(24px,1.5vw,30px);height:clamp(24px,1.5vw,30px)}
+  .hero .store-label strong {font-size:clamp(15px,min(1.1vw,1.6vh),19px)}
+  .hero .store-label small {font-size:clamp(12px,min(.8vw,1.2vh),14px)}
+  .hero-benefits {font-size:clamp(14px,min(1vw,1.6vh),18px);gap:clamp(8px,.8vh,12px);margin-top:clamp(22px,2.5vh,32px)}
+  .hero-benefits li {padding-left:clamp(23px,1.7vw,29px)}
+  .hero-benefits li::before {width:clamp(6px,.45vw,8px);height:clamp(10px,.7vw,13px)}
   .hero-back-rig {left:calc(44% - var(--hero-back-width) * .9)}
   .hero-front-rig {left:calc(44% - var(--hero-front-width) * .18)}
+}
+@media(min-width:761px) and (max-width:1100px) and (min-height:501px) {
+  .hero h1 {font-size:clamp(28px,min(3.4vw,4.4vh),36px);text-wrap:balance}
+  .hero .store-download {min-height:66px}
+  .hero .store-label strong {font-size:15px}
+  .hero .store-label small {font-size:12px}
+  .hero-benefits {font-size:14px}
 }
 @media(min-width:761px) and (max-width:1100px) {
   .budget-details.wrap {gap:30px clamp(28px,4vw,40px)}
