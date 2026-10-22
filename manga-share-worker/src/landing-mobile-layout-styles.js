@@ -20,7 +20,7 @@ export const LANDING_MOBILE_LAYOUT_STYLES = `
   .budget-explanations article {width:100%;max-width:35ch;justify-self:center}
   .budget-explanations article:nth-child(1) {order:1}
   .budget-device-scene {order:2;justify-self:center;width:100%;padding:12px 8px 26px}
-  .budget-device {width:clamp(190px,56vw,226px);transform:rotateY(14deg)}
+  .budget-device {width:clamp(190px,56vw,226px);transform:none}
   .budget-explanations article:nth-child(3) {order:3;margin-top:32px}
   .budget-scan-morph {order:4;width:min(100%,330px);max-width:330px;margin-top:4px}
   .budget-scan-morph .barcode-morph {width:100%;max-width:330px}
