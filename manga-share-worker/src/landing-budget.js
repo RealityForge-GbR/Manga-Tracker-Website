@@ -21,7 +21,11 @@ export const LANDING_BUDGET_SCRIPT = String.raw`(() => {
       { name: "landed", duration: 220, action: "arrive" }
     );
   }
-  stages.push({ name: "blocked", duration: 3800 }, { name: "complete", duration: 0 });
+  stages.push(
+    { name: "blocked", duration: 3800 },
+    { name: "closing", duration: 750 },
+    { name: "complete", duration: 0 }
+  );
   const now = () => typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : Date.now();
   let reduced;
   try { reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)"); } catch {}

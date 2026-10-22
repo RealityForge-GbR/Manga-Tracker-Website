@@ -74,7 +74,12 @@ https://play.google.com/store/apps/details?id=com.ketchapp.stack), mit eigenen
 nativ gezeichneten Büchern. Die Buchbreite ist am Desktop 190 Pixel. Es werden
 keine Spielgrafiken oder erfundenen App-Screenshots verwendet.
 
-Das Paket öffnet seine vier Klappen. Jedes Buch bleibt zuerst mittig über der
+Das Paket öffnet und schließt seine vier Klappen mit 15 festen Vektor-Bildern.
+Zwei übereinanderliegende SVG-Bildstreifen halten Vorder- und Rückseite getrennt;
+die CSS-Technik entspricht der Katze, benötigt aber keine neue Rastergrafik.
+Geschlossene Klappen bedecken die Öffnung tatsächlich. Die vorderen Klappen
+öffnen zuerst, beim Schließen sind die hinteren zuerst an der Reihe.
+Jedes Buch bleibt zuerst mittig über der
 Öffnung, wird senkrecht angehoben und wächst erst oberhalb der Klappen auf seine
 volle Größe. Die Höhe wird aus Paketposition, Paket- und Buchgröße berechnet.
 Erst danach beginnt die seitliche Bewegung. Beim Rückflug läuft dieselbe
@@ -92,18 +97,23 @@ Der erfolgreiche Flug dauert 2,2 Sekunden; die Abbuchung erfolgt bei 60 Prozent.
 Bei null Euro versucht das nächste Buch zweimal, die Budgetgrenze zu passieren.
 Es federt dazwischen zurück, löst zwei kurze Fehlermarkierungen aus und kehrt
 anschließend vollständig ins Paket zurück. Dieser Ablauf dauert 3,8 Sekunden.
-Budget und Sammlung bleiben dabei unverändert und anschließend stehen. Es gibt
+Danach schließen sich die Klappen in 0,75 Sekunden. Budget und Sammlung bleiben
+dabei unverändert und anschließend stehen. Es gibt
 keinen Verkauf, Erlös oder unbemerkten Budget-Neustart.
 
 Die sichtbaren Beschriftungen „Shop“, „10 € pro Band“, „Budget aufgebraucht“ und
-die Bandanzahl bleiben entfernt. Monatsbudget und Sammlungswert sind beschriftet.
+die Bandanzahl bleiben entfernt. Monatsbudget und „Wert deiner Sammlung“ sind beschriftet.
 
-Der gesamte Ablauf dauert 11,86 Sekunden und benötigt nur einen Milestone-Timer.
+Der gesamte Ablauf dauert 12,61 Sekunden und benötigt nur einen Milestone-Timer.
 CSS animiert Transformationen und Transparenz. Elf vorbereitete Buchlagen halten
-die Anzahl der Elemente begrenzt; der Stapel wächst optisch aus dem Bild.
+die Anzahl der Elemente begrenzt. Alle elf Lagen bleiben vollständig sichtbar,
+ohne Verlauf oder Beschnitt am unteren Rand. Die Bühne ist dafür am Desktop
+438 Pixel hoch, mobil 380 Pixel. Der Anflug bleibt unter der Wertbeschriftung
+(20 Pixel Anhebung am Desktop, 40 Pixel mobil). Auch der kurze Abzug von
+10 Euro erscheint außerhalb des Flugwegs oberhalb der Budgetkarte.
 Außerhalb des Sichtbereichs oder bei verborgenem Tab pausieren Zeit und Bewegung
 gemeinsam. Reduzierte Bewegung oder fehlende Browserfunktionen zeigen das
-fertige Beispiel mit ausgeschöpftem Budget ohne Timer.
+fertige Beispiel mit ausgeschöpftem Budget und geschlossenem Paket ohne Timer.
 
 
 ## Schloss und Finanzierung
