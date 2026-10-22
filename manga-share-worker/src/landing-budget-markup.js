@@ -31,7 +31,7 @@ const budgetWallet = `<svg class="cycle-budget-wallet" viewBox="0 0 240 190" ari
 
 export const LANDING_BUDGET_MARKUP = `
 <div class="budget-cycle" data-budget-cycle data-cycle-stage="complete" data-cycle-added="2" data-cycle-owned="10" data-cycle-empty="true">
-  <div class="budget-cycle-heading"><h2 id="planning-title">Lege dein Monatsbudget fest …</h2></div>
+  <div class="budget-cycle-heading"><h2 id="planning-title">Lege dein Monatsbudget fest<span class="budget-cycle-ellipsis"> …</span></h2></div>
   <div class="cycle-stage" role="img" aria-label="Beispiel mit 20 Euro Monatsbudget: Ein Paket öffnet sich. Zwei Bücher werden einzeln senkrecht aus dem Paket gehoben, fliegen durch das Budget und landen von oben auf dem Stapel. Jeder Band kostet 10 Euro. Die Sammlung wächst von acht Bänden im Wert von 80 Euro auf zehn Bände im Wert von 100 Euro. Bei null Euro versucht ein weiteres Buch zweimal durchzukommen und kehrt anschließend ins Paket zurück. Budget und Wert der Sammlung bleiben dabei unverändert. Nach der Rückkehr schließt sich das Paket wieder.">
     <div class="cycle-parcel-back">${PARCEL_BACK}</div>
     <div class="cycle-parcel-front">${PARCEL_FRONT}</div>

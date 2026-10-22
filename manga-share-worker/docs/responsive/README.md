@@ -83,23 +83,27 @@ an der Bildschirmmitte sowie der spätere, einmalige Schlossverschluss bleiben
 erhalten. Community-Kasten, Katzenanimation und Desktop-/Tablet-Regeln wurden
 nicht umgestaltet.
 
-Die mobile Budget-Szene besitzt eine eigene Geometrie: Wallet oben mittig,
-Paket links darunter, Sammlung rechts darunter. Ein Buch steigt senkrecht
-aus dem Paket und fliegt auf einer gebogenen Bahn hinter der Wallet zur
-Sammlung. Der dritte Band wird zweimal abgewiesen und senkrecht zurückgelegt.
-Budget, Wertanzeige und Abbuchung liegen außerhalb der sichtbaren Flugbahn.
-Der bestehende Controller führt weiterhin genau zwei Käufe aus (20 → 10 → 0 €).
-Die zusätzlichen CSS-Keyframes werden serverseitig erzeugt; es gibt keinen
-neuen Animationsloop im Browser. Sichtbarkeitspausen, Tab-Pausen und reduzierte
-Bewegung bleiben erhalten.
+Die mobile Budget-Szene besitzt ein eigenes kompaktes Panel: oben eine
+flache Budgetzeile, in der Mitte Paket und Bücher, unten eine gleich breite
+Zeile für den Sammlungswert. Der ovale Paketschatten, die Wallet-Grafik und
+der Fade sind dort ausgeblendet. Drei sichtbare Bücher wachsen auf fünf;
+die vorhandenen Bücher bleiben am gemeinsamen Boden ausgerichtet und neue
+Bände werden darüber abgelegt. Der dritte Band wird zweimal abgewiesen und
+senkrecht zurückgelegt. Budget und Wertanzeige bleiben außerhalb der
+Flugbahn. Der bestehende Controller führt weiterhin genau zwei Käufe aus
+(20 → 10 → 0 €). Die CSS-Keyframes werden serverseitig erzeugt; es gibt
+keinen neuen Animationsloop im Browser. Sichtbarkeitspausen, Tab-Pausen und
+reduzierte Bewegung bleiben erhalten.
 
 Geprüft: 320×568, 360×800, 375×667, 390×844, 430×932, 600×960, 740×360
 sowie 768×1024, 820×1180, 1024×768, 1280×720 und 2560×1440. Kein
 seitlicher Seitenüberlauf, keine horizontal versteckten Featurekarten.
 Die gemessenen Desktop-Größen bei 1920×1080 sind unverändert. Auch Breite,
 Höhe, Schrift und Abstände des Community-Kastens bei 390×844 stimmen überein.
-16 neue Geometrieprüfungen decken Flugbahn, Debit-Milestone, zwei Rückstöße,
-senkrechte Rückgabe, geschützte Wertanzeige und stetige Geschwindigkeit ab.
+Sechs Geometrieprüfungen decken alle 441 ganzzahligen Bildschirmbreiten
+zwischen 320 und 760 Pixeln ab: Flugbahn einschließlich Rotation, korrekte
+Landung beider Käufe, fester Boden vorhandener Bände, zwei Rückstöße,
+senkrechte Rückgabe, geschützte Textbereiche und stetige Geschwindigkeit.
 
 ### Kompakte animierte Featurekarten
 
@@ -125,3 +129,11 @@ unter anderem Bildladefehler, Präferenz- und Breakpointwechsel, Teilbatches
 der Sichtbarkeitsmeldungen, die vierte Karte und den minifizierten Controller.
 Die gemessene Desktopgeometrie bleibt innerhalb von 0,001 Pixeln gleich;
 die vierte Karte ist dort ausgeblendet und die neue Bewegung inaktiv.
+
+### Vergleich nach dem mobilen Budget-Neuaufbau
+
+Bei 390×844 ist das Panel rund 427 Pixel hoch. Auf 320 bis 760 Pixeln
+entsteht kein seitlicher Überlauf und beide Wertzeilen passen vollständig.
+PC bei 1920×1080 und Tablet bei 820×1180 wurden vor und nach der Änderung
+verglichen: identische Größen, Positionen, Typografie und Transformationen.
+Alle 159 Tests und der Produktions-Dry-Run sind erfolgreich.

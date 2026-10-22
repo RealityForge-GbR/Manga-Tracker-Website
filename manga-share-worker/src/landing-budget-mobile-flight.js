@@ -5,15 +5,16 @@ const ease = (value) => { const t = clamp(value); return t * t * (3 - 2 * t); };
 const mix = (from, to, progress) => from + (to - from) * ease(progress);
 
 // Reuse the desktop choreography: lift, budget/debit at 60%, then land.
-// Only the mobile vertical route changes; CSS resolves the actual scene dimensions.
+// The narrow panel has a clear route below its budget bar. The same stack factor
+// also lowers the flight onto the next book position as the stack grows upward.
 export function mobilePurchasePose(progress) {
   const pose = purchasePose(progress);
   return { ...pose, wallet: pose.gate };
 }
 
-// On a phone, the closed wallet is approached diagonally from below.
-// Two separate contacts match the existing 40%/58% error flashes, then the
-// book takes the same route home and drops vertically into the open parcel.
+// Two contacts in the mobile purchase lane match the budget bar's existing
+// 40%/58% error flashes. The book then takes the same route home and
+// drops vertically into the open parcel.
 export function mobileRejectedPose(progress) {
   const t = clamp(progress);
   const source = rejectedPose(t);
@@ -60,7 +61,7 @@ const number = (value) => Number(value.toFixed(6));
 const frames = (sample, render) => Array.from({ length: 101 }, (_, index) => `${index}% {${render(sample(index / 100))}}`).join("\n");
 const turn = (pose) => `transform:rotate(${number(pose.rotation)}deg) scale(${number(pose.scale)})`;
 
-export const MOBILE_PURCHASE_FLIGHT_FRAMES = frames(mobilePurchasePose, (p) => `opacity:${number(p.opacity)};transform:translate3d(calc((var(--gate-x) - var(--shop-x)) * ${number(p.gate)} + (var(--stack-x) - var(--shop-x)) * ${number(p.stack)} + var(--cycle-book-lean,0px) * ${number(p.lean)}),calc(var(--parcel-rise) * ${number(p.rise)} + var(--mobile-gate-rise) * ${number(p.wallet)} + var(--flight-lift) * ${number(p.lift)} + ${number(p.pixels)}px),0)`);
+export const MOBILE_PURCHASE_FLIGHT_FRAMES = frames(mobilePurchasePose, (p) => `opacity:${number(p.opacity)};transform:translate3d(calc((var(--gate-x) - var(--shop-x)) * ${number(p.gate)} + (var(--stack-x) - var(--shop-x)) * ${number(p.stack)} + var(--cycle-book-lean,0px) * ${number(p.lean)}),calc(var(--parcel-rise) * ${number(p.rise)} + var(--mobile-gate-rise) * ${number(p.wallet)} + var(--mobile-land-offset) * ${number(p.stack)} + var(--flight-lift) * ${number(p.lift)} + ${number(p.pixels)}px),0)`);
 export const MOBILE_PURCHASE_TURN_FRAMES = frames(mobilePurchasePose, turn);
 export const MOBILE_REJECTED_FLIGHT_FRAMES = frames(mobileRejectedPose, (p) => `opacity:${number(p.opacity)};transform:translate3d(calc((var(--gate-x) - var(--shop-x) - var(--mobile-reject-inset)) * ${number(p.approach)} + ${number(p.recoil)}px),calc(var(--parcel-rise) * ${number(p.rise)} + var(--mobile-stop-rise) * ${number(p.wallet)} + ${number(p.pixels)}px),0)`);
 export const MOBILE_REJECTED_TURN_FRAMES = frames(mobileRejectedPose, turn);
