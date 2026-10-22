@@ -2,11 +2,11 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
 .planning.section {padding-bottom:52px}
 .budget-details {
   display:grid;
-  grid-template-columns:minmax(220px,.8fr) minmax(280px,1fr) minmax(300px,1.08fr);
+  grid-template-columns:minmax(220px,.74fr) minmax(300px,1.05fr) minmax(300px,1.02fr);
   align-items:center;
-  gap:clamp(24px,2.5vw,42px);
+  gap:clamp(22px,1.8vw,28px);
   margin-top:85px;
-  max-width:1280px
+  max-width:1200px
 }
 .budget-device-scene {
   position:relative;
@@ -56,6 +56,11 @@ export const LANDING_PLANNING_DETAILS_STYLES = `
 .retained-preview>figure {display:grid;justify-items:center;gap:16px;padding-top:32px}
 .retained-preview .phone {width:260px}
 .retained-preview figcaption {margin:0;max-width:500px;font-size:11px;line-height:1.6;text-align:center;color:var(--muted)}
+@media(min-width:1101px) {
+  .budget-details {--budget-rise:clamp(64px,6vw,96px)}
+  .budget-device-scene {align-self:start;padding-top:calc(18px + var(--budget-rise))}
+  .budget-explanations {margin-top:calc(var(--budget-rise) * .5)}
+}
 @media(max-width:1100px) and (min-width:761px) {
   .budget-details {grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:30px 40px;margin-top:65px}
   .budget-device {width:255px}

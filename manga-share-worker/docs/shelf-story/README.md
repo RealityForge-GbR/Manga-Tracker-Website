@@ -292,10 +292,21 @@ und die gemeinsame Pausensteuerung bleiben erhalten.
 
 ### Gemeinsame Oberkante von Überschrift und Barcode
 
-Textspalte und Barcode-Bühne richten sich im Desktop-Raster am selben oberen
-Zeilenrand aus. Der SVG-Ausschnitt beginnt direkt bei der Oberkante des weißen
-Rechtecks (y=42), ohne den früheren internen oberen Leerraum. So stimmt seine
-Oberkante unabhängig von Spaltenbreite und Umbrüchen mit dem ersten h3 überein.
-Die Höhe des weißen Etiketts beträgt ohne Zahlenzeile 160 Einheiten; die Streifen
-haben damit oben und unten denselben Abstand. Auf schmaleren Geräten bleibt
-die bestehende Anordnung untereinander erhalten.
+Der SVG-Ausschnitt beginnt direkt bei der Oberkante des weißen Rechtecks
+(y=42), ohne den früheren internen oberen Leerraum. Die Höhe des weißen Etiketts
+beträgt ohne Zahlenzeile 160 Einheiten; die Streifen haben damit oben und unten
+denselben Abstand. Die zuvor gemeinsame horizontale Oberkante wird mit der
+folgenden diagonalen Anordnung entlang der neuen Nutzer-Skizze gestaffelt.
+
+
+### Kompakte Diagonale im Budget-Abschnitt
+
+Auf Desktop stehen die drei Spalten enger zusammen (höchstens 1200 Pixel
+Gesamtbreite, 22 bis 28 Pixel Rasterabstand). Das Telefon beginnt etwas tiefer,
+die Texte auf halber Zwischenhöhe und das Barcode-Etikett oben rechts. Die
+Höhenstaffel wächst passend zur Breite von 64 bis höchstens 96 Pixeln und folgt
+so den eingezeichneten, von links unten nach rechts oben laufenden Linien.
+Die vertikale 3D-Drehachse des Telefons, lesbare Textzeilen und der ganze
+Scan-/Buchfall bleiben erhalten. Die Staffelung ist im Layout berücksichtigt,
+sodass der Büchertrenner unterhalb frei bleibt. Tablet und Handy behalten ihre
+bestehende Anordnung ohne die Desktop-Versätze.
