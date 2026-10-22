@@ -42,7 +42,8 @@ Achievement zwischen den Wiederholungen sichtbar. Ein Durchlauf dauert hier
 App-Effekts, kein aufgenommener oder erfundener Achievement-Screenshot.
 
 CSS übernimmt die Bewegung ohne JavaScript pro Bild. Wiedergabe beginnt erst
-nach Laden des Original-Artworks und ab 20 Prozent Sichtbarkeit; sie pausiert
+nach Laden des Original-Artworks und wenn die Oberkante der Animationsfläche
+die Bildschirmmitte erreicht. Nach diesem ersten Start pausiert sie
 außerhalb des Bildes und im verborgenen Tab. Reduzierte Bewegung bzw. fehlende
 Browserfunktionen behalten das statische Artwork. Tests prüfen Federverlauf,
 Bildladezustände, Pause/Fortsetzung, Präferenzen und Produktions-Minifizierung.
@@ -68,3 +69,11 @@ sind auf Desktop, Tablet und Handy horizontal zentriert. Die bestehende
 mobile Touch-Galerie und die Achievement-Animation bleiben unverändert.
 Ab 761 Pixeln teilen sich die Karten die Außenkanten des Budgetblocks und
 passen Abstände, Schriftgrößen und Mockups an ihre verfügbare Breite an.
+
+## Späterer Animationsstart
+
+Achievement und Datenschutz-Schloss starten erst, wenn ihre Animationsfläche
+die horizontale Bildschirmmitte erreicht. Die Startzone wird aus der tatsächlichen
+Viewporthöhe in Pixeln berechnet und vor dem Start bei Größenänderungen angepasst.
+Nach dem ersten Start gilt die normale Sichtbarkeitspause. Das Schloss bleibt
+nach dem Schließen dauerhaft zu. Der Start benötigt keine Scroll- oder Frame-Schleife.

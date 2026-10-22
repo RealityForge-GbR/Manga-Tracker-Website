@@ -18,19 +18,24 @@ function scene({loaded=true, hidden=false, reduced=false, media=true, observer=t
   const element={querySelector:()=>image,classList:{toggle(name,on){if(on)classes.add(name);else classes.delete(name);}}};
   const document=new Events(); document.hidden=hidden; document.querySelector=()=>root?element:null;
   const preference=new Events(); preference.matches=reduced;
-  let notify, disconnected=false;
-  const window={};
+  let notify, gateNotify, gateOptions, disconnected=false;
+  const window=new Events(); window.innerHeight=1000;
+  window.removeEventListener=(name)=>window.events.delete(name);
   if(media)window.matchMedia=()=>preference;
   if(observer)window.IntersectionObserver=class {
-    constructor(fn){notify=fn;if(broken)throw new Error("unavailable");}
+    constructor(fn,settings){if(settings.rootMargin?.includes("-")){gateNotify=fn;gateOptions=settings;}else notify=fn;if(broken)throw new Error("unavailable");}
     observe(target){assert.equal(target,element);}
     disconnect(){disconnected=true;}
   };
   vm.runInNewContext(script,{document,window});
   return {classes,document,image,preference,
+    get gateOptions(){return gateOptions;},
+    approach(ratio=1){notify?.([{target:element,isIntersecting:true,intersectionRatio:ratio}]);},
+    midpoint(on=true){gateNotify?.([{target:element,isIntersecting:on,intersectionRatio:on?1:0}]);},
+    resize(height){window.innerHeight=height;window.fire("resize");},
     get ready(){return classes.has("is-achievement-ready");},
     get playing(){return classes.has("is-achievement-playing");},
-    visible(on=true,ratio=1){notify?.([{target:element,isIntersecting:on,intersectionRatio:ratio}]);},
+    visible(on=true,ratio=1){notify?.([{target:element,isIntersecting:on,intersectionRatio:ratio}]);if(on)gateNotify?.([{target:element,isIntersecting:true,intersectionRatio:1}]);},
     unrelated(){notify?.([{target:{},isIntersecting:true,intersectionRatio:1}]);},
     hidden(on=true){document.hidden=on;document.fire("visibilitychange");},
     load(){image.naturalWidth=683;image.fire("load");},
@@ -66,8 +71,12 @@ test("an artwork load completing while hidden cannot start playback and errors s
   s.hidden(false);assert.equal(s.playing,true);
   s.fail();assert.equal(s.playing,false);assert.equal(s.ready,false);
 });
-test("the animation requires twenty percent visibility and ignores other targets",()=>{
+test("the animation waits for the viewport midpoint and then requires visibility",()=>{
   const s=scene();s.unrelated();assert.equal(s.playing,false);
+  assert.equal(s.gateOptions.rootMargin,"0px 0px -500px 0px");
+  s.approach();assert.equal(s.playing,false);
+  s.midpoint(false);assert.equal(s.playing,false);
+  s.midpoint();assert.equal(s.playing,true);
   s.visible(true,.19);assert.equal(s.playing,false);
   s.visible(true,.2);assert.equal(s.playing,true);
   s.visible(false);s.hidden();s.hidden(false);assert.equal(s.playing,false);
@@ -86,4 +95,11 @@ test("the minified browser controller retains loading and visibility safeguards"
   const {code}=await transform(LANDING_ACHIEVEMENT_SCRIPT,{minify:true,keepNames:true,target:"es2022"});
   const s=scene({loaded:false,script:code});s.visible();assert.equal(s.playing,false);
   s.load();assert.equal(s.playing,true);s.reduced();assert.equal(s.playing,false);
+});
+
+test("the midpoint follows viewport height changes before the first start",()=>{
+  const s=scene();s.approach();s.resize(700);
+  assert.equal(s.gateOptions.rootMargin,"0px 0px -350px 0px");
+  assert.equal(s.playing,false);s.midpoint();assert.equal(s.playing,true);
+  s.visible(false);s.resize(1200);s.approach();assert.equal(s.playing,true);
 });

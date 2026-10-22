@@ -28,19 +28,23 @@ function scene({ reduced = false, hidden = false, root = true, media = true, obs
     preference.addEventListener = undefined;
   }
   if (!mediaEvents) { preference.addListener = undefined; preference.addEventListener = undefined; }
-  const window = {};
+  const window = new Events();
+  window.innerHeight = 1000;
+  window.removeEventListener = (name) => window.events.delete(name);
   if (media) window.matchMedia = () => {
     if (brokenMedia) throw new Error("unavailable");
     return preference;
   };
   let intersection;
+  let midpoint;
+  let gateOptions;
   let disconnected = false;
   let options;
   if (observer) window.IntersectionObserver = class {
     constructor(callback, settings) {
       if (brokenObserver) throw new Error("unavailable");
-      intersection = callback;
-      options = settings;
+      if (settings.rootMargin?.includes("-")) { midpoint = callback; gateOptions = settings; }
+      else { intersection = callback; options = settings; }
     }
     observe(target) {
       if (brokenObserve) throw new Error("cannot observe");
@@ -56,10 +60,14 @@ function scene({ reduced = false, hidden = false, root = true, media = true, obs
   return {
     element, document, preference,
     get options() { return options; },
+    get gateOptions() { return gateOptions; },
+    approach() { intersection?.([{target:element,isIntersecting:true,intersectionRatio:1}]); },
+    midpoint(on=true) { midpoint?.([{target:element,isIntersecting:on,intersectionRatio:on?1:0}]); },
+    resize(height) { window.innerHeight=height; window.dispatch("resize"); },
     get disconnected() { return disconnected; },
     get ready() { return element.classes.has("is-lock-ready"); },
     get playing() { return element.classes.has("is-lock-playing"); },
-    visible(ratio = 1, isIntersecting = ratio > 0) { intersection?.([{ target: element, isIntersecting, intersectionRatio: ratio }]); },
+    visible(ratio = 1, isIntersecting = ratio > 0) { intersection?.([{ target: element, isIntersecting, intersectionRatio: ratio }]); if(isIntersecting)midpoint?.([{target:element,isIntersecting:true,intersectionRatio:1}]); },
     finish(animationName = "privacy-lock-shut") { element.dispatch("animationend", { animationName }); },
     unrelatedEntry() { intersection?.([{ target: {}, isIntersecting: false, intersectionRatio: 0 }]); },
     hidden(value = true) { document.hidden = value; document.dispatch("visibilitychange"); },
@@ -67,11 +75,14 @@ function scene({ reduced = false, hidden = false, root = true, media = true, obs
   };
 }
 
-test("lock playback starts 100px before scrolling into view without a JavaScript animation loop", () => {
+test("lock playback waits for the viewport midpoint without a JavaScript animation loop", () => {
   const s = scene();
   assert.equal(s.ready, true);
   assert.equal(s.playing, false);
-  assert.equal(s.options.rootMargin, "0px 0px 100px 0px");
+  assert.equal(s.options.rootMargin, "0px");
+  assert.equal(s.gateOptions.rootMargin, "0px 0px -500px 0px");
+  s.approach();assert.equal(s.playing,false);
+  s.midpoint(false);assert.equal(s.playing,false);
   assert.equal(s.options.threshold, 0);
   s.visible(0, false);
   assert.equal(s.playing, false);
@@ -168,4 +179,11 @@ test("the literal browser script survives Worker minification with function name
   s.hidden();
   assert.equal(s.playing, false);
   assert.equal(s.ready, true);
+});
+
+test("lock midpoint adapts to viewport resizing before it starts", () => {
+  const s=scene();s.approach();s.resize(700);
+  assert.equal(s.gateOptions.rootMargin,"0px 0px -350px 0px");
+  assert.equal(s.playing,false);s.midpoint();assert.equal(s.playing,true);
+  s.finish();s.resize(1200);s.visible();assert.equal(s.ready,false);assert.equal(s.playing,false);
 });
