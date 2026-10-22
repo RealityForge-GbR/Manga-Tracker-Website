@@ -301,12 +301,30 @@ folgenden diagonalen Anordnung entlang der neuen Nutzer-Skizze gestaffelt.
 
 ### Kompakte Diagonale im Budget-Abschnitt
 
-Auf Desktop stehen die drei Spalten enger zusammen (höchstens 1200 Pixel
-Gesamtbreite, 22 bis 28 Pixel Rasterabstand). Das Telefon beginnt etwas tiefer,
-die Texte auf halber Zwischenhöhe und das Barcode-Etikett oben rechts. Die
-Höhenstaffel wächst passend zur Breite von 64 bis höchstens 96 Pixeln und folgt
-so den eingezeichneten, von links unten nach rechts oben laufenden Linien.
+Auf Desktop stehen die drei Spalten mit proportionalen Breiten zusammen.
+Das Telefon beginnt etwas tiefer, die Texte auf halber Zwischenhöhe und das
+Barcode-Etikett oben rechts. Die Höhenstaffel wächst mit der Abschnittsbreite
+und folgt den eingezeichneten, von links unten nach rechts oben laufenden Linien.
 Die vertikale 3D-Drehachse des Telefons, lesbare Textzeilen und der ganze
 Scan-/Buchfall bleiben erhalten. Die Staffelung ist im Layout berücksichtigt,
 sodass der Büchertrenner unterhalb frei bleibt. Tablet und Handy behalten ihre
 bestehende Anordnung ohne die Desktop-Versätze.
+
+
+### Breite und Größen reagieren auf das Fenster
+
+Der Budget-Detailabschnitt hat keine feste Maximalbreite mehr und überschreibt
+hier gezielt die allgemeine 1280-Pixel-Wrap-Begrenzung. Er nutzt die verfügbare
+Fensterbreite mit seitlichen, ebenfalls reagierenden Abständen. Das Raster
+verteilt den Platz auf seine drei Spalten; Telefon und Barcode-Grafik füllen
+ihre Spalte. Die frühere feste Telefonbreite und die 430-Pixel-Grenze der Grafik
+entfallen in diesem Abschnitt.
+
+Der Abschnitt dient als CSS-Inline-Size-Container. Überschriften, Fließtext,
+Textspaltenhöhe, Perspektive und die diagonalen Versätze richten sich nach
+seiner tatsächlichen Breite. Schriftgrößen haben lesbare Unter- und Obergrenzen.
+Die Staffelung reicht von 64 bis 180 Pixeln und bleibt ausschließlich auf dem
+Desktop aktiv. Auf Tablets folgen Telefon und Texte im Zweispaltenraster, die
+bis zu 560 Pixel breite Scan-Animation darunter. Auf Handys folgt alles in einer
+Spalte; die volle Breite bleibt abzüglich der äußeren Abstände verfügbar.
+Es gibt weder zusätzliche Resize-Listener noch neue Animationsberechnungen.
