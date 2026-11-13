@@ -9,7 +9,7 @@ export const LANDING_SOCIAL_MARKUP = `<section class="social-links wrap" aria-la
   </nav>
 </section>`;
 
-// Desktop is previewed separately until approved; only phones show this live.
+// Shared social links with the approved desktop row and mobile button grid.
 export const LANDING_SOCIAL_STYLES = `
 .social-links {display:none}
 @media(max-width:760px) {
@@ -24,4 +24,5 @@ export const LANDING_SOCIAL_STYLES = `
   .social-buttons a:focus-visible {outline:2px solid var(--rose);outline-offset:4px}
 }
 @media(max-width:359px) {.social-links.wrap {width:calc(100% - 32px)}}
+@media(min-width:761px){.social-links.wrap{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:0 0 36px;margin-top:-32px}.social-copy h2{font-size:24px;line-height:1.25;font-weight:600;letter-spacing:-.035em;margin:0 0 6px}.social-copy p{font-size:14px;color:var(--muted);margin:0}.social-buttons{display:flex;gap:12px}.social-buttons a{display:flex;align-items:center;justify-content:center;gap:10px;min-width:152px;min-height:50px;padding:12px 20px;border:1px solid var(--bordeaux);border-radius:12px;background:var(--surface);text-decoration:none;font-size:14px;font-weight:600}.social-buttons svg{width:22px;height:22px;color:var(--rose)}}
 `;
