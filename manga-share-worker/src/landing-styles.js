@@ -1,3 +1,4 @@
+import { LANDING_SOCIAL_STYLES } from "./landing-social.js";
 import { LANDING_MOBILE_LOCK_STYLES } from "./landing-mobile-lock-styles.js";
 import { LANDING_MOBILE_SHARE_STYLES } from "./landing-mobile-share-scene.js";
 import { LANDING_MOBILE_LAYOUT_STYLES } from "./landing-mobile-layout-styles.js";
@@ -971,6 +972,7 @@ ${LANDING_MOBILE_SHARE_STYLES}
 ${LANDING_MOBILE_LAYOUT_STYLES}
 ${LANDING_MOBILE_LOCK_STYLES}
 ${LANDING_BUDGET_MOBILE_STYLES}
+${LANDING_SOCIAL_STYLES}
 @media(prefers-reduced-motion:reduce) {
   :root {
     scroll-behavior:auto

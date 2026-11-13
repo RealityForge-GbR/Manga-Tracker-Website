@@ -1,3 +1,4 @@
+import { LANDING_SOCIAL_MARKUP } from "./landing-social.js";
 import { LANDING_PLANNING_DETAILS } from "./landing-planning-details.js";
 import { LANDING_SHELF_DIVIDER_MARKUP } from "./landing-shelf-divider.js";
 import { LANDING_APP_SHOWCASE } from "./landing-app-showcase.js";
@@ -127,6 +128,7 @@ export function renderLandingPage(origin) {
       </ul>
       ${catScene()}
     </section>
+    ${LANDING_SOCIAL_MARKUP}
   </main>
   <footer class="footer wrap"><a class="brand" href="/" aria-label="Manga Tracker Startseite"><img src="/landing/app-icon.png" alt="" width="192" height="192"><span>Manga Tracker</span></a><p>Eine App von RealityForge GbR</p><nav aria-label="Rechtliches"><a href="https://realityforge.eu/legal-notice/">Impressum</a><a href="https://realityforge.eu/privacy-policy/">Datenschutz Website</a><a href="https://realityforge.eu/privacy-policy/manga-tracker/">Datenschutz App</a></nav></footer>
 <script>${LANDING_MOTION_SCRIPT}</script>
