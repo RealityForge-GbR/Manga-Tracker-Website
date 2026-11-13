@@ -32,7 +32,7 @@ for (const origin of origins) {
     assert.ok(html.includes(`<link rel="canonical" href="${origin}/">`));
     assert.ok(html.includes(`property="og:url" content="${origin}/"`));
     assert.ok(html.includes(`property="og:image" content="${origin}/landing/app-icon-source.png"`));
-    assert.ok(html.includes(`href="${PLAY}"`));
+    assert.ok(html.includes(`href="${PLAY}`));
     assert.equal(response.headers.get("location"), null);
   });
 
@@ -48,7 +48,7 @@ for (const origin of origins) {
         assert.ok(html.includes(`property="og:url" content="${origin}/manga/${ISBN}"`));
         assert.ok(html.includes(`data-fallback="${origin}/manga-tracker-og.png"`));
         assert.ok(html.includes(`property="og:image" content="${cover ? `${API}/manga/${ISBN}/cover` : `${origin}/manga-tracker-og.png`}"`));
-        assert.ok(html.includes(`href="${PLAY}"`));
+        assert.ok(html.includes(`href="${PLAY}`));
       }
     }
   });
@@ -73,7 +73,7 @@ for (const origin of origins) {
     for (const path of ["/manga/9783964335389", "/manga/9783964335388%2Fother", "/manga/not-an-isbn"]) {
       const response = await handleRequest(new Request(`${origin}${path}`), { FETCH: () => assert.fail("invalid ISBN must not call API") });
       assert.equal(response.status, 404);
-      assert.ok((await response.text()).includes(`href="${PLAY}"`));
+      assert.ok((await response.text()).includes(`href="${PLAY}`));
     }
     const response = await handleRequest(new Request(`${origin}/manga/${ISBN}`), env(true, 500));
     assert.equal(response.status, 503);
@@ -139,7 +139,7 @@ test("cached HTML is isolated by host and bypasses the former v3 namespace", asy
       assert.ok(html.includes(`property="og:url" content="${origin}/manga/${ISBN}"`));
       assert.ok(html.includes(`property="og:image" content="${origin}/manga-tracker-og.png"`));
     }
-    assert.deepEqual([...stored.keys()], origins.map((origin) => `${origin}/__manga-share-cache-v4/manga/${ISBN}`));
+    assert.deepEqual([...stored.keys()], origins.map((origin) => `${origin}/__manga-share-cache-v5/manga/${ISBN}`));
   } finally {
     if (previous === undefined) delete globalThis.caches;
     else globalThis.caches = previous;

@@ -1,4 +1,5 @@
 import { LANDING_SOCIAL_MARKUP } from "./landing-social.js";
+import { playStoreHref } from "./acquisition.js";
 import { LANDING_PLANNING_DETAILS } from "./landing-planning-details.js";
 import { LANDING_SHELF_DIVIDER_MARKUP } from "./landing-shelf-divider.js";
 import { LANDING_APP_SHOWCASE } from "./landing-app-showcase.js";
@@ -13,16 +14,15 @@ export const LANDING_ASSETS = new Set([
   "manga-cat-still.webp", "manga-cat-sprite.webp", "manga-shelf-illustration.webp",
 ].map((name) => `/landing/${name}`));
 
-const PLAY = "https://play.google.com/store/apps/details?id=eu.realityforge.mangatracker";
 const description = "Verwalte deine Manga und Light Novels, entdecke monatliche Neuerscheinungen und plane deine nächsten Käufe.";
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const downloadIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg>';
-function cta() { return `<a class="button store-download" href="${PLAY}" aria-label="Manga Tracker kostenlos bei Google Play herunterladen">${downloadIcon}<span class="store-label"><strong>Kostenlos herunterladen</strong><small>bei Google Play</small></span></a>`; }
-function catScene() {
+function cta(origin) { return `<a class="button store-download" href="${playStoreHref(origin, "homepage_hero")}" aria-label="Manga Tracker kostenlos bei Google Play herunterladen">${downloadIcon}<span class="store-label"><strong>Kostenlos herunterladen</strong><small>bei Google Play</small></span></a>`; }
+function catScene(origin) {
   return `<div class="cat-scene" data-cat-scene>
     <div class="manga-shelf" aria-hidden="true"></div>
     <div class="shelf-books" aria-hidden="true"><span></span><span></span><span></span></div>
-    <a class="button cat-cta" href="${PLAY}" aria-label="Manga Tracker kostenlos bei Google Play herunterladen"><svg class="download-symbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span class="cat-cta-label"><strong>Kostenlos herunterladen</strong><small>bei Google Play</small></span></a>
+    <a class="button cat-cta" href="${playStoreHref(origin, "homepage_download")}" aria-label="Manga Tracker kostenlos bei Google Play herunterladen"><svg class="download-symbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span class="cat-cta-label"><strong>Kostenlos herunterladen</strong><small>bei Google Play</small></span></a>
     <div class="cat-art" aria-hidden="true">
       <img class="cat-still" src="/landing/manga-cat-still.webp" alt="" width="512" height="512" loading="lazy" decoding="async">
       <img class="cat-sprite" data-cat-sprite data-src="/landing/manga-cat-sprite.webp" alt="" width="7680" height="512" decoding="async">
@@ -92,13 +92,13 @@ export function renderLandingPage(origin) {
   <header class="header wrap">
     <a class="brand" href="/" aria-label="Manga Tracker Startseite"><img src="/landing/app-icon.png" alt="" width="192" height="192"><span>Manga Tracker</span></a>
     <nav aria-label="Hauptnavigation"><a href="#entdecken">Entdecken</a><a href="#sammlung">Sammlung</a><a href="#planung">Kaufplanung</a></nav>
-    <a class="header-download" href="${PLAY}">App holen ${arrow}</a>
+    <a class="header-download" href="${playStoreHref(origin, "homepage_header")}">App holen ${arrow}</a>
   </header>
   <main id="inhalt" tabindex="-1">
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
         <h1 id="hero-title">Manga sammeln und Neuheiten entdecken.</h1>
-        <div class="hero-actions">${cta()}</div>
+        <div class="hero-actions">${cta(origin)}</div>
         <ul class="hero-benefits"><li>Kostenlos</li><li>Werbefrei</li><li>Keine In-App-Käufe</li></ul>
       </div>
       <figure class="hero-visual" data-floating-hero data-mobile-parallax>
@@ -126,7 +126,7 @@ export function renderLandingPage(origin) {
         <li>Neuerscheinungen, Einkaufsliste und Budget im Blick</li>
         <li>Deine Sammlung bleibt auf deinem Gerät</li>
       </ul>
-      ${catScene()}
+      ${catScene(origin)}
     </section>
     ${LANDING_SOCIAL_MARKUP}
   </main>

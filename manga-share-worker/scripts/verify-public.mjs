@@ -34,7 +34,18 @@ for (const origin of ["https://mangatracker.de", "https://manga.realityforge.eu"
       const canonical = `${origin}${path}`;
       assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`), url);
       assert.ok(html.includes(`property="og:url" content="${canonical}"`), url);
-      assert.ok(html.includes(`href="${PLAY}"`), url);
+      const storeLinks = [...html.matchAll(/href="(https:\/\/play\.google\.com\/store\/apps\/details[^" ]*)"/g)]
+        .map((match) => new URL(match[1].replaceAll("&amp;", "&")));
+      const placements = path === "/" ? ["homepage_header", "homepage_hero", "homepage_download"] : ["manga_detail", "manga_footer"];
+      assert.equal(storeLinks.length, placements.length, url);
+      for (const [index, link] of storeLinks.entries()) {
+        if (origin === "https://mangatracker.de") {
+          assert.equal(link.searchParams.get("id"), "eu.realityforge.mangatracker");
+          const expected = { utm_source: "mangatracker.de", utm_medium: "referral", utm_campaign: "website", utm_content: placements[index] };
+          for (const [key, value] of Object.entries(expected)) assert.equal(link.searchParams.get(key), value);
+          assert.deepEqual(Object.fromEntries(new URLSearchParams(link.searchParams.get("referrer"))), expected);
+        } else assert.equal(link.href, PLAY);
+      }
       assert.match(response.headers.get("content-security-policy"), /img-src 'self' https:\/\/api\.manga\.realityforge\.eu/);
       if (origin.endsWith("mangatracker.de")) assert.doesNotMatch(html, /intent:\/\/|data-android-intent=/);
       result.canonical = canonical;

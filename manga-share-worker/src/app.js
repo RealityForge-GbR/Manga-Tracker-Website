@@ -1,3 +1,4 @@
+import { playStoreHref } from "./acquisition.js";
 import { LANDING_ASSETS, renderLandingPage } from "./landing.js";
 import { LANDING_MOTION_SCRIPT } from "./landing-motion.js";
 
@@ -12,12 +13,11 @@ const PUBLIC_ORIGINS = new Map([
   ["manga.realityforge.eu", SITE_ORIGIN],
   ["realityforge-manga-share.realityforgeeu.workers.dev", PRIMARY_ORIGIN],
 ]);
-const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=eu.realityforge.mangatracker";
 const ROOT_IMPRINT = "https://realityforge.eu/legal-notice/";
 const ROOT_PRIVACY = "https://realityforge.eu/privacy-policy/";
 const MANGA_PRIVACY = "https://realityforge.eu/privacy-policy/manga-tracker/";
 const FETCH_TIMEOUT_MS = 5000;
-const CACHE_VERSION = "4";
+const CACHE_VERSION = "5";
 
 // Fixed, hash-authorized script: no backend text or inline event handlers.
 const CLIENT_SCRIPT = `(() => {
@@ -286,7 +286,7 @@ export function renderMangaPage(manga, coverUrl, siteOrigin = SITE_ORIGIN) {
     manga.description ? `<section class="panel description" aria-labelledby="description"><h2 id="description">${descriptionHeading}</h2>${renderDescription(manga.description)}</section>` : "",
     details ? `<section class="panel" aria-labelledby="details"><h2 id="details">Details</h2><dl class="details">${details}</dl></section>` : "",
   ].filter(Boolean).join("");
-  const body = `<main><article><section class="hero"><div class="cover-wrap"><img class="cover" src="${escapeHtml(image)}" data-fallback="${fallbackImage}" alt="Cover von ${escapeHtml(manga.title)}" width="600" height="900"></div><div><p class="eyebrow">Manga Tracker</p><h1 class="title">${escapeHtml(manga.title)}</h1>${manga.subtitle ? `<p class="subtitle">${escapeHtml(manga.subtitle)}</p>` : ""}${authors.length ? `<p class="authors">${escapeHtml(authors.join(", "))}</p>` : ""}${facts ? `<ul class="key-facts" aria-label="Kurzinformationen">${facts}</ul>` : ""}<a class="cta" href="${PLAY_STORE_URL}">Manga Tracker bei Google Play</a>${appAction}</div></section>${content ? `<div class="content">${content}</div>` : ""}<section class="panel app-promo" aria-labelledby="app"><h2 id="app">Manga Tracker</h2><p>Entdecke deutsche Manga-Neuerscheinungen, verwalte deine Sammlung und behalte neue Bände deiner Reihen im Blick.</p><a class="cta" href="${PLAY_STORE_URL}">Manga Tracker bei Google Play</a></section></article></main>`;
+  const body = `<main><article><section class="hero"><div class="cover-wrap"><img class="cover" src="${escapeHtml(image)}" data-fallback="${fallbackImage}" alt="Cover von ${escapeHtml(manga.title)}" width="600" height="900"></div><div><p class="eyebrow">Manga Tracker</p><h1 class="title">${escapeHtml(manga.title)}</h1>${manga.subtitle ? `<p class="subtitle">${escapeHtml(manga.subtitle)}</p>` : ""}${authors.length ? `<p class="authors">${escapeHtml(authors.join(", "))}</p>` : ""}${facts ? `<ul class="key-facts" aria-label="Kurzinformationen">${facts}</ul>` : ""}<a class="cta" href="${playStoreHref(siteOrigin, "manga_detail")}">Manga Tracker bei Google Play</a>${appAction}</div></section>${content ? `<div class="content">${content}</div>` : ""}<section class="panel app-promo" aria-labelledby="app"><h2 id="app">Manga Tracker</h2><p>Entdecke deutsche Manga-Neuerscheinungen, verwalte deine Sammlung und behalte neue Bände deiner Reihen im Blick.</p><a class="cta" href="${playStoreHref(siteOrigin, "manga_footer")}">Manga Tracker bei Google Play</a></section></article></main>`;
   return shell({
     title: `${manga.title} | Manga Tracker`, socialTitle: manga.title, description: metaDescription, canonical, image, body, type: "book",
     jsonLd: bookJsonLd(manga, canonical, image, authors, release?.iso || ""),
@@ -297,7 +297,7 @@ export function renderMangaPage(manga, coverUrl, siteOrigin = SITE_ORIGIN) {
 function renderStatePage(status, heading, message, siteOrigin) {
   const canonical = status === 404 ? `${siteOrigin}/404` : siteOrigin;
   const FALLBACK_IMAGE = `${siteOrigin}/manga-tracker-og.png`;
-  const body = `<main><section class="state"><div class="cover-wrap"><img class="cover" src="${FALLBACK_IMAGE}" alt="Manga Tracker" width="1200" height="630"></div><p class="eyebrow">Manga Tracker</p><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(message)}</p><a class="cta" href="${PLAY_STORE_URL}">Manga Tracker bei Google Play</a></section></main>`;
+  const body = `<main><section class="state"><div class="cover-wrap"><img class="cover" src="${FALLBACK_IMAGE}" alt="Manga Tracker" width="1200" height="630"></div><p class="eyebrow">Manga Tracker</p><h1>${escapeHtml(heading)}</h1><p>${escapeHtml(message)}</p><a class="cta" href="${playStoreHref(siteOrigin, "error_page")}">Manga Tracker bei Google Play</a></section></main>`;
   return shell({ title: `${heading} | Manga Tracker`, description: message, canonical, image: FALLBACK_IMAGE, body, robots: status === 404 ? "noindex,follow" : "noindex,nofollow" });
 }
 
@@ -439,7 +439,7 @@ export async function handleRequest(request, env = {}, ctx = {}) {
     for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
     return asHead(request, new Response(asset.body, { status: asset.status, headers }));
   }
-  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900", DEFAULT_API_BASE, LANDING_MOTION_SCRIPT), "landing-58");
+  if (url.pathname === "/" || url.pathname === "") return cached(request, ctx, async () => htmlResponse(renderLandingPage(siteOrigin), 200, "public, max-age=60, s-maxage=900", DEFAULT_API_BASE, LANDING_MOTION_SCRIPT), "landing-59");
   const match = /^\/manga\/([^/]+)\/?$/.exec(url.pathname);
   if (!match || !isValidIsbn13(match[1])) return cached(request, ctx, async () => htmlResponse(renderStatePage(404, "Manga nicht gefunden", "Diese Manga-Seite ist nicht verfügbar. Prüfe den Link oder öffne Manga Tracker.", siteOrigin), 404, "public, max-age=30, s-maxage=120"));
   const isbn = match[1];

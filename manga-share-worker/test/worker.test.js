@@ -502,7 +502,7 @@ test("cache namespace changes bypass the previous broken HTML without deleting p
     const response = await handleRequest(request(`/manga/${ISBN}?shared=true`), environment().env, { waitUntil: (promise) => pending.push(promise) });
     await Promise.all(pending);
     assert.match(await response.text(), /Rental Girlfriend/);
-    assert.ok(keys.every((key) => key.includes(`/__manga-share-cache-v4/manga/${ISBN}`) && !key.includes("?")));
+    assert.ok(keys.every((key) => key.includes(`/__manga-share-cache-v5/manga/${ISBN}`) && !key.includes("?")));
   } finally {
     if (previous === undefined) delete globalThis.caches;
     else globalThis.caches = previous;

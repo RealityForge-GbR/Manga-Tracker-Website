@@ -21,7 +21,7 @@ test("homepage works independently of unavailable API and assets bindings", asyn
       const html = await response.text();
       if (method === "HEAD") { assert.equal(html, ""); continue; }
       assert.equal((html.match(/<h1\b/g) || []).length, 1);
-      assert.ok(html.includes(`href="${PLAY}"`));
+      assert.ok(html.includes(`href="${PLAY}`));
       assert.match(html, /id="inhalt" tabindex="-1"/);
       assert.match(html, /class="skip" href="#inhalt"/);
       assert.match(html, /prefers-reduced-motion:reduce/);
@@ -115,7 +115,7 @@ test("homepage bypasses former cached landing without changing detail cache name
   globalThis.caches = { default: { async match(key) { keys.push(key.url); return undefined; }, async put() {} } };
   try {
     await handleRequest(new Request("https://mangatracker.de/?campaign=test"));
-    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-58/"]);
+    assert.deepEqual(keys, ["https://mangatracker.de/__manga-share-cache-vlanding-59/"]);
   } finally {
     if (previous === undefined) delete globalThis.caches; else globalThis.caches = previous;
   }
