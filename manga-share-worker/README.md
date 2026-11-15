@@ -121,3 +121,33 @@ Der folgende Abschnitt dokumentiert die frühere Freigabe des bereits übernomme
 7. Die alte API-Adresse weiterhin auf die bestehende 307-Brücke und das unveränderte kanonische Ziel prüfen.
 
 Referenzen: [Android Digital Asset Links](https://developer.android.com/training/app-links/configure-assetlinks), [Chrome Android Intents](https://developer.chrome.com/docs/android/intents), [Cloudflare HTTP Service Bindings](https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/http/).
+
+
+## Geteilte Manga · Prompt #24, 15.11.2026
+
+`https://mangatracker.de/share/manga/{isbn}` is the explicit app-title-share entry.
+It renders the same validated title without redirecting to `/manga/`. Both Play
+buttons carry `manga_tracker / referral / manga_share / title_share`, in outer
+UTM parameters and exactly once in the encoded Install Referrer. No user-specific
+identifier, ISBN or title enters that campaign. No analytics script/event is added.
+
+The route intentionally remains outside Android's `/manga/` manifest prefix.
+Its Android Chrome action uses the old, query-free
+`https://manga.realityforge.eu/manga/{isbn}` intent for supported old and current
+apps. Its browser fallback returns to the share route, retaining attribution
+when no app is installed. No automatic Play redirect occurs. Existing title,
+homepage and legacy attribution, domains and assetlinks remain unchanged.
+
+Canonical SEO points to `/manga/`; the share page is `noindex,follow` and its
+Open Graph URL preserves `/share/manga/` for previews. GET/HEAD bots receive the
+same page without conversions. Cache v6 includes host and full path, so shared
+and ordinary pages never share an entry; arbitrary query tags do not select a
+channel. Existing www/HTTPS redirects preserve the share path. Valid missing or
+temporarily unavailable titles retain the fixed channel on their Play CTA.
+
+Validation: 185 local Node tests passed, including six new channel regressions;
+production Wrangler dry-run passed. `scripts/verify-public.mjs` checks the share
+route, both Play links, referrer, canonical/social URLs and intent fallback on
+both hosts, without following any Play or affiliate links. This does not prove
+a Play installation or a natural GA4 first_open. Website availability and Android
+rollout are separate timestamps in the marketing channel configuration.

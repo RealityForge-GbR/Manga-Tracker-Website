@@ -139,7 +139,7 @@ test("cached HTML is isolated by host and bypasses the former v3 namespace", asy
       assert.ok(html.includes(`property="og:url" content="${origin}/manga/${ISBN}"`));
       assert.ok(html.includes(`property="og:image" content="${origin}/manga-tracker-og.png"`));
     }
-    assert.deepEqual([...stored.keys()], origins.map((origin) => `${origin}/__manga-share-cache-v5/manga/${ISBN}`));
+    assert.deepEqual([...stored.keys()], origins.map((origin) => `${origin}/__manga-share-cache-v6/manga/${ISBN}`));
   } finally {
     if (previous === undefined) delete globalThis.caches;
     else globalThis.caches = previous;
